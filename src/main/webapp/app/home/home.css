@@ -1,11 +1,28 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+.btn-ttc{
+    font-family: Arial;
+    background-color: #19f4ea;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+.btn-ttc:hover{
+    background-color: #2993a8; /* Green */
+    color: white;
+    color: #f4fff0;
 
+}
+.btn-ttc:active {
+    font-family: sans-serif;
+    color: #f4fff0;
+    text-shadow: 0 -1px 0 rgba(81, 157, 243, 0.76);
+    background-color: #0f85ac;
+}
 .hipster {
     display: inline-block;
     width: 347px;
-    height: 497px;
+    height: 217px;
     background: url("../../content/images/hipster.png") no-repeat center top;
     background-size: contain;
 }

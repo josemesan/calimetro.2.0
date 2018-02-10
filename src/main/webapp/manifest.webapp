@@ -1,6 +1,6 @@
 {
-  "name": "Calimetro",
-  "short_name": "Calimetro",
+  "name": "CaliMetro",
+  "short_name": "CaliMetro",
   "icons": [
       {
           "src": "./content/images/logo-jhipster.png",
