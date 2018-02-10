@@ -1,0 +1,9 @@
+{
+    "calimetroApp": {
+        "TipoVia" : {
+            "null": "",
+            "I": "I",
+            "II": "II"
+        }
+    }
+}

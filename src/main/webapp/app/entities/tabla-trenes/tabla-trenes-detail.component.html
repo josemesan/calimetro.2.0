@@ -1,0 +1,40 @@
+
+<div *ngIf="tablaTrenes">
+    <h2><span jhiTranslate="calimetroApp.tablaTrenes.detail.title">Tabla Trenes</span> {{tablaTrenes.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.tablaTrenes.fechaHora">Fecha Hora</span></dt>
+        <dd>
+            <span>{{tablaTrenes.fechaHora | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.tablaTrenes.tipoDia">Tipo Dia</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoDia.' + tablaTrenes.tipoDia}}">{{tablaTrenes.tipoDia}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.tablaTrenes.numeroTrenes">Numero Trenes</span></dt>
+        <dd>
+            <span>{{tablaTrenes.numeroTrenes}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.tablaTrenes.linea">Linea</span></dt>
+        <dd>
+            <div *ngIf="tablaTrenes.linea">
+                <a [routerLink]="['/linea', tablaTrenes.linea?.id]">{{tablaTrenes.linea?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'tabla-trenes/'+ tablaTrenes.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

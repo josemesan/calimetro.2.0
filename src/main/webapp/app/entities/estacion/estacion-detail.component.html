@@ -1,0 +1,44 @@
+
+<div *ngIf="estacion">
+    <h2><span jhiTranslate="calimetroApp.estacion.detail.title">Estacion</span> {{estacion.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.estacion.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{estacion.nombre}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.estacion.nemo">Nemo</span></dt>
+        <dd>
+            <span>{{estacion.nemo}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.estacion.via">Via</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoVia.' + estacion.via}}">{{estacion.via}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.estacion.visible">Visible</span></dt>
+        <dd>
+            <span>{{estacion.visible}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.estacion.linea">Linea</span></dt>
+        <dd>
+            <div *ngIf="estacion.linea">
+                <a [routerLink]="['/linea', estacion.linea?.id]">{{estacion.linea?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'estacion/'+ estacion.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

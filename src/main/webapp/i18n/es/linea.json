@@ -1,0 +1,27 @@
+
+{
+    "calimetroApp": {
+        "linea" : {
+            "home": {
+                "title": "Lineas",
+                "createLabel": "Crear nuevo Linea",
+                "createOrEditLabel": "Crear o editar Linea"
+            },
+            "created": "Un nuevo Linea ha sido creado con el identificador {{ param }}",
+            "updated": "Un Linea ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Linea ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Linea {{ id }}?"
+            },
+            "detail": {
+                "title": "Linea"
+            },
+            "nombre": "Nombre",
+            "visible": "Visible",
+            "estacion": "Estacion",
+            "datos": "Datos",
+            "tablaTrenes": "Tabla Trenes",
+            "intervaloOfertado": "Intervalo Ofertado"
+        }
+    }
+}

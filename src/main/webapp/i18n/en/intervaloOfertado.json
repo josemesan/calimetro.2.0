@@ -1,0 +1,26 @@
+
+{
+    "calimetroApp": {
+        "intervaloOfertado" : {
+            "home": {
+                "title": "Intervalo Ofertados",
+                "createLabel": "Create a new Intervalo Ofertado",
+                "createOrEditLabel": "Create or edit a Intervalo Ofertado"
+            },
+            "created": "A new Intervalo Ofertado is created with identifier {{ param }}",
+            "updated": "A Intervalo Ofertado is updated with identifier {{ param }}",
+            "deleted": "A Intervalo Ofertado is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Intervalo Ofertado {{ id }}?"
+            },
+            "detail": {
+                "title": "Intervalo Ofertado"
+            },
+            "fechaHora": "Fecha Hora",
+            "tipoDia": "Tipo Dia",
+            "intervaloMax": "Intervalo Max",
+            "intervaloMin": "Intervalo Min",
+            "linea": "Linea"
+        }
+    }
+}

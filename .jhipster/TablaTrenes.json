@@ -1,0 +1,32 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "linea",
+            "otherEntityName": "linea",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaHora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "tipoDia",
+            "fieldType": "TipoDia",
+            "fieldValues": "LAB,VIER,SAB,FEST,ESP"
+        },
+        {
+            "fieldName": "numeroTrenes",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180210194653",
+    "entityTableName": "tabla_trenes",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

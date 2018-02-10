@@ -1,0 +1,40 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "linea",
+            "otherEntityName": "linea",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "nemo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        },
+        {
+            "fieldName": "via",
+            "fieldType": "TipoVia",
+            "fieldValues": "I,II"
+        },
+        {
+            "fieldName": "visible",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180210194650",
+    "entityTableName": "estacion",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

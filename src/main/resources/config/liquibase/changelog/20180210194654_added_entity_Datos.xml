@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity Datos.
+    -->
+    <changeSet id="20180210194654-1" author="jhipster">
+        <createTable tableName="datos">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="fecha_hora" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tipo_dia" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="intervalo_medio" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="inter_min" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estacion_min" type="varchar(5)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="via_min" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="inter_max" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="estacion_max" type="varchar(5)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="viamax" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="desviacion_media" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="tiempo_vuelta" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="numero_trenes" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="viajeros" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="toc" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="densidad" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="consumo" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="velocidad" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="coche_km" type="integer">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="linea_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        <dropDefaultValue tableName="datos" columnName="fecha_hora" columnDataType="datetime"/>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>

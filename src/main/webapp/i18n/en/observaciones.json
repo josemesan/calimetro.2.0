@@ -1,0 +1,23 @@
+
+{
+    "calimetroApp": {
+        "observaciones" : {
+            "home": {
+                "title": "Observaciones",
+                "createLabel": "Create a new Observaciones",
+                "createOrEditLabel": "Create or edit a Observaciones"
+            },
+            "created": "A new Observaciones is created with identifier {{ param }}",
+            "updated": "A Observaciones is updated with identifier {{ param }}",
+            "deleted": "A Observaciones is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Observaciones {{ id }}?"
+            },
+            "detail": {
+                "title": "Observaciones"
+            },
+            "texto": "Texto",
+            "datos": "Datos"
+        }
+    }
+}

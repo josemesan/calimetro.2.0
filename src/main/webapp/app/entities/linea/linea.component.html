@@ -1,0 +1,60 @@
+<div>
+    <h2>
+        <span jhiTranslate="calimetroApp.linea.home.title">Lineas</span>
+        <button class="btn btn-primary float-right jh-create-entity create-linea" [routerLink]="['/', { outlets: { popup: ['linea-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="calimetroApp.linea.home.createLabel">
+            Create new Linea
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="lineas">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="calimetroApp.linea.nombre">Nombre</span></th>
+            <th><span jhiTranslate="calimetroApp.linea.visible">Visible</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let linea of lineas ;trackBy: trackId">
+                <td><a [routerLink]="['../linea', linea.id ]">{{linea.id}}</a></td>
+                <td>{{linea.nombre}}</td>
+                <td>{{linea.visible}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../linea', linea.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'linea/'+ linea.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'linea/'+ linea.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

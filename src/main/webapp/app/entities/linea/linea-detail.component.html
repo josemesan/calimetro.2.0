@@ -1,0 +1,30 @@
+
+<div *ngIf="linea">
+    <h2><span jhiTranslate="calimetroApp.linea.detail.title">Linea</span> {{linea.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.linea.nombre">Nombre</span></dt>
+        <dd>
+            <span>{{linea.nombre}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.linea.visible">Visible</span></dt>
+        <dd>
+            <span>{{linea.visible}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'linea/'+ linea.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

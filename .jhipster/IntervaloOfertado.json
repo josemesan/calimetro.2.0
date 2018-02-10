@@ -1,0 +1,36 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "linea",
+            "otherEntityName": "linea",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaHora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "tipoDia",
+            "fieldType": "TipoDia",
+            "fieldValues": "LAB,VIER,SAB,FEST,ESP"
+        },
+        {
+            "fieldName": "intervaloMax",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "intervaloMin",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180210194652",
+    "entityTableName": "intervalo_ofertado",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

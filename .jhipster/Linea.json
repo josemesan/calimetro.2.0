@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "estacion",
+            "otherEntityName": "estacion",
+            "otherEntityRelationshipName": "linea"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "datos",
+            "otherEntityName": "datos",
+            "otherEntityRelationshipName": "linea"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "tablaTrenes",
+            "otherEntityName": "tablaTrenes",
+            "otherEntityRelationshipName": "linea"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "intervaloOfertado",
+            "otherEntityName": "intervaloOfertado",
+            "otherEntityRelationshipName": "linea"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nombre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "visible",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20180210194651",
+    "entityTableName": "linea",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

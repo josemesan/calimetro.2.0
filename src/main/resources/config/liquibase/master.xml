@@ -5,6 +5,17 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194649_added_entity_Observaciones.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194650_added_entity_Estacion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194651_added_entity_Linea.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194652_added_entity_IntervaloOfertado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194653_added_entity_TablaTrenes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194654_added_entity_Datos.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20180210194649_added_entity_constraints_Observaciones.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194650_added_entity_constraints_Estacion.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194652_added_entity_constraints_IntervaloOfertado.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194653_added_entity_constraints_TablaTrenes.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180210194654_added_entity_constraints_Datos.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -1,0 +1,26 @@
+
+{
+    "calimetroApp": {
+        "estacion" : {
+            "home": {
+                "title": "Estacions",
+                "createLabel": "Create a new Estacion",
+                "createOrEditLabel": "Create or edit a Estacion"
+            },
+            "created": "A new Estacion is created with identifier {{ param }}",
+            "updated": "A Estacion is updated with identifier {{ param }}",
+            "deleted": "A Estacion is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Estacion {{ id }}?"
+            },
+            "detail": {
+                "title": "Estacion"
+            },
+            "nombre": "Nombre",
+            "nemo": "Nemo",
+            "via": "Via",
+            "visible": "Visible",
+            "linea": "Linea"
+        }
+    }
+}

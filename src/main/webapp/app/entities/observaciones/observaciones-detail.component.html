@@ -1,0 +1,32 @@
+
+<div *ngIf="observaciones">
+    <h2><span jhiTranslate="calimetroApp.observaciones.detail.title">Observaciones</span> {{observaciones.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.observaciones.texto">Texto</span></dt>
+        <dd>
+            <span>{{observaciones.texto}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.observaciones.datos">Datos</span></dt>
+        <dd>
+            <div *ngIf="observaciones.datos">
+                <a [routerLink]="['/datos', observaciones.datos?.id]">{{observaciones.datos?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'observaciones/'+ observaciones.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

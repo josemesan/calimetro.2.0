@@ -1,0 +1,41 @@
+
+{
+    "calimetroApp": {
+        "datos" : {
+            "home": {
+                "title": "Datos",
+                "createLabel": "Create a new Datos",
+                "createOrEditLabel": "Create or edit a Datos"
+            },
+            "created": "A new Datos is created with identifier {{ param }}",
+            "updated": "A Datos is updated with identifier {{ param }}",
+            "deleted": "A Datos is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Datos {{ id }}?"
+            },
+            "detail": {
+                "title": "Datos"
+            },
+            "fechaHora": "Fecha Hora",
+            "tipoDia": "Tipo Dia",
+            "intervaloMedio": "Intervalo Medio",
+            "interMin": "Inter Min",
+            "estacionMin": "Estacion Min",
+            "viaMin": "Via Min",
+            "interMax": "Inter Max",
+            "estacionMax": "Estacion Max",
+            "viamax": "Viamax",
+            "desviacionMedia": "Desviacion Media",
+            "tiempoVuelta": "Tiempo Vuelta",
+            "numeroTrenes": "Numero Trenes",
+            "viajeros": "Viajeros",
+            "toc": "Toc",
+            "densidad": "Densidad",
+            "consumo": "Consumo",
+            "velocidad": "Velocidad",
+            "cocheKm": "Coche Km",
+            "linea": "Linea",
+            "observaciones": "Observaciones"
+        }
+    }
+}

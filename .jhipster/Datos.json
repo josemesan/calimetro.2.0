@@ -1,0 +1,108 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "linea",
+            "otherEntityName": "linea",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "observaciones",
+            "otherEntityName": "observaciones",
+            "otherEntityRelationshipName": "datos"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "fechaHora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "tipoDia",
+            "fieldType": "TipoDia",
+            "fieldValues": "LAB,VIER,SAB,FEST,ESP"
+        },
+        {
+            "fieldName": "intervaloMedio",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "interMin",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "estacionMin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        },
+        {
+            "fieldName": "viaMin",
+            "fieldType": "TipoVia",
+            "fieldValues": "I,II"
+        },
+        {
+            "fieldName": "interMax",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "estacionMax",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        },
+        {
+            "fieldName": "viamax",
+            "fieldType": "TipoVia",
+            "fieldValues": "I,II"
+        },
+        {
+            "fieldName": "desviacionMedia",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "tiempoVuelta",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numeroTrenes",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "viajeros",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "toc",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "densidad",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "consumo",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "velocidad",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "cocheKm",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20180210194654",
+    "entityTableName": "datos",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,25 @@
+
+{
+    "calimetroApp": {
+        "tablaTrenes" : {
+            "home": {
+                "title": "Tabla Trenes",
+                "createLabel": "Create a new Tabla Trenes",
+                "createOrEditLabel": "Create or edit a Tabla Trenes"
+            },
+            "created": "A new Tabla Trenes is created with identifier {{ param }}",
+            "updated": "A Tabla Trenes is updated with identifier {{ param }}",
+            "deleted": "A Tabla Trenes is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Tabla Trenes {{ id }}?"
+            },
+            "detail": {
+                "title": "Tabla Trenes"
+            },
+            "fechaHora": "Fecha Hora",
+            "tipoDia": "Tipo Dia",
+            "numeroTrenes": "Numero Trenes",
+            "linea": "Linea"
+        }
+    }
+}

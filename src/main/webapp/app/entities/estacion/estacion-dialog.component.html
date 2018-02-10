@@ -1,0 +1,60 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEstacionLabel" jhiTranslate="calimetroApp.estacion.home.createOrEditLabel">Create or edit a Estacion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!estacion.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="estacion.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.estacion.nombre" for="field_nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="field_nombre"
+                [(ngModel)]="estacion.nombre" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.estacion.nemo" for="field_nemo">Nemo</label>
+            <input type="text" class="form-control" name="nemo" id="field_nemo"
+                [(ngModel)]="estacion.nemo" maxlength="5"/>
+            <div [hidden]="!(editForm.controls.nemo?.dirty && editForm.controls.nemo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.nemo?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
+                   This field cannot be longer than 5 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.estacion.via" for="field_via">Via</label>
+            <select class="form-control" name="via" [(ngModel)]="estacion.via" id="field_via" >
+                <option value="I">{{'calimetroApp.TipoVia.I' | translate}}</option>
+                <option value="II">{{'calimetroApp.TipoVia.II' | translate}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.estacion.visible" for="field_visible">Visible</label>
+            <input type="checkbox" class="form-control" name="visible" id="field_visible"
+                [(ngModel)]="estacion.visible" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.estacion.linea" for="field_linea">Linea</label>
+            <select class="form-control" id="field_linea" name="linea" [(ngModel)]="estacion.linea" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="lineaOption.id === estacion.linea?.id ? estacion.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

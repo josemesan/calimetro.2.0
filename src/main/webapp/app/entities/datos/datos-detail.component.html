@@ -1,0 +1,100 @@
+
+<div *ngIf="datos">
+    <h2><span jhiTranslate="calimetroApp.datos.detail.title">Datos</span> {{datos.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.datos.fechaHora">Fecha Hora</span></dt>
+        <dd>
+            <span>{{datos.fechaHora | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.tipoDia">Tipo Dia</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoDia.' + datos.tipoDia}}">{{datos.tipoDia}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></dt>
+        <dd>
+            <span>{{datos.intervaloMedio}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.interMin">Inter Min</span></dt>
+        <dd>
+            <span>{{datos.interMin}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.estacionMin">Estacion Min</span></dt>
+        <dd>
+            <span>{{datos.estacionMin}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.viaMin">Via Min</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viaMin}}">{{datos.viaMin}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.interMax">Inter Max</span></dt>
+        <dd>
+            <span>{{datos.interMax}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.estacionMax">Estacion Max</span></dt>
+        <dd>
+            <span>{{datos.estacionMax}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.viamax">Viamax</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viamax}}">{{datos.viamax}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></dt>
+        <dd>
+            <span>{{datos.desviacionMedia}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.tiempoVuelta">Tiempo Vuelta</span></dt>
+        <dd>
+            <span>{{datos.tiempoVuelta}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.numeroTrenes">Numero Trenes</span></dt>
+        <dd>
+            <span>{{datos.numeroTrenes}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.viajeros">Viajeros</span></dt>
+        <dd>
+            <span>{{datos.viajeros}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.toc">Toc</span></dt>
+        <dd>
+            <span>{{datos.toc}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.densidad">Densidad</span></dt>
+        <dd>
+            <span>{{datos.densidad}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.consumo">Consumo</span></dt>
+        <dd>
+            <span>{{datos.consumo}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></dt>
+        <dd>
+            <span>{{datos.velocidad}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.cocheKm">Coche Km</span></dt>
+        <dd>
+            <span>{{datos.cocheKm}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.linea">Linea</span></dt>
+        <dd>
+            <div *ngIf="datos.linea">
+                <a [routerLink]="['/linea', datos.linea?.id]">{{datos.linea?.id}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>
