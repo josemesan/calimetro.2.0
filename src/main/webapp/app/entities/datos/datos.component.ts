@@ -12,9 +12,10 @@ import { Principal } from '../../shared';
     templateUrl: './datos.component.html'
 })
 export class DatosComponent implements OnInit, OnDestroy {
-datos: Datos[];
+    datos: Datos[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    desde = String;
 
     constructor(
         private datosService: DatosService,
@@ -40,6 +41,15 @@ datos: Datos[];
         this.registerChangeInDatos();
     }
 
+    loadFecha() {
+        this.datosService.queryFecha(this.desde + ' 06:00').subscribe(
+            (res: HttpResponse<Datos[]>) => {
+                this.datos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
@@ -48,7 +58,7 @@ datos: Datos[];
         return item.id;
     }
     registerChangeInDatos() {
-        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFecha());
     }
 
     private onError(error) {

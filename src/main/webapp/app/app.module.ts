@@ -17,8 +17,10 @@ import { CalimetroAdminModule } from './admin/admin.module';
 import { CalimetroAccountModule } from './account/account.module';
 import { CalimetroEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
+
     JhiMainComponent,
     NavbarComponent,
     FooterComponent,
@@ -28,9 +30,11 @@ import {
     ErrorComponent
 } from './layouts';
 import { GraficasComponent } from './graficas/graficas.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     imports: [
+        ChartsModule,
         BrowserModule,
         CalimetroAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),

@@ -4,6 +4,17 @@ import com.metro.calimetro.domain.Datos;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+import java.time.ZonedDateTime;
+import java.util.List;
+
+import com.metro.calimetro.domain.TablaTrenes;
+import org.springframework.stereotype.Repository;
+
+import org.springframework.data.jpa.repository.*;
+
+import java.time.ZonedDateTime;
+import java.util.List;
+
 
 
 /**
@@ -12,5 +23,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface DatosRepository extends JpaRepository<Datos, Long> {
-
+    public List<Datos> findByFechaHoraBetween (ZonedDateTime desde, ZonedDateTime hasta);
 }
+
+

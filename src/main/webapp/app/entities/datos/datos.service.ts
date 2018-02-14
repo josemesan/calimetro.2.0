@@ -39,6 +39,10 @@ export class DatosService {
         return this.http.get<Datos[]>(this.resourceUrl, { params: options, observe: 'response' })
             .map((res: HttpResponse<Datos[]>) => this.convertArrayResponse(res));
     }
+    queryFecha(desde: any): Observable<HttpResponse<Datos[]>> {
+        return this.http.get<Datos[]>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'})
+            .map((res: HttpResponse<Datos[]>) => this.convertArrayResponse(res));
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
