@@ -6,6 +6,9 @@ import { CalimetroLineaModule } from './linea/linea.module';
 import { CalimetroIntervaloOfertadoModule } from './intervalo-ofertado/intervalo-ofertado.module';
 import { CalimetroTablaTrenesModule } from './tabla-trenes/tabla-trenes.module';
 import { CalimetroDatosModule } from './datos/datos.module';
+import { CalimetroRelacionFechaTipodiaModule } from './relacion-fecha-tipodia/relacion-fecha-tipodia.module';
+import { CalimetroIntervaloMinModule } from './intervalo-min/intervalo-min.module';
+import { CalimetroIntervaloMaxModule } from './intervalo-max/intervalo-max.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -16,6 +19,9 @@ import { CalimetroDatosModule } from './datos/datos.module';
         CalimetroIntervaloOfertadoModule,
         CalimetroTablaTrenesModule,
         CalimetroDatosModule,
+        CalimetroRelacionFechaTipodiaModule,
+        CalimetroIntervaloMinModule,
+        CalimetroIntervaloMaxModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

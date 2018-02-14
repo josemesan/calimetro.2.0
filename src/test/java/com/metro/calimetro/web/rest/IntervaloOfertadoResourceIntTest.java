@@ -44,8 +44,8 @@ import com.metro.calimetro.domain.enumeration.TipoDia;
 @SpringBootTest(classes = CalimetroApp.class)
 public class IntervaloOfertadoResourceIntTest {
 
-    private static final ZonedDateTime DEFAULT_FECHA_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_FECHA_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final TipoDia DEFAULT_TIPO_DIA = TipoDia.LAB;
     private static final TipoDia UPDATED_TIPO_DIA = TipoDia.VIER;
@@ -94,7 +94,7 @@ public class IntervaloOfertadoResourceIntTest {
      */
     public static IntervaloOfertado createEntity(EntityManager em) {
         IntervaloOfertado intervaloOfertado = new IntervaloOfertado()
-            .fechaHora(DEFAULT_FECHA_HORA)
+            .hora(DEFAULT_HORA)
             .tipoDia(DEFAULT_TIPO_DIA)
             .intervaloMax(DEFAULT_INTERVALO_MAX)
             .intervaloMin(DEFAULT_INTERVALO_MIN);
@@ -121,7 +121,7 @@ public class IntervaloOfertadoResourceIntTest {
         List<IntervaloOfertado> intervaloOfertadoList = intervaloOfertadoRepository.findAll();
         assertThat(intervaloOfertadoList).hasSize(databaseSizeBeforeCreate + 1);
         IntervaloOfertado testIntervaloOfertado = intervaloOfertadoList.get(intervaloOfertadoList.size() - 1);
-        assertThat(testIntervaloOfertado.getFechaHora()).isEqualTo(DEFAULT_FECHA_HORA);
+        assertThat(testIntervaloOfertado.getHora()).isEqualTo(DEFAULT_HORA);
         assertThat(testIntervaloOfertado.getTipoDia()).isEqualTo(DEFAULT_TIPO_DIA);
         assertThat(testIntervaloOfertado.getIntervaloMax()).isEqualTo(DEFAULT_INTERVALO_MAX);
         assertThat(testIntervaloOfertado.getIntervaloMin()).isEqualTo(DEFAULT_INTERVALO_MIN);
@@ -157,7 +157,7 @@ public class IntervaloOfertadoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(intervaloOfertado.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fechaHora").value(hasItem(sameInstant(DEFAULT_FECHA_HORA))))
+            .andExpect(jsonPath("$.[*].hora").value(hasItem(sameInstant(DEFAULT_HORA))))
             .andExpect(jsonPath("$.[*].tipoDia").value(hasItem(DEFAULT_TIPO_DIA.toString())))
             .andExpect(jsonPath("$.[*].intervaloMax").value(hasItem(DEFAULT_INTERVALO_MAX)))
             .andExpect(jsonPath("$.[*].intervaloMin").value(hasItem(DEFAULT_INTERVALO_MIN)));
@@ -174,7 +174,7 @@ public class IntervaloOfertadoResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(intervaloOfertado.getId().intValue()))
-            .andExpect(jsonPath("$.fechaHora").value(sameInstant(DEFAULT_FECHA_HORA)))
+            .andExpect(jsonPath("$.hora").value(sameInstant(DEFAULT_HORA)))
             .andExpect(jsonPath("$.tipoDia").value(DEFAULT_TIPO_DIA.toString()))
             .andExpect(jsonPath("$.intervaloMax").value(DEFAULT_INTERVALO_MAX))
             .andExpect(jsonPath("$.intervaloMin").value(DEFAULT_INTERVALO_MIN));
@@ -200,7 +200,7 @@ public class IntervaloOfertadoResourceIntTest {
         // Disconnect from session so that the updates on updatedIntervaloOfertado are not directly saved in db
         em.detach(updatedIntervaloOfertado);
         updatedIntervaloOfertado
-            .fechaHora(UPDATED_FECHA_HORA)
+            .hora(UPDATED_HORA)
             .tipoDia(UPDATED_TIPO_DIA)
             .intervaloMax(UPDATED_INTERVALO_MAX)
             .intervaloMin(UPDATED_INTERVALO_MIN);
@@ -214,7 +214,7 @@ public class IntervaloOfertadoResourceIntTest {
         List<IntervaloOfertado> intervaloOfertadoList = intervaloOfertadoRepository.findAll();
         assertThat(intervaloOfertadoList).hasSize(databaseSizeBeforeUpdate);
         IntervaloOfertado testIntervaloOfertado = intervaloOfertadoList.get(intervaloOfertadoList.size() - 1);
-        assertThat(testIntervaloOfertado.getFechaHora()).isEqualTo(UPDATED_FECHA_HORA);
+        assertThat(testIntervaloOfertado.getHora()).isEqualTo(UPDATED_HORA);
         assertThat(testIntervaloOfertado.getTipoDia()).isEqualTo(UPDATED_TIPO_DIA);
         assertThat(testIntervaloOfertado.getIntervaloMax()).isEqualTo(UPDATED_INTERVALO_MAX);
         assertThat(testIntervaloOfertado.getIntervaloMin()).isEqualTo(UPDATED_INTERVALO_MIN);

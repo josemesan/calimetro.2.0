@@ -34,9 +34,6 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-import com.metro.calimetro.domain.enumeration.TipoDia;
-import com.metro.calimetro.domain.enumeration.TipoVia;
-import com.metro.calimetro.domain.enumeration.TipoVia;
 /**
  * Test class for the DatosResource REST controller.
  *
@@ -49,29 +46,8 @@ public class DatosResourceIntTest {
     private static final ZonedDateTime DEFAULT_FECHA_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
     private static final ZonedDateTime UPDATED_FECHA_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
-    private static final TipoDia DEFAULT_TIPO_DIA = TipoDia.LAB;
-    private static final TipoDia UPDATED_TIPO_DIA = TipoDia.VIER;
-
     private static final Integer DEFAULT_INTERVALO_MEDIO = 1;
     private static final Integer UPDATED_INTERVALO_MEDIO = 2;
-
-    private static final Integer DEFAULT_INTER_MIN = 1;
-    private static final Integer UPDATED_INTER_MIN = 2;
-
-    private static final String DEFAULT_ESTACION_MIN = "AAAAA";
-    private static final String UPDATED_ESTACION_MIN = "BBBBB";
-
-    private static final TipoVia DEFAULT_VIA_MIN = TipoVia.I;
-    private static final TipoVia UPDATED_VIA_MIN = TipoVia.II;
-
-    private static final Integer DEFAULT_INTER_MAX = 1;
-    private static final Integer UPDATED_INTER_MAX = 2;
-
-    private static final String DEFAULT_ESTACION_MAX = "AAAAA";
-    private static final String UPDATED_ESTACION_MAX = "BBBBB";
-
-    private static final TipoVia DEFAULT_VIAMAX = TipoVia.I;
-    private static final TipoVia UPDATED_VIAMAX = TipoVia.II;
 
     private static final Integer DEFAULT_DESVIACION_MEDIA = 1;
     private static final Integer UPDATED_DESVIACION_MEDIA = 2;
@@ -139,14 +115,7 @@ public class DatosResourceIntTest {
     public static Datos createEntity(EntityManager em) {
         Datos datos = new Datos()
             .fechaHora(DEFAULT_FECHA_HORA)
-            .tipoDia(DEFAULT_TIPO_DIA)
             .intervaloMedio(DEFAULT_INTERVALO_MEDIO)
-            .interMin(DEFAULT_INTER_MIN)
-            .estacionMin(DEFAULT_ESTACION_MIN)
-            .viaMin(DEFAULT_VIA_MIN)
-            .interMax(DEFAULT_INTER_MAX)
-            .estacionMax(DEFAULT_ESTACION_MAX)
-            .viamax(DEFAULT_VIAMAX)
             .desviacionMedia(DEFAULT_DESVIACION_MEDIA)
             .tiempoVuelta(DEFAULT_TIEMPO_VUELTA)
             .numeroTrenes(DEFAULT_NUMERO_TRENES)
@@ -180,14 +149,7 @@ public class DatosResourceIntTest {
         assertThat(datosList).hasSize(databaseSizeBeforeCreate + 1);
         Datos testDatos = datosList.get(datosList.size() - 1);
         assertThat(testDatos.getFechaHora()).isEqualTo(DEFAULT_FECHA_HORA);
-        assertThat(testDatos.getTipoDia()).isEqualTo(DEFAULT_TIPO_DIA);
         assertThat(testDatos.getIntervaloMedio()).isEqualTo(DEFAULT_INTERVALO_MEDIO);
-        assertThat(testDatos.getInterMin()).isEqualTo(DEFAULT_INTER_MIN);
-        assertThat(testDatos.getEstacionMin()).isEqualTo(DEFAULT_ESTACION_MIN);
-        assertThat(testDatos.getViaMin()).isEqualTo(DEFAULT_VIA_MIN);
-        assertThat(testDatos.getInterMax()).isEqualTo(DEFAULT_INTER_MAX);
-        assertThat(testDatos.getEstacionMax()).isEqualTo(DEFAULT_ESTACION_MAX);
-        assertThat(testDatos.getViamax()).isEqualTo(DEFAULT_VIAMAX);
         assertThat(testDatos.getDesviacionMedia()).isEqualTo(DEFAULT_DESVIACION_MEDIA);
         assertThat(testDatos.getTiempoVuelta()).isEqualTo(DEFAULT_TIEMPO_VUELTA);
         assertThat(testDatos.getNumeroTrenes()).isEqualTo(DEFAULT_NUMERO_TRENES);
@@ -230,14 +192,7 @@ public class DatosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(datos.getId().intValue())))
             .andExpect(jsonPath("$.[*].fechaHora").value(hasItem(sameInstant(DEFAULT_FECHA_HORA))))
-            .andExpect(jsonPath("$.[*].tipoDia").value(hasItem(DEFAULT_TIPO_DIA.toString())))
             .andExpect(jsonPath("$.[*].intervaloMedio").value(hasItem(DEFAULT_INTERVALO_MEDIO)))
-            .andExpect(jsonPath("$.[*].interMin").value(hasItem(DEFAULT_INTER_MIN)))
-            .andExpect(jsonPath("$.[*].estacionMin").value(hasItem(DEFAULT_ESTACION_MIN.toString())))
-            .andExpect(jsonPath("$.[*].viaMin").value(hasItem(DEFAULT_VIA_MIN.toString())))
-            .andExpect(jsonPath("$.[*].interMax").value(hasItem(DEFAULT_INTER_MAX)))
-            .andExpect(jsonPath("$.[*].estacionMax").value(hasItem(DEFAULT_ESTACION_MAX.toString())))
-            .andExpect(jsonPath("$.[*].viamax").value(hasItem(DEFAULT_VIAMAX.toString())))
             .andExpect(jsonPath("$.[*].desviacionMedia").value(hasItem(DEFAULT_DESVIACION_MEDIA)))
             .andExpect(jsonPath("$.[*].tiempoVuelta").value(hasItem(DEFAULT_TIEMPO_VUELTA)))
             .andExpect(jsonPath("$.[*].numeroTrenes").value(hasItem(DEFAULT_NUMERO_TRENES)))
@@ -261,14 +216,7 @@ public class DatosResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(datos.getId().intValue()))
             .andExpect(jsonPath("$.fechaHora").value(sameInstant(DEFAULT_FECHA_HORA)))
-            .andExpect(jsonPath("$.tipoDia").value(DEFAULT_TIPO_DIA.toString()))
             .andExpect(jsonPath("$.intervaloMedio").value(DEFAULT_INTERVALO_MEDIO))
-            .andExpect(jsonPath("$.interMin").value(DEFAULT_INTER_MIN))
-            .andExpect(jsonPath("$.estacionMin").value(DEFAULT_ESTACION_MIN.toString()))
-            .andExpect(jsonPath("$.viaMin").value(DEFAULT_VIA_MIN.toString()))
-            .andExpect(jsonPath("$.interMax").value(DEFAULT_INTER_MAX))
-            .andExpect(jsonPath("$.estacionMax").value(DEFAULT_ESTACION_MAX.toString()))
-            .andExpect(jsonPath("$.viamax").value(DEFAULT_VIAMAX.toString()))
             .andExpect(jsonPath("$.desviacionMedia").value(DEFAULT_DESVIACION_MEDIA))
             .andExpect(jsonPath("$.tiempoVuelta").value(DEFAULT_TIEMPO_VUELTA))
             .andExpect(jsonPath("$.numeroTrenes").value(DEFAULT_NUMERO_TRENES))
@@ -301,14 +249,7 @@ public class DatosResourceIntTest {
         em.detach(updatedDatos);
         updatedDatos
             .fechaHora(UPDATED_FECHA_HORA)
-            .tipoDia(UPDATED_TIPO_DIA)
             .intervaloMedio(UPDATED_INTERVALO_MEDIO)
-            .interMin(UPDATED_INTER_MIN)
-            .estacionMin(UPDATED_ESTACION_MIN)
-            .viaMin(UPDATED_VIA_MIN)
-            .interMax(UPDATED_INTER_MAX)
-            .estacionMax(UPDATED_ESTACION_MAX)
-            .viamax(UPDATED_VIAMAX)
             .desviacionMedia(UPDATED_DESVIACION_MEDIA)
             .tiempoVuelta(UPDATED_TIEMPO_VUELTA)
             .numeroTrenes(UPDATED_NUMERO_TRENES)
@@ -329,14 +270,7 @@ public class DatosResourceIntTest {
         assertThat(datosList).hasSize(databaseSizeBeforeUpdate);
         Datos testDatos = datosList.get(datosList.size() - 1);
         assertThat(testDatos.getFechaHora()).isEqualTo(UPDATED_FECHA_HORA);
-        assertThat(testDatos.getTipoDia()).isEqualTo(UPDATED_TIPO_DIA);
         assertThat(testDatos.getIntervaloMedio()).isEqualTo(UPDATED_INTERVALO_MEDIO);
-        assertThat(testDatos.getInterMin()).isEqualTo(UPDATED_INTER_MIN);
-        assertThat(testDatos.getEstacionMin()).isEqualTo(UPDATED_ESTACION_MIN);
-        assertThat(testDatos.getViaMin()).isEqualTo(UPDATED_VIA_MIN);
-        assertThat(testDatos.getInterMax()).isEqualTo(UPDATED_INTER_MAX);
-        assertThat(testDatos.getEstacionMax()).isEqualTo(UPDATED_ESTACION_MAX);
-        assertThat(testDatos.getViamax()).isEqualTo(UPDATED_VIAMAX);
         assertThat(testDatos.getDesviacionMedia()).isEqualTo(UPDATED_DESVIACION_MEDIA);
         assertThat(testDatos.getTiempoVuelta()).isEqualTo(UPDATED_TIEMPO_VUELTA);
         assertThat(testDatos.getNumeroTrenes()).isEqualTo(UPDATED_NUMERO_TRENES);

@@ -31,8 +31,8 @@ export class IntervaloOfertadoPopupService {
                 this.intervaloOfertadoService.find(id)
                     .subscribe((intervaloOfertadoResponse: HttpResponse<IntervaloOfertado>) => {
                         const intervaloOfertado: IntervaloOfertado = intervaloOfertadoResponse.body;
-                        intervaloOfertado.fechaHora = this.datePipe
-                            .transform(intervaloOfertado.fechaHora, 'yyyy-MM-ddTHH:mm:ss');
+                        intervaloOfertado.hora = this.datePipe
+                            .transform(intervaloOfertado.hora, 'yyyy-MM-ddTHH:mm:ss');
                         this.ngbModalRef = this.intervaloOfertadoModalRef(component, intervaloOfertado);
                         resolve(this.ngbModalRef);
                     });

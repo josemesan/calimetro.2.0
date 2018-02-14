@@ -26,35 +26,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="tipo_dia" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
             <column name="intervalo_medio" type="integer">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="inter_min" type="integer">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="estacion_min" type="varchar(5)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="via_min" type="varchar(255)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="inter_max" type="integer">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="estacion_max" type="varchar(5)">
-                <constraints nullable="true" />
-            </column>
-
-            <column name="viamax" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -97,7 +69,11 @@
             <column name="linea_id" type="bigint">
                 <constraints nullable="true" />
             </column>
-
+            <column name="intervalo_min_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>            <column name="intervalo_max_id" type="bigint">
+                <constraints unique="true" nullable="true" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
         <dropDefaultValue tableName="datos" columnName="fecha_hora" columnDataType="datetime"/>

@@ -17,7 +17,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="calimetroApp.intervaloOfertado.fechaHora">Fecha Hora</span></th>
+            <th><span jhiTranslate="calimetroApp.intervaloOfertado.hora">Hora</span></th>
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.tipoDia">Tipo Dia</span></th>
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.intervaloMax">Intervalo Max</span></th>
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.intervaloMin">Intervalo Min</span></th>
@@ -28,7 +28,7 @@
             <tbody>
             <tr *ngFor="let intervaloOfertado of intervaloOfertados ;trackBy: trackId">
                 <td><a [routerLink]="['../intervalo-ofertado', intervaloOfertado.id ]">{{intervaloOfertado.id}}</a></td>
-                <td>{{intervaloOfertado.fechaHora | date:'medium'}}</td>
+                <td>{{intervaloOfertado.hora | date:'medium'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + intervaloOfertado.tipoDia}}">{{intervaloOfertado.tipoDia}}</td>
                 <td>{{intervaloOfertado.intervaloMax}}</td>
                 <td>{{intervaloOfertado.intervaloMin}}</td>

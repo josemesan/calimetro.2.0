@@ -10,7 +10,7 @@
     ],
     "fields": [
         {
-            "fieldName": "fechaHora",
+            "fieldName": "hora",
             "fieldType": "ZonedDateTime"
         },
         {

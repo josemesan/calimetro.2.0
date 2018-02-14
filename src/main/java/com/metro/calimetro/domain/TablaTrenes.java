@@ -22,8 +22,8 @@ public class TablaTrenes implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_hora")
-    private ZonedDateTime fechaHora;
+    @Column(name = "hora")
+    private ZonedDateTime hora;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_dia")
@@ -44,17 +44,17 @@ public class TablaTrenes implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getFechaHora() {
-        return fechaHora;
+    public ZonedDateTime getHora() {
+        return hora;
     }
 
-    public TablaTrenes fechaHora(ZonedDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public TablaTrenes hora(ZonedDateTime hora) {
+        this.hora = hora;
         return this;
     }
 
-    public void setFechaHora(ZonedDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setHora(ZonedDateTime hora) {
+        this.hora = hora;
     }
 
     public TipoDia getTipoDia() {
@@ -121,7 +121,7 @@ public class TablaTrenes implements Serializable {
     public String toString() {
         return "TablaTrenes{" +
             "id=" + getId() +
-            ", fechaHora='" + getFechaHora() + "'" +
+            ", hora='" + getHora() + "'" +
             ", tipoDia='" + getTipoDia() + "'" +
             ", numeroTrenes=" + getNumeroTrenes() +
             "}";

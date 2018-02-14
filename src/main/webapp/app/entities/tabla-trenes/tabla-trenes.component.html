@@ -17,7 +17,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="calimetroApp.tablaTrenes.fechaHora">Fecha Hora</span></th>
+            <th><span jhiTranslate="calimetroApp.tablaTrenes.hora">Hora</span></th>
             <th><span jhiTranslate="calimetroApp.tablaTrenes.tipoDia">Tipo Dia</span></th>
             <th><span jhiTranslate="calimetroApp.tablaTrenes.numeroTrenes">Numero Trenes</span></th>
             <th><span jhiTranslate="calimetroApp.tablaTrenes.linea">Linea</span></th>
@@ -27,7 +27,7 @@
             <tbody>
             <tr *ngFor="let tablaTrenes of tablaTrenes ;trackBy: trackId">
                 <td><a [routerLink]="['../tabla-trenes', tablaTrenes.id ]">{{tablaTrenes.id}}</a></td>
-                <td>{{tablaTrenes.fechaHora | date:'medium'}}</td>
+                <td>{{tablaTrenes.hora | date:'medium'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + tablaTrenes.tipoDia}}">{{tablaTrenes.tipoDia}}</td>
                 <td>{{tablaTrenes.numeroTrenes}}</td>
                 <td>

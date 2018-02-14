@@ -9,13 +9,40 @@
             <li><a href="https://twitter.com/java_hipster" target="_blank" rel="noopener" jhiTranslate="home.link.follow">follow @java_hipster on Twitter</a></li>
         </ul>
     </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-ttc">
-            <span class="fa fa-subway"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span></span>
-        </button>
+<div class="col-md-2">
+    <div class="table-responsive" *ngIf="lineas">
+        <table>
+            <thead>
+            <tr>
+                <th><span>Lineas</span></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let linea of lineas ;trackBy: trackId">
+                <td *ngIf="linea.visible">
+                    <div>
+                        <button type="submit"
+                                [routerLink]="['../linea', linea.id ]"
+                                queryParamsHandling="merge"
+                                class="btn btn-ttc">
+                                <span><i class="fa fa-subway" aria-hidden="true"></i>
+                                <span>{{linea.nombre}}</span>
+                                </span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <!-- <div class="col-md-2">
+        <input type="time" name="fechaIngreso" [(ngModel)]="desde"
+               ng-required="true" />{{desde}}
         <button type="submit" class="btn btn-ttc">
             <span class="fa fa-area-chart"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span></span>
-        </button>
+
         <button type="submit" class="btn btn-ttc">
             <span class="fa fa-bar-chart"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span></span>
         </button>
@@ -84,7 +111,7 @@
         <button type="submit" class="btn btn-ttc">
             <span class="fa fa-train"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span></span>
         </button>
-    </div>
+    </div> -->
 
         <!--<h1 class="display-4" jhiTranslate="home.title">Welcome, Java Hipster!</h1>
         <p class="lead" jhiTranslate="home.subtitle">This is your homepage</p>
@@ -110,5 +137,6 @@
         </p>
         <p>
             <span jhiTranslate="home.like">If you like JHipster, don't forget to give us a star on</span> <a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" jhiTranslate="home.github">GitHub</a>!
-        </p>-->
+        </p>
+-->
 </div>

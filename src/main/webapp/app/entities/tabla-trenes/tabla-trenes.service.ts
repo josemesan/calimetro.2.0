@@ -63,8 +63,8 @@ export class TablaTrenesService {
      */
     private convertItemFromServer(tablaTrenes: TablaTrenes): TablaTrenes {
         const copy: TablaTrenes = Object.assign({}, tablaTrenes);
-        copy.fechaHora = this.dateUtils
-            .convertDateTimeFromServer(tablaTrenes.fechaHora);
+        copy.hora = this.dateUtils
+            .convertDateTimeFromServer(tablaTrenes.hora);
         return copy;
     }
 
@@ -74,7 +74,7 @@ export class TablaTrenesService {
     private convert(tablaTrenes: TablaTrenes): TablaTrenes {
         const copy: TablaTrenes = Object.assign({}, tablaTrenes);
 
-        copy.fechaHora = this.dateUtils.toDate(tablaTrenes.fechaHora);
+        copy.hora = this.dateUtils.toDate(tablaTrenes.hora);
         return copy;
     }
 }

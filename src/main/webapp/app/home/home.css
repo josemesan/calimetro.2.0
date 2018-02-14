@@ -2,13 +2,16 @@
 Main page styles
 ========================================================================== */
 .btn-ttc{
-    font-family: Arial;
-    background-color: #19f4ea;
+    min-width: 110px;
+    background-color: #2c50f4;
+    border: #1c1e94;
+    text-shadow: 0 -1px 0 rgba(28, 28, 109, 0.76);
+    text-align-all: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
 }
 .btn-ttc:hover{
-    background-color: #2993a8; /* Green */
+    background-color: #ff2215; /* Green */
     color: white;
     color: #f4fff0;
 
@@ -16,8 +19,8 @@ Main page styles
 .btn-ttc:active {
     font-family: sans-serif;
     color: #f4fff0;
-    text-shadow: 0 -1px 0 rgba(81, 157, 243, 0.76);
-    background-color: #0f85ac;
+    text-shadow: 0 -1px 0 rgba(156, 17, 16, 0.76);
+    background-color: #f71b19;
 }
 .hipster {
     display: inline-block;

@@ -8,6 +8,22 @@
             "otherEntityField": "id"
         },
         {
+            "relationshipType": "one-to-one",
+            "relationshipName": "intervaloMin",
+            "otherEntityName": "intervaloMin",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "datos"
+        },
+        {
+            "relationshipType": "one-to-one",
+            "relationshipName": "intervaloMax",
+            "otherEntityName": "intervaloMax",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "datos"
+        },
+        {
             "relationshipType": "one-to-many",
             "relationshipName": "observaciones",
             "otherEntityName": "observaciones",
@@ -20,47 +36,8 @@
             "fieldType": "ZonedDateTime"
         },
         {
-            "fieldName": "tipoDia",
-            "fieldType": "TipoDia",
-            "fieldValues": "LAB,VIER,SAB,FEST,ESP"
-        },
-        {
             "fieldName": "intervaloMedio",
             "fieldType": "Integer"
-        },
-        {
-            "fieldName": "interMin",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "estacionMin",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 5
-        },
-        {
-            "fieldName": "viaMin",
-            "fieldType": "TipoVia",
-            "fieldValues": "I,II"
-        },
-        {
-            "fieldName": "interMax",
-            "fieldType": "Integer"
-        },
-        {
-            "fieldName": "estacionMax",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "maxlength"
-            ],
-            "fieldValidateRulesMaxlength": 5
-        },
-        {
-            "fieldName": "viamax",
-            "fieldType": "TipoVia",
-            "fieldValues": "I,II"
         },
         {
             "fieldName": "desviacionMedia",

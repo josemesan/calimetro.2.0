@@ -44,8 +44,8 @@ import com.metro.calimetro.domain.enumeration.TipoDia;
 @SpringBootTest(classes = CalimetroApp.class)
 public class TablaTrenesResourceIntTest {
 
-    private static final ZonedDateTime DEFAULT_FECHA_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_FECHA_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
+    private static final ZonedDateTime DEFAULT_HORA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_HORA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     private static final TipoDia DEFAULT_TIPO_DIA = TipoDia.LAB;
     private static final TipoDia UPDATED_TIPO_DIA = TipoDia.VIER;
@@ -91,7 +91,7 @@ public class TablaTrenesResourceIntTest {
      */
     public static TablaTrenes createEntity(EntityManager em) {
         TablaTrenes tablaTrenes = new TablaTrenes()
-            .fechaHora(DEFAULT_FECHA_HORA)
+            .hora(DEFAULT_HORA)
             .tipoDia(DEFAULT_TIPO_DIA)
             .numeroTrenes(DEFAULT_NUMERO_TRENES);
         return tablaTrenes;
@@ -117,7 +117,7 @@ public class TablaTrenesResourceIntTest {
         List<TablaTrenes> tablaTrenesList = tablaTrenesRepository.findAll();
         assertThat(tablaTrenesList).hasSize(databaseSizeBeforeCreate + 1);
         TablaTrenes testTablaTrenes = tablaTrenesList.get(tablaTrenesList.size() - 1);
-        assertThat(testTablaTrenes.getFechaHora()).isEqualTo(DEFAULT_FECHA_HORA);
+        assertThat(testTablaTrenes.getHora()).isEqualTo(DEFAULT_HORA);
         assertThat(testTablaTrenes.getTipoDia()).isEqualTo(DEFAULT_TIPO_DIA);
         assertThat(testTablaTrenes.getNumeroTrenes()).isEqualTo(DEFAULT_NUMERO_TRENES);
     }
@@ -152,7 +152,7 @@ public class TablaTrenesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tablaTrenes.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fechaHora").value(hasItem(sameInstant(DEFAULT_FECHA_HORA))))
+            .andExpect(jsonPath("$.[*].hora").value(hasItem(sameInstant(DEFAULT_HORA))))
             .andExpect(jsonPath("$.[*].tipoDia").value(hasItem(DEFAULT_TIPO_DIA.toString())))
             .andExpect(jsonPath("$.[*].numeroTrenes").value(hasItem(DEFAULT_NUMERO_TRENES)));
     }
@@ -168,7 +168,7 @@ public class TablaTrenesResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(tablaTrenes.getId().intValue()))
-            .andExpect(jsonPath("$.fechaHora").value(sameInstant(DEFAULT_FECHA_HORA)))
+            .andExpect(jsonPath("$.hora").value(sameInstant(DEFAULT_HORA)))
             .andExpect(jsonPath("$.tipoDia").value(DEFAULT_TIPO_DIA.toString()))
             .andExpect(jsonPath("$.numeroTrenes").value(DEFAULT_NUMERO_TRENES));
     }
@@ -193,7 +193,7 @@ public class TablaTrenesResourceIntTest {
         // Disconnect from session so that the updates on updatedTablaTrenes are not directly saved in db
         em.detach(updatedTablaTrenes);
         updatedTablaTrenes
-            .fechaHora(UPDATED_FECHA_HORA)
+            .hora(UPDATED_HORA)
             .tipoDia(UPDATED_TIPO_DIA)
             .numeroTrenes(UPDATED_NUMERO_TRENES);
 
@@ -206,7 +206,7 @@ public class TablaTrenesResourceIntTest {
         List<TablaTrenes> tablaTrenesList = tablaTrenesRepository.findAll();
         assertThat(tablaTrenesList).hasSize(databaseSizeBeforeUpdate);
         TablaTrenes testTablaTrenes = tablaTrenesList.get(tablaTrenesList.size() - 1);
-        assertThat(testTablaTrenes.getFechaHora()).isEqualTo(UPDATED_FECHA_HORA);
+        assertThat(testTablaTrenes.getHora()).isEqualTo(UPDATED_HORA);
         assertThat(testTablaTrenes.getTipoDia()).isEqualTo(UPDATED_TIPO_DIA);
         assertThat(testTablaTrenes.getNumeroTrenes()).isEqualTo(UPDATED_NUMERO_TRENES);
     }

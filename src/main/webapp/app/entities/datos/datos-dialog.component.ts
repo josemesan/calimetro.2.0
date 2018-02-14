@@ -10,6 +10,8 @@ import { Datos } from './datos.model';
 import { DatosPopupService } from './datos-popup.service';
 import { DatosService } from './datos.service';
 import { Linea, LineaService } from '../linea';
+import { IntervaloMin, IntervaloMinService } from '../intervalo-min';
+import { IntervaloMax, IntervaloMaxService } from '../intervalo-max';
 
 @Component({
     selector: 'jhi-datos-dialog',
@@ -22,11 +24,17 @@ export class DatosDialogComponent implements OnInit {
 
     lineas: Linea[];
 
+    intervalomins: IntervaloMin[];
+
+    intervalomaxes: IntervaloMax[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private datosService: DatosService,
         private lineaService: LineaService,
+        private intervaloMinService: IntervaloMinService,
+        private intervaloMaxService: IntervaloMaxService,
         private eventManager: JhiEventManager
     ) {
     }
@@ -35,6 +43,32 @@ export class DatosDialogComponent implements OnInit {
         this.isSaving = false;
         this.lineaService.query()
             .subscribe((res: HttpResponse<Linea[]>) => { this.lineas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.intervaloMinService
+            .query({filter: 'datos-is-null'})
+            .subscribe((res: HttpResponse<IntervaloMin[]>) => {
+                if (!this.datos.intervaloMin || !this.datos.intervaloMin.id) {
+                    this.intervalomins = res.body;
+                } else {
+                    this.intervaloMinService
+                        .find(this.datos.intervaloMin.id)
+                        .subscribe((subRes: HttpResponse<IntervaloMin>) => {
+                            this.intervalomins = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                }
+            }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.intervaloMaxService
+            .query({filter: 'datos-is-null'})
+            .subscribe((res: HttpResponse<IntervaloMax[]>) => {
+                if (!this.datos.intervaloMax || !this.datos.intervaloMax.id) {
+                    this.intervalomaxes = res.body;
+                } else {
+                    this.intervaloMaxService
+                        .find(this.datos.intervaloMax.id)
+                        .subscribe((subRes: HttpResponse<IntervaloMax>) => {
+                            this.intervalomaxes = [subRes.body].concat(res.body);
+                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                }
+            }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     clear() {
@@ -72,6 +106,14 @@ export class DatosDialogComponent implements OnInit {
     }
 
     trackLineaById(index: number, item: Linea) {
+        return item.id;
+    }
+
+    trackIntervaloMinById(index: number, item: IntervaloMin) {
+        return item.id;
+    }
+
+    trackIntervaloMaxById(index: number, item: IntervaloMax) {
         return item.id;
     }
 }

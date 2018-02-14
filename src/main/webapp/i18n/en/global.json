@@ -13,6 +13,9 @@
                 "intervaloOfertado": "Intervalo Ofertado",
                 "tablaTrenes": "Tabla Trenes",
                 "datos": "Datos",
+                "relacionFechaTipodia": "Relacion Fecha Tipodia",
+                "intervaloMin": "Intervalo Min",
+                "intervaloMax": "Intervalo Max",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

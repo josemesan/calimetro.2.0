@@ -3,17 +3,12 @@ package com.metro.calimetro.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
-
-import com.metro.calimetro.domain.enumeration.TipoDia;
-
-import com.metro.calimetro.domain.enumeration.TipoVia;
 
 /**
  * A Datos.
@@ -31,34 +26,8 @@ public class Datos implements Serializable {
     @Column(name = "fecha_hora")
     private ZonedDateTime fechaHora;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "tipo_dia")
-    private TipoDia tipoDia;
-
     @Column(name = "intervalo_medio")
     private Integer intervaloMedio;
-
-    @Column(name = "inter_min")
-    private Integer interMin;
-
-    @Size(max = 5)
-    @Column(name = "estacion_min", length = 5)
-    private String estacionMin;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "via_min")
-    private TipoVia viaMin;
-
-    @Column(name = "inter_max")
-    private Integer interMax;
-
-    @Size(max = 5)
-    @Column(name = "estacion_max", length = 5)
-    private String estacionMax;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "viamax")
-    private TipoVia viamax;
 
     @Column(name = "desviacion_media")
     private Integer desviacionMedia;
@@ -90,6 +59,14 @@ public class Datos implements Serializable {
     @ManyToOne
     private Linea linea;
 
+    @OneToOne
+    @JoinColumn(unique = true)
+    private IntervaloMin intervaloMin;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private IntervaloMax intervaloMax;
+
     @OneToMany(mappedBy = "datos")
     @JsonIgnore
     private Set<Observaciones> observaciones = new HashSet<>();
@@ -116,19 +93,6 @@ public class Datos implements Serializable {
         this.fechaHora = fechaHora;
     }
 
-    public TipoDia getTipoDia() {
-        return tipoDia;
-    }
-
-    public Datos tipoDia(TipoDia tipoDia) {
-        this.tipoDia = tipoDia;
-        return this;
-    }
-
-    public void setTipoDia(TipoDia tipoDia) {
-        this.tipoDia = tipoDia;
-    }
-
     public Integer getIntervaloMedio() {
         return intervaloMedio;
     }
@@ -140,84 +104,6 @@ public class Datos implements Serializable {
 
     public void setIntervaloMedio(Integer intervaloMedio) {
         this.intervaloMedio = intervaloMedio;
-    }
-
-    public Integer getInterMin() {
-        return interMin;
-    }
-
-    public Datos interMin(Integer interMin) {
-        this.interMin = interMin;
-        return this;
-    }
-
-    public void setInterMin(Integer interMin) {
-        this.interMin = interMin;
-    }
-
-    public String getEstacionMin() {
-        return estacionMin;
-    }
-
-    public Datos estacionMin(String estacionMin) {
-        this.estacionMin = estacionMin;
-        return this;
-    }
-
-    public void setEstacionMin(String estacionMin) {
-        this.estacionMin = estacionMin;
-    }
-
-    public TipoVia getViaMin() {
-        return viaMin;
-    }
-
-    public Datos viaMin(TipoVia viaMin) {
-        this.viaMin = viaMin;
-        return this;
-    }
-
-    public void setViaMin(TipoVia viaMin) {
-        this.viaMin = viaMin;
-    }
-
-    public Integer getInterMax() {
-        return interMax;
-    }
-
-    public Datos interMax(Integer interMax) {
-        this.interMax = interMax;
-        return this;
-    }
-
-    public void setInterMax(Integer interMax) {
-        this.interMax = interMax;
-    }
-
-    public String getEstacionMax() {
-        return estacionMax;
-    }
-
-    public Datos estacionMax(String estacionMax) {
-        this.estacionMax = estacionMax;
-        return this;
-    }
-
-    public void setEstacionMax(String estacionMax) {
-        this.estacionMax = estacionMax;
-    }
-
-    public TipoVia getViamax() {
-        return viamax;
-    }
-
-    public Datos viamax(TipoVia viamax) {
-        this.viamax = viamax;
-        return this;
-    }
-
-    public void setViamax(TipoVia viamax) {
-        this.viamax = viamax;
     }
 
     public Integer getDesviacionMedia() {
@@ -350,6 +236,32 @@ public class Datos implements Serializable {
         this.linea = linea;
     }
 
+    public IntervaloMin getIntervaloMin() {
+        return intervaloMin;
+    }
+
+    public Datos intervaloMin(IntervaloMin intervaloMin) {
+        this.intervaloMin = intervaloMin;
+        return this;
+    }
+
+    public void setIntervaloMin(IntervaloMin intervaloMin) {
+        this.intervaloMin = intervaloMin;
+    }
+
+    public IntervaloMax getIntervaloMax() {
+        return intervaloMax;
+    }
+
+    public Datos intervaloMax(IntervaloMax intervaloMax) {
+        this.intervaloMax = intervaloMax;
+        return this;
+    }
+
+    public void setIntervaloMax(IntervaloMax intervaloMax) {
+        this.intervaloMax = intervaloMax;
+    }
+
     public Set<Observaciones> getObservaciones() {
         return observaciones;
     }
@@ -401,14 +313,7 @@ public class Datos implements Serializable {
         return "Datos{" +
             "id=" + getId() +
             ", fechaHora='" + getFechaHora() + "'" +
-            ", tipoDia='" + getTipoDia() + "'" +
             ", intervaloMedio=" + getIntervaloMedio() +
-            ", interMin=" + getInterMin() +
-            ", estacionMin='" + getEstacionMin() + "'" +
-            ", viaMin='" + getViaMin() + "'" +
-            ", interMax=" + getInterMax() +
-            ", estacionMax='" + getEstacionMax() + "'" +
-            ", viamax='" + getViamax() + "'" +
             ", desviacionMedia=" + getDesviacionMedia() +
             ", tiempoVuelta=" + getTiempoVuelta() +
             ", numeroTrenes=" + getNumeroTrenes() +

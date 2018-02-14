@@ -11,6 +11,9 @@
     <include file="config/liquibase/changelog/20180210194652_added_entity_IntervaloOfertado.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180210194653_added_entity_TablaTrenes.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180210194654_added_entity_Datos.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180213182048_added_entity_RelacionFechaTipodia.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180213182050_added_entity_IntervaloMin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180213182051_added_entity_IntervaloMax.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180210194649_added_entity_constraints_Observaciones.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180210194650_added_entity_constraints_Estacion.xml" relativeToChangelogFile="false"/>

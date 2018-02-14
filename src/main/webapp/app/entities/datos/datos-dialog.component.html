@@ -20,65 +20,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.tipoDia" for="field_tipoDia">Tipo Dia</label>
-            <select class="form-control" name="tipoDia" [(ngModel)]="datos.tipoDia" id="field_tipoDia" >
-                <option value="LAB">{{'calimetroApp.TipoDia.LAB' | translate}}</option>
-                <option value="VIER">{{'calimetroApp.TipoDia.VIER' | translate}}</option>
-                <option value="SAB">{{'calimetroApp.TipoDia.SAB' | translate}}</option>
-                <option value="FEST">{{'calimetroApp.TipoDia.FEST' | translate}}</option>
-                <option value="ESP">{{'calimetroApp.TipoDia.ESP' | translate}}</option>
-            </select>
-        </div>
-        <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMedio" for="field_intervaloMedio">Intervalo Medio</label>
             <input type="number" class="form-control" name="intervaloMedio" id="field_intervaloMedio"
                 [(ngModel)]="datos.intervaloMedio" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.interMin" for="field_interMin">Inter Min</label>
-            <input type="number" class="form-control" name="interMin" id="field_interMin"
-                [(ngModel)]="datos.interMin" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.estacionMin" for="field_estacionMin">Estacion Min</label>
-            <input type="text" class="form-control" name="estacionMin" id="field_estacionMin"
-                [(ngModel)]="datos.estacionMin" maxlength="5"/>
-            <div [hidden]="!(editForm.controls.estacionMin?.dirty && editForm.controls.estacionMin?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.estacionMin?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
-                   This field cannot be longer than 5 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.viaMin" for="field_viaMin">Via Min</label>
-            <select class="form-control" name="viaMin" [(ngModel)]="datos.viaMin" id="field_viaMin" >
-                <option value="I">{{'calimetroApp.TipoVia.I' | translate}}</option>
-                <option value="II">{{'calimetroApp.TipoVia.II' | translate}}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.interMax" for="field_interMax">Inter Max</label>
-            <input type="number" class="form-control" name="interMax" id="field_interMax"
-                [(ngModel)]="datos.interMax" />
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.estacionMax" for="field_estacionMax">Estacion Max</label>
-            <input type="text" class="form-control" name="estacionMax" id="field_estacionMax"
-                [(ngModel)]="datos.estacionMax" maxlength="5"/>
-            <div [hidden]="!(editForm.controls.estacionMax?.dirty && editForm.controls.estacionMax?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.estacionMax?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
-                   This field cannot be longer than 5 characters.
-                </small>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.viamax" for="field_viamax">Viamax</label>
-            <select class="form-control" name="viamax" [(ngModel)]="datos.viamax" id="field_viamax" >
-                <option value="I">{{'calimetroApp.TipoVia.I' | translate}}</option>
-                <option value="II">{{'calimetroApp.TipoVia.II' | translate}}</option>
-            </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.desviacionMedia" for="field_desviacionMedia">Desviacion Media</label>
@@ -131,6 +75,20 @@
             <select class="form-control" id="field_linea" name="linea" [(ngModel)]="datos.linea" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="lineaOption.id === datos.linea?.id ? datos.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMin" for="field_intervaloMin">Intervalo Min</label>
+            <select class="form-control" id="field_intervaloMin" name="intervaloMin" [(ngModel)]="datos.intervaloMin">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="intervaloMinOption.id === datos.intervaloMin?.id ? datos.intervaloMin : intervaloMinOption" *ngFor="let intervaloMinOption of intervalomins; trackBy: trackIntervaloMinById">{{intervaloMinOption.id}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMax" for="field_intervaloMax">Intervalo Max</label>
+            <select class="form-control" id="field_intervaloMax" name="intervaloMax" [(ngModel)]="datos.intervaloMax">
+                <option [ngValue]="null"></option>
+                <option [ngValue]="intervaloMaxOption.id === datos.intervaloMax?.id ? datos.intervaloMax : intervaloMaxOption" *ngFor="let intervaloMaxOption of intervalomaxes; trackBy: trackIntervaloMaxById">{{intervaloMaxOption.id}}</option>
             </select>
         </div>
     </div>

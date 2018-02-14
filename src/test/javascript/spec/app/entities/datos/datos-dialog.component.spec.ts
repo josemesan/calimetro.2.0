@@ -10,6 +10,8 @@ import { DatosDialogComponent } from '../../../../../../main/webapp/app/entities
 import { DatosService } from '../../../../../../main/webapp/app/entities/datos/datos.service';
 import { Datos } from '../../../../../../main/webapp/app/entities/datos/datos.model';
 import { LineaService } from '../../../../../../main/webapp/app/entities/linea';
+import { IntervaloMinService } from '../../../../../../main/webapp/app/entities/intervalo-min';
+import { IntervaloMaxService } from '../../../../../../main/webapp/app/entities/intervalo-max';
 
 describe('Component Tests', () => {
 
@@ -26,6 +28,8 @@ describe('Component Tests', () => {
                 declarations: [DatosDialogComponent],
                 providers: [
                     LineaService,
+                    IntervaloMinService,
+                    IntervaloMaxService,
                     DatosService
                 ]
             })

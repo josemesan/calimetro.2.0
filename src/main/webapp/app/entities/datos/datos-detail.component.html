@@ -8,37 +8,9 @@
         <dd>
             <span>{{datos.fechaHora | date:'medium'}}</span>
         </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.tipoDia">Tipo Dia</span></dt>
-        <dd>
-            <span jhiTranslate="{{'calimetroApp.TipoDia.' + datos.tipoDia}}">{{datos.tipoDia}}</span>
-        </dd>
         <dt><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></dt>
         <dd>
             <span>{{datos.intervaloMedio}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.interMin">Inter Min</span></dt>
-        <dd>
-            <span>{{datos.interMin}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.estacionMin">Estacion Min</span></dt>
-        <dd>
-            <span>{{datos.estacionMin}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.viaMin">Via Min</span></dt>
-        <dd>
-            <span jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viaMin}}">{{datos.viaMin}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.interMax">Inter Max</span></dt>
-        <dd>
-            <span>{{datos.interMax}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.estacionMax">Estacion Max</span></dt>
-        <dd>
-            <span>{{datos.estacionMax}}</span>
-        </dd>
-        <dt><span jhiTranslate="calimetroApp.datos.viamax">Viamax</span></dt>
-        <dd>
-            <span jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viamax}}">{{datos.viamax}}</span>
         </dd>
         <dt><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></dt>
         <dd>
@@ -80,6 +52,18 @@
         <dd>
             <div *ngIf="datos.linea">
                 <a [routerLink]="['/linea', datos.linea?.id]">{{datos.linea?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.intervaloMin">Intervalo Min</span></dt>
+        <dd>
+            <div *ngIf="datos.intervaloMin">
+                <a [routerLink]="['/intervalo-min', datos.intervaloMin?.id]">{{datos.intervaloMin?.id}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.datos.intervaloMax">Intervalo Max</span></dt>
+        <dd>
+            <div *ngIf="datos.intervaloMax">
+                <a [routerLink]="['/intervalo-max', datos.intervaloMax?.id]">{{datos.intervaloMax?.id}}</a>
             </div>
         </dd>
     </dl>

@@ -18,14 +18,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="calimetroApp.datos.fechaHora">Fecha Hora</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.tipoDia">Tipo Dia</span></th>
             <th><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.interMin">Inter Min</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.estacionMin">Estacion Min</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.viaMin">Via Min</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.interMax">Inter Max</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.estacionMax">Estacion Max</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.viamax">Viamax</span></th>
             <th><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></th>
             <th><span jhiTranslate="calimetroApp.datos.tiempoVuelta">Tiempo Vuelta</span></th>
             <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Numero Trenes</span></th>
@@ -36,6 +29,8 @@
             <th><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></th>
             <th><span jhiTranslate="calimetroApp.datos.cocheKm">Coche Km</span></th>
             <th><span jhiTranslate="calimetroApp.datos.linea">Linea</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.intervaloMin">Intervalo Min</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.intervaloMax">Intervalo Max</span></th>
             <th></th>
             </tr>
             </thead>
@@ -43,14 +38,7 @@
             <tr *ngFor="let datos of datos ;trackBy: trackId">
                 <td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>
                 <td>{{datos.fechaHora | date:'medium'}}</td>
-                <td jhiTranslate="{{'calimetroApp.TipoDia.' + datos.tipoDia}}">{{datos.tipoDia}}</td>
                 <td>{{datos.intervaloMedio}}</td>
-                <td>{{datos.interMin}}</td>
-                <td>{{datos.estacionMin}}</td>
-                <td jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viaMin}}">{{datos.viaMin}}</td>
-                <td>{{datos.interMax}}</td>
-                <td>{{datos.estacionMax}}</td>
-                <td jhiTranslate="{{'calimetroApp.TipoVia.' + datos.viamax}}">{{datos.viamax}}</td>
                 <td>{{datos.desviacionMedia}}</td>
                 <td>{{datos.tiempoVuelta}}</td>
                 <td>{{datos.numeroTrenes}}</td>
@@ -63,6 +51,16 @@
                 <td>
                     <div *ngIf="datos.linea">
                         <a [routerLink]="['../linea', datos.linea?.id ]" >{{datos.linea?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="datos.intervaloMin">
+                        <a [routerLink]="['../intervalo-min', datos.intervaloMin?.id ]" >{{datos.intervaloMin?.id}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="datos.intervaloMax">
+                        <a [routerLink]="['../intervalo-max', datos.intervaloMax?.id ]" >{{datos.intervaloMax?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

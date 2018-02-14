@@ -11,34 +11,42 @@ entity Estacion {
 	nombre String,
     nemo String maxlength(5),
     via TipoVia,
-    visible Boolean
-    
+    visible Boolean    
 }   
 entity Linea {
 	nombre String,
     visible Boolean
 }
-entity IntervaloOfertado {
-  	fechaHora ZonedDateTime,
+entity IntervaloOfertado {  
+    hora ZonedDateTime,
     tipoDia TipoDia,
     intervaloMax Integer,
     intervaloMin Integer
 }
+entity RelacionFechaTipodia {
+	fecha ZonedDateTime,
+    tipoDia TipoDia,    
+}
 entity TablaTrenes {
-  	fechaHora ZonedDateTime,
+  	hora ZonedDateTime,
     tipoDia TipoDia,
     numeroTrenes Integer
 }
-entity Datos {
-	fechaHora ZonedDateTime,
-    tipoDia TipoDia,
-	intervaloMedio Integer,
+entity IntervaloMin{
+	hora ZonedDateTime,
 	interMin Integer,
     estacionMin String maxlength(5),
     viaMin TipoVia,
-    interMax Integer,
+}
+entity IntervaloMax{
+	hora ZonedDateTime,
+	interMax Integer,
     estacionMax String maxlength(5),
     viamax TipoVia,
+}
+entity Datos {
+	fechaHora ZonedDateTime,
+	intervaloMedio Integer,    
     desviacionMedia Integer,
  	tiempoVuelta Integer,
     numeroTrenes Integer,
@@ -49,10 +57,15 @@ entity Datos {
 	velocidad Integer,
 	cocheKm Integer
 	}    
+
 relationship OneToMany {     
-    Linea {estacion(nemo)} to Estacion,
-    Linea {datos(fechaHora)} to Datos,
-    Linea {tablaTrenes(numeroTrenes)} to TablaTrenes,
-    Linea {intervaloOfertado(intervaloMax)} to IntervaloOfertado,
-    Datos {observaciones(texto)} to Observaciones
+    Linea {estacion} to Estacion,
+    Linea {datos} to Datos,
+    Linea {tablaTrenes} to TablaTrenes,
+    Linea {intervaloOfertado} to IntervaloOfertado,
+    Datos {observaciones} to Observaciones
+}
+relationship OneToOne {  
+	Datos {intervaloMin} to IntervaloMin,
+    Datos {intervaloMax} to IntervaloMax
 }

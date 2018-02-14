@@ -17,14 +17,7 @@
                 "title": "Datos"
             },
             "fechaHora": "Fecha Hora",
-            "tipoDia": "Tipo Dia",
             "intervaloMedio": "Intervalo Medio",
-            "interMin": "Inter Min",
-            "estacionMin": "Estacion Min",
-            "viaMin": "Via Min",
-            "interMax": "Inter Max",
-            "estacionMax": "Estacion Max",
-            "viamax": "Viamax",
             "desviacionMedia": "Desviacion Media",
             "tiempoVuelta": "Tiempo Vuelta",
             "numeroTrenes": "Numero Trenes",
@@ -35,6 +28,8 @@
             "velocidad": "Velocidad",
             "cocheKm": "Coche Km",
             "linea": "Linea",
+            "intervaloMin": "Intervalo Min",
+            "intervaloMax": "Intervalo Max",
             "observaciones": "Observaciones"
         }
     }

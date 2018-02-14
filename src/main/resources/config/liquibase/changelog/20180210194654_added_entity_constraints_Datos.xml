@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="linea"/>
 
+        <addForeignKeyConstraint baseColumnNames="intervalo_min_id"
+                                 baseTableName="datos"
+                                 constraintName="fk_datos_intervalo_min_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="intervalo_min"/>
+
+        <addForeignKeyConstraint baseColumnNames="intervalo_max_id"
+                                 baseTableName="datos"
+                                 constraintName="fk_datos_intervalo_max_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="intervalo_max"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -27,6 +27,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
+import { GraficasComponent } from './graficas/graficas.component';
 
 @NgModule({
     imports: [
@@ -46,7 +47,8 @@ import {
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        GraficasComponent
     ],
     providers: [
         ProfileService,

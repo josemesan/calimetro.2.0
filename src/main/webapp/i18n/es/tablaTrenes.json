@@ -16,7 +16,7 @@
             "detail": {
                 "title": "Tabla Trenes"
             },
-            "fechaHora": "Fecha Hora",
+            "hora": "Hora",
             "tipoDia": "Tipo Dia",
             "numeroTrenes": "Numero Trenes",
             "linea": "Linea"

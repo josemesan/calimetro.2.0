@@ -63,8 +63,8 @@ export class IntervaloOfertadoService {
      */
     private convertItemFromServer(intervaloOfertado: IntervaloOfertado): IntervaloOfertado {
         const copy: IntervaloOfertado = Object.assign({}, intervaloOfertado);
-        copy.fechaHora = this.dateUtils
-            .convertDateTimeFromServer(intervaloOfertado.fechaHora);
+        copy.hora = this.dateUtils
+            .convertDateTimeFromServer(intervaloOfertado.hora);
         return copy;
     }
 
@@ -74,7 +74,7 @@ export class IntervaloOfertadoService {
     private convert(intervaloOfertado: IntervaloOfertado): IntervaloOfertado {
         const copy: IntervaloOfertado = Object.assign({}, intervaloOfertado);
 
-        copy.fechaHora = this.dateUtils.toDate(intervaloOfertado.fechaHora);
+        copy.hora = this.dateUtils.toDate(intervaloOfertado.hora);
         return copy;
     }
 }

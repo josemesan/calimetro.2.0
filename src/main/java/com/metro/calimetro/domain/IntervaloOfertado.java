@@ -22,8 +22,8 @@ public class IntervaloOfertado implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha_hora")
-    private ZonedDateTime fechaHora;
+    @Column(name = "hora")
+    private ZonedDateTime hora;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_dia")
@@ -47,17 +47,17 @@ public class IntervaloOfertado implements Serializable {
         this.id = id;
     }
 
-    public ZonedDateTime getFechaHora() {
-        return fechaHora;
+    public ZonedDateTime getHora() {
+        return hora;
     }
 
-    public IntervaloOfertado fechaHora(ZonedDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public IntervaloOfertado hora(ZonedDateTime hora) {
+        this.hora = hora;
         return this;
     }
 
-    public void setFechaHora(ZonedDateTime fechaHora) {
-        this.fechaHora = fechaHora;
+    public void setHora(ZonedDateTime hora) {
+        this.hora = hora;
     }
 
     public TipoDia getTipoDia() {
@@ -137,7 +137,7 @@ public class IntervaloOfertado implements Serializable {
     public String toString() {
         return "IntervaloOfertado{" +
             "id=" + getId() +
-            ", fechaHora='" + getFechaHora() + "'" +
+            ", hora='" + getHora() + "'" +
             ", tipoDia='" + getTipoDia() + "'" +
             ", intervaloMax=" + getIntervaloMax() +
             ", intervaloMin=" + getIntervaloMin() +

@@ -11,7 +11,7 @@ export const enum TipoDia {
 export class TablaTrenes implements BaseEntity {
     constructor(
         public id?: number,
-        public fechaHora?: any,
+        public hora?: any,
         public tipoDia?: TipoDia,
         public numeroTrenes?: number,
         public linea?: BaseEntity,

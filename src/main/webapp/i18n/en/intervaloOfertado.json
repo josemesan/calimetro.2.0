@@ -16,7 +16,7 @@
             "detail": {
                 "title": "Intervalo Ofertado"
             },
-            "fechaHora": "Fecha Hora",
+            "hora": "Hora",
             "tipoDia": "Tipo Dia",
             "intervaloMax": "Intervalo Max",
             "intervaloMin": "Intervalo Min",
