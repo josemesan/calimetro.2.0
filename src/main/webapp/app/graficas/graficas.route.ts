@@ -1,11 +1,12 @@
 import { Route } from '@angular/router';
 import { GraficasComponent } from './graficas.component';
+import {UserRouteAccessService} from '../shared';
 
 export const GRAFICAS_ROUTE: Route = {
-    path: 'graf',
+    path: 'graf/:id',
     component: GraficasComponent,
     data: {
-        authorities: [],
-        pageTitle: 'graficas.title'
-    }
+        authorities: ['ROLE_USER'],
+    },
+    canActivate: [UserRouteAccessService]
 };
