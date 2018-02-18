@@ -1,0 +1,42 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myRelacionFechaTipodiaLabel" jhiTranslate="calimetroApp.relacionFechaTipodia.home.createOrEditLabel">Create or edit a Relacion Fecha Tipodia</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!relacionFechaTipodia.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="relacionFechaTipodia.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.relacionFechaTipodia.fecha" for="field_fecha">Fecha</label>
+            <div class="d-flex">
+                <input id="field_fecha" type="datetime-local" class="form-control" name="fecha" [(ngModel)]="relacionFechaTipodia.fecha"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.relacionFechaTipodia.tipoDia" for="field_tipoDia">Tipo Dia</label>
+            <select class="form-control" name="tipoDia" [(ngModel)]="relacionFechaTipodia.tipoDia" id="field_tipoDia" >
+                <option value="LAB">{{'calimetroApp.TipoDia.LAB' | translate}}</option>
+                <option value="VIER">{{'calimetroApp.TipoDia.VIER' | translate}}</option>
+                <option value="SAB">{{'calimetroApp.TipoDia.SAB' | translate}}</option>
+                <option value="FEST">{{'calimetroApp.TipoDia.FEST' | translate}}</option>
+                <option value="ESP">{{'calimetroApp.TipoDia.ESP' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

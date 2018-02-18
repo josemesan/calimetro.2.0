@@ -1,0 +1,38 @@
+
+<div *ngIf="intervaloMax">
+    <h2><span jhiTranslate="calimetroApp.intervaloMax.detail.title">Intervalo Max</span> {{intervaloMax.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="calimetroApp.intervaloMax.hora">Hora</span></dt>
+        <dd>
+            <span>{{intervaloMax.hora | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.intervaloMax.interMax">Inter Max</span></dt>
+        <dd>
+            <span>{{intervaloMax.interMax}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.intervaloMax.estacionMax">Estacion Max</span></dt>
+        <dd>
+            <span>{{intervaloMax.estacionMax}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.intervaloMax.viamax">Viamax</span></dt>
+        <dd>
+            <span jhiTranslate="{{'calimetroApp.TipoVia.' + intervaloMax.viamax}}">{{intervaloMax.viamax}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'intervalo-max/'+ intervaloMax.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Ng2Webstorage, LocalStorageService, SessionStorageService  } from 'ngx-webstorage';
 import { JhiEventManager } from 'ng-jhipster';
-
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { ErrorHandlerInterceptor } from './blocks/interceptor/errorhandler.interceptor';
@@ -16,6 +15,7 @@ import { CalimetroHomeModule } from './home/home.module';
 import { CalimetroAdminModule } from './admin/admin.module';
 import { CalimetroAccountModule } from './account/account.module';
 import { CalimetroEntityModule } from './entities/entity.module';
+import { CalimetroGraficasModule } from './graficas';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 
 // jhipster-needle-angular-add-module-import JHipster will add new module here
@@ -29,7 +29,7 @@ import {
     ActiveMenuDirective,
     ErrorComponent
 } from './layouts';
-import { GraficasComponent } from './graficas/graficas.component';
+
 import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
@@ -43,6 +43,7 @@ import { ChartsModule } from 'ng2-charts';
         CalimetroAdminModule,
         CalimetroAccountModule,
         CalimetroEntityModule,
+        CalimetroGraficasModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
@@ -51,8 +52,7 @@ import { ChartsModule } from 'ng2-charts';
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent,
-        GraficasComponent
+        FooterComponent
     ],
     providers: [
         ProfileService,

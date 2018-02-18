@@ -1,0 +1,23 @@
+
+{
+    "calimetroApp": {
+        "relacionFechaTipodia" : {
+            "home": {
+                "title": "Relacion Fecha Tipodias",
+                "createLabel": "Crear nuevo Relacion Fecha Tipodia",
+                "createOrEditLabel": "Crear o editar Relacion Fecha Tipodia"
+            },
+            "created": "Un nuevo Relacion Fecha Tipodia ha sido creado con el identificador {{ param }}",
+            "updated": "Un Relacion Fecha Tipodia ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Relacion Fecha Tipodia ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Relacion Fecha Tipodia {{ id }}?"
+            },
+            "detail": {
+                "title": "Relacion Fecha Tipodia"
+            },
+            "fecha": "Fecha",
+            "tipoDia": "Tipo Dia"
+        }
+    }
+}

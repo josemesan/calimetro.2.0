@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "hora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "interMin",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "estacionMin",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        },
+        {
+            "fieldName": "viaMin",
+            "fieldType": "TipoVia",
+            "fieldValues": "I,II"
+        }
+    ],
+    "changelogDate": "20180213182050",
+    "entityTableName": "intervalo_min",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

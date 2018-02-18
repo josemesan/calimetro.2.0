@@ -1,0 +1,25 @@
+
+{
+    "calimetroApp": {
+        "intervaloMax" : {
+            "home": {
+                "title": "Intervalo Maxes",
+                "createLabel": "Create a new Intervalo Max",
+                "createOrEditLabel": "Create or edit a Intervalo Max"
+            },
+            "created": "A new Intervalo Max is created with identifier {{ param }}",
+            "updated": "A Intervalo Max is updated with identifier {{ param }}",
+            "deleted": "A Intervalo Max is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Intervalo Max {{ id }}?"
+            },
+            "detail": {
+                "title": "Intervalo Max"
+            },
+            "hora": "Hora",
+            "interMax": "Inter Max",
+            "estacionMax": "Estacion Max",
+            "viamax": "Viamax"
+        }
+    }
+}

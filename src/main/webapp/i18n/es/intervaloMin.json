@@ -1,0 +1,25 @@
+
+{
+    "calimetroApp": {
+        "intervaloMin" : {
+            "home": {
+                "title": "Intervalo Mins",
+                "createLabel": "Crear nuevo Intervalo Min",
+                "createOrEditLabel": "Crear o editar Intervalo Min"
+            },
+            "created": "Un nuevo Intervalo Min ha sido creado con el identificador {{ param }}",
+            "updated": "Un Intervalo Min ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Intervalo Min ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Intervalo Min {{ id }}?"
+            },
+            "detail": {
+                "title": "Intervalo Min"
+            },
+            "hora": "Hora",
+            "interMin": "Inter Min",
+            "estacionMin": "Estacion Min",
+            "viaMin": "Via Min"
+        }
+    }
+}

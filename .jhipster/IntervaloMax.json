@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "hora",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "interMax",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "estacionMax",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "maxlength"
+            ],
+            "fieldValidateRulesMaxlength": 5
+        },
+        {
+            "fieldName": "viamax",
+            "fieldType": "TipoVia",
+            "fieldValues": "I,II"
+        }
+    ],
+    "changelogDate": "20180213182051",
+    "entityTableName": "intervalo_max",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

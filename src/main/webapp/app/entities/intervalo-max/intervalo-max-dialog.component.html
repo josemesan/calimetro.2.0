@@ -1,0 +1,55 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myIntervaloMaxLabel" jhiTranslate="calimetroApp.intervaloMax.home.createOrEditLabel">Create or edit a Intervalo Max</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!intervaloMax.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="intervaloMax.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.hora" for="field_hora">Hora</label>
+            <div class="d-flex">
+                <input id="field_hora" type="datetime-local" class="form-control" name="hora" [(ngModel)]="intervaloMax.hora"
+                />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.interMax" for="field_interMax">Inter Max</label>
+            <input type="number" class="form-control" name="interMax" id="field_interMax"
+                [(ngModel)]="intervaloMax.interMax" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.estacionMax" for="field_estacionMax">Estacion Max</label>
+            <input type="text" class="form-control" name="estacionMax" id="field_estacionMax"
+                [(ngModel)]="intervaloMax.estacionMax" maxlength="5"/>
+            <div [hidden]="!(editForm.controls.estacionMax?.dirty && editForm.controls.estacionMax?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.estacionMax?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
+                   This field cannot be longer than 5 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.viamax" for="field_viamax">Viamax</label>
+            <select class="form-control" name="viamax" [(ngModel)]="intervaloMax.viamax" id="field_viamax" >
+                <option value="I">{{'calimetroApp.TipoVia.I' | translate}}</option>
+                <option value="II">{{'calimetroApp.TipoVia.II' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
