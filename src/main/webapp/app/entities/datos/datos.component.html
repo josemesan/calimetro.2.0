@@ -1,9 +1,9 @@
 <div class="form-group">
     <div><span class="font-weight-bold">Filtro fecha</span>
-        <input type="date" name="fechaHora" [(ngModel)]="desde" (change)="loadFecha()">
+        <input type="date" name="fechaHora" [(ngModel)]="desde" (change)="loadFecha()">{{desde}}
         <button type="submit" class="btn btn-primary"(click)="desde=''; loadAll()">Anular
         </button>
-        <a class="dropdown-item" [routerLink]="['/graf', 1]">
+        <a [class]="clas" [routerLink]="['/graf', 1]">
             <i class="fa fa-fw fa-user" aria-hidden="true"></i>
             <span>Graficas</span>
         </a>

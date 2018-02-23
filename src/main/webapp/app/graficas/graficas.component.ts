@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
+import {Datos} from '../entities/datos';
 
 import { Principal} from '../shared';
 
@@ -15,6 +16,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     private subscription: Subscription;
     linea: number;
+    datos: Datos[];
+    fecha: number;
 
     public lineChartData: Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
@@ -69,6 +72,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.linea = (params['id']); });
         this.registerChangeInGraficas();
+        this.fecha = this.datos[0].id;
     }
 
     registerChangeInGraficas() {

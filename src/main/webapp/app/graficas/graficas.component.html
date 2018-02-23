@@ -1,3 +1,10 @@
+<div class="form-group">
+    <div><span class="font-weight-bold">Filtro fecha</span>
+        <input type="date" name="fechaHora" [(ngModel)]="desde" (change)="loadFecha()">{{desde}}
+        <button type="submit" class="btn btn-primary"(click)="desde=''; loadAll()">Anular
+        </button>
+    </div>
+</div>
 <div class="row">
     <span>Graficas de Linea {{linea}}</span>
     <div class="col-md-6">

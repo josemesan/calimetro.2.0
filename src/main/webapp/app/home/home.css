@@ -1,6 +1,91 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+.btn-L-1{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #19e7ff;
+}
+.btn-L-2{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: rgba(255, 10, 0, 0.82);
+}
+.btn-L-3{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #ffe800;
+}
+.btn-L-4{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #ff4300;
+}
+.btn-L-5{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #00ff21;
+}
+.btn-L-6{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #a19993;
+}
+.btn-L-7{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #ffbb00;
+}
+.btn-L-8{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: rgba(255, 119, 151, 0.83);
+}
+.btn-L-9{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #ff00cc;
+}
+.btn-L-10{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #0014ff;
+}
+.btn-L-11{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #13ff44;
+}
+.btn-L-12{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    text-align-all: center;
+    background-color: #007fff;
+}
+
 .btn-ttc{
     min-width: 110px;
     background-color: #2c50f4;

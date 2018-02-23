@@ -16,6 +16,7 @@ export class DatosComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     desde = String;
+    clas = 'btn btn-danger btn-sm';
 
     constructor(
         private datosService: DatosService,
