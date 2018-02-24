@@ -43,6 +43,10 @@ export class DatosService {
         return this.http.get<Datos[]>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'})
             .map((res: HttpResponse<Datos[]>) => this.convertArrayResponse(res));
     }
+    queryFechaLinea(desde: any, linea: Number): Observable<HttpResponse<Datos[]>> {
+        return this.http.get<Datos[]>(`${this.resourceUrl}/fecha/${desde}/${linea}`, {observe: 'response'})
+            .map((res: HttpResponse<Datos[]>) => this.convertArrayResponse(res));
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});

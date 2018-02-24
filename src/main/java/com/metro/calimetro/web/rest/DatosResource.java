@@ -94,6 +94,17 @@ public class DatosResource {
         return datosRepository.findAll();
         }
 
+    @GetMapping("/datos/fecha/{ini}/{lin}")
+    @Timed
+    public List<Datos> getBetweenFechaDatosLinea(@PathVariable String ini,@PathVariable Long lin) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        LocalDateTime ldt2 = ldt1.plusHours(20);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
+        log.debug("REST request to get Datos segun Fecha : {}", ini);
+        return datosRepository.findByFechaHoraBetweenAndLineaId(zone1,zone2, lin);
+    }
     @GetMapping("/datos/fecha/{ini}")
     @Timed
     public List<Datos> getBetweenFechaDatos(@PathVariable String ini) {
@@ -102,23 +113,10 @@ public class DatosResource {
         ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
         LocalDateTime ldt2 = ldt1.plusHours(20);
         ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
-
         log.debug("REST request to get Datos segun Fecha : {}", ini);
         return datosRepository.findByFechaHoraBetween(zone1,zone2);
+
     }
-
-        /* @GetMapping("/datos/fecha/{ini}")
-    @Timed
-    public List<Datos> getBetweenFechaDatos(@PathVariable String ini) {
-        //--- Convertir string en zonedatetime
-        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
-        LocalDateTime ldt2 = ldt1.plusHours(20);
-        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
-
-        log.debug("REST request to get BetweenDate Datos");
-        return DatosRepository.findByFechaHoraBetween(zone1,zone2);
-    }*/
 
     /**
      * GET  /datos/:id : get the "id" datos.

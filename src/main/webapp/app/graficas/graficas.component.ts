@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, Attribute } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
@@ -18,8 +19,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     linea: number;
     datos: Datos[];
     private date;
-    fecha: any;
-    desde = String;
+    desde: any;
 
     public lineChartData: Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
@@ -65,12 +65,15 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal,
         private route: ActivatedRoute,
+        public datepipe: DatePipe,
 
     ) {
+        this.desde = new Date();
+        this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();
         setInterval(() => {
             this.date =  new Date();
-        }, 60000);
+        }, 10000);
     }
 
     ngOnInit() {
@@ -81,10 +84,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
             this.linea = (params['id']); });
         this.registerChangeInGraficas();
         this.registerChangeInDatos();
+        this.loadFechaLinea();
     }
 
     registerChangeInDatos() {
-        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFecha());
+        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
     }
 
     registerChangeInGraficas() {
@@ -94,8 +98,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
         );
     }
 
-    loadFecha() {
-        this.datosService.queryFecha(this.desde + ' 06:00').subscribe(
+    loadFechaLinea() {
+        this.datosService.queryFechaLinea(this.desde.toString() + ' 06:00', this.linea).subscribe(
             (res: HttpResponse<Datos[]>) => {
                 this.datos = res.body;
             },
