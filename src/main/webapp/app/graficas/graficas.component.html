@@ -1,24 +1,29 @@
 <div class="form-group">
+    <div class="text-right">
+        <span>Hora {{date | date: 'hh:mm'}}</span>
+    </div>
     <div><span class="font-weight-bold">Filtro fecha</span>
-        <input type="date" name="fechaHora" [(ngModel)]="desde" (change)="loadFecha()">{{desde}}
-        <button type="submit" class="btn btn-primary"(click)="desde=''; loadAll()">Anular
-        </button>
+        <input type="date" name="fechaHora" [(ngModel)]="desde" (change)="loadFecha()" value="date">{{desde}}
+    </div>
+</div>
+<div class="flex-row">
+    <div class="col-md-4">
+        <h2 class="text-left">Graficas de Linea {{linea}}</h2>
     </div>
 </div>
 <div class="row">
-    <span>Graficas de Linea {{linea}}</span>
     <div class="col-md-6">
-        <div style="display: block;">
-            <canvas baseChart width="400" height="400"
-                    [datasets]="lineChartData"
-                    [labels]="lineChartLabels"
-                    [options]="lineChartOptions"
-                    [colors]="lineChartColors"
-                    [legend]="lineChartLegend"
-                    [chartType]="lineChartType"
-                    (chartHover)="chartHovered($event)"
-                    (chartClick)="chartClicked($event)"></canvas>
-        </div>
+            <div style="display: block;">
+                <canvas baseChart width="400" height="400"
+                        [datasets]="lineChartData"
+                        [labels]="lineChartLabels"
+                        [options]="lineChartOptions"
+                        [colors]="lineChartColors"
+                        [legend]="lineChartLegend"
+                        [chartType]="lineChartType"
+                        (chartHover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"></canvas>
+            </div>
     </div>
     <div class="col-md-6" style="margin-bottom: 10px">
         <table class="table table-responsive table-condensed">
@@ -30,5 +35,5 @@
             </tr>
         </table>
         <button (click)="randomize()">CLICK</button>
-    </div>
+</div>
 </div>

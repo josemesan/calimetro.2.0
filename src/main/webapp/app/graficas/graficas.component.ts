@@ -1,23 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Attribute } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-import {Datos} from '../entities/datos';
-
-import { Principal} from '../shared';
+import {HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { Principal } from '../shared';
+import { Datos } from '../entities/datos';
+import { DatosService } from '../entities/datos';
 
 @Component({
     selector: 'jhi-graficas',
     templateUrl: './graficas.component.html'
 })
 export class GraficasComponent implements OnInit, OnDestroy {
-
     currentAccount: any;
     eventSubscriber: Subscription;
     private subscription: Subscription;
     linea: number;
     datos: Datos[];
-    fecha: number;
+    private date;
+    fecha: any;
+    desde = String;
 
     public lineChartData: Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
@@ -58,11 +60,17 @@ export class GraficasComponent implements OnInit, OnDestroy {
     public lineChartType = 'line';
 
     constructor(
+        private datosService: DatosService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+
     ) {
+        this.date =  new Date();
+        setInterval(() => {
+            this.date =  new Date();
+        }, 60000);
     }
 
     ngOnInit() {
@@ -72,7 +80,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.subscription = this.route.params.subscribe((params) => {
             this.linea = (params['id']); });
         this.registerChangeInGraficas();
-        this.fecha = this.datos[0].id;
+        this.registerChangeInDatos();
+    }
+
+    registerChangeInDatos() {
+        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFecha());
     }
 
     registerChangeInGraficas() {
@@ -81,6 +93,16 @@ export class GraficasComponent implements OnInit, OnDestroy {
             (response) => this.subscription.unsubscribe()
         );
     }
+
+    loadFecha() {
+        this.datosService.queryFecha(this.desde + ' 06:00').subscribe(
+            (res: HttpResponse<Datos[]>) => {
+                this.datos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
     previousState() {
         window.history.back();
     }
