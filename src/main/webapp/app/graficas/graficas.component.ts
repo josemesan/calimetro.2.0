@@ -8,6 +8,8 @@ import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
 import { Chart } from 'angular-highcharts';
+// import { getHighChartsData } from './chart-data';
+import { getHighChartsTheme } from './chart-data';
 
 @Component({
     selector: 'jhi-graficas',
@@ -21,22 +23,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
     datos: Datos[];
     private date;
     desde: any;
+    chartData: any;
+    chart: any;
     // ------
-    chart = new Chart({
-        chart: {
-            type: 'line'
-        },
-        title: {
-            text: 'Linechart'
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: 'Line 1',
-            data: [1, 2, 3]
-        }]
-    });
 
     /*public lineChartData: Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40], label: 'Intervalo medio'},
@@ -87,7 +76,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         public datepipe: DatePipe,
 
-    ) {
+    ) { // this.chartData = getHighChartsData;
+        // this.chart = new Chart(this.chartData);
+        this.chartData = getHighChartsTheme;
+        this.chart = new Chart(this.chartData);
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();
