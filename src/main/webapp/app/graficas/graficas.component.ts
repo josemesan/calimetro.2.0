@@ -22,14 +22,17 @@ export class GraficasComponent implements OnInit, OnDestroy {
     desde: any;
 
     public lineChartData: Array<any> = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-        {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+        {data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40], label: 'Intervalo medio'},
+        {data: [65, 65, 40, 40, 40, 60, 60, 65, 65, 40, 40, 40, 60, 60], label: 'Máximo Ofertado'},
+        {data: [40, 40, 20, 20, 20, 30, 20, 40, 40, 20, 20, 20, 30, 20, ], label: 'Mínimo Ofertado'}
     ];
-    public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-    public lineChartOptions: any = {
-        responsive: true
+    public lineChartLabels: Array<any> = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2];
+
+    public lineChartOptions:any = {
+        responsive: true,
+        yAxisID : 0,
     };
+
     public lineChartColors: Array<any> = [
         { // grey
             backgroundColor: 'rgba(148,159,177,0.2)',
