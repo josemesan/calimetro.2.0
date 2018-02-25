@@ -7,6 +7,7 @@ import {HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
+import { Chart } from 'angular-highcharts';
 
 @Component({
     selector: 'jhi-graficas',
@@ -20,15 +21,31 @@ export class GraficasComponent implements OnInit, OnDestroy {
     datos: Datos[];
     private date;
     desde: any;
+    // ------
+    chart = new Chart({
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Linechart'
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Line 1',
+            data: [1, 2, 3]
+        }]
+    });
 
-    public lineChartData: Array<any> = [
+    /*public lineChartData: Array<any> = [
         {data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56, 55, 40], label: 'Intervalo medio'},
         {data: [65, 65, 40, 40, 40, 60, 60, 65, 65, 40, 40, 40, 60, 60], label: 'Máximo Ofertado'},
         {data: [40, 40, 20, 20, 20, 30, 20, 40, 40, 20, 20, 20, 30, 20, ], label: 'Mínimo Ofertado'}
     ];
     public lineChartLabels: Array<any> = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2];
 
-    public lineChartOptions:any = {
+    public lineChartOptions: any = {
         responsive: true,
         yAxisID : 0,
     };
@@ -60,7 +77,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         }
     ];
     public lineChartLegend = true;
-    public lineChartType = 'line';
+    public lineChartType = 'line';*/
 
     constructor(
         private datosService: DatosService,
@@ -88,6 +105,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.registerChangeInGraficas();
         this.registerChangeInDatos();
         this.loadFechaLinea();
+    }
+    // ------------
+    add() {
+        this.chart.addPoint(Math.floor(Math.random() * 10));
     }
 
     registerChangeInDatos() {
@@ -123,7 +144,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.jhiAlertService.error(error.message, null, null);
     }
 
-    public randomize(): void {
+   /* public randomize(): void {
         const _lineChartData: Array<any> = new Array(this.lineChartData.length);
         for (let i = 0; i < this.lineChartData.length; i++) {
             _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
@@ -141,5 +162,5 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
     public chartHovered(e: any): void {
         console.log(e);
-    }
+    }*/
 }

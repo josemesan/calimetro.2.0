@@ -30,11 +30,11 @@ import {
     ErrorComponent
 } from './layouts';
 
-import { ChartsModule } from 'ng2-charts';
+// import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
     imports: [
-        ChartsModule,
+        // ChartsModule,
         BrowserModule,
         CalimetroAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
