@@ -2,7 +2,7 @@ export const getHighChartsTheme = {
     colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
         '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
     chart: {
-        type: 'bar',
+        type: 'line',
         backgroundColor: {
             linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
             stops: [
@@ -196,8 +196,6 @@ export const getHighChartsTheme = {
     textColor: '#C0C0C0',
     contrastTextColor: '#F0F0F3',
     maskColor: 'rgba(255,255,255,0.3)',
-
-
 
         series: [{
             name: 'Winter 2012-2013',

@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Attribute, SimpleChange, Input, OnChanges} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
@@ -8,7 +8,6 @@ import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
 import { Chart } from 'angular-highcharts';
-// import { getHighChartsData } from './chart-data';
 import { getHighChartsTheme } from './chart-data';
 
 @Component({
@@ -16,7 +15,7 @@ import { getHighChartsTheme } from './chart-data';
     templateUrl: './graficas.component.html'
 })
 export class GraficasComponent implements OnInit, OnDestroy {
-    @Input() config: any;
+    config: any;
     currentAccount: any;
     eventSubscriber: Subscription;
     private subscription: Subscription;
@@ -26,6 +25,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     desde: any;
     chartData: any;
     chart: any;
+    chart2: any;
 
     constructor(
         private datosService: DatosService,
@@ -37,6 +37,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
     ) { this.chartData = getHighChartsTheme;
         this.chart = new Chart(this.chartData);
+        this.chart2 = new Chart(this.chartData);
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();
@@ -44,9 +45,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
             this.date =  new Date();
         }, 10000);
     }
-    /* ngOnChanges  (changes: SimpleChange){
-        const { config } = changes;
-    }*/
+
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.currentAccount = account;
@@ -62,10 +61,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chart.addPoint(Math.floor(Math.random() * 10));
     }
 
-
-
-    updateChart(type){
-        this.chartData = type === 'line';
+    updateChart(){
+        if (this.chartData.chart.type ==='line') {
+            this.chartData.chart.type ='bar';
+        } else {
+            this.chartData.chart.type ='line';
+        }
+        this.chart= new Chart(this.chartData);
     }
 
     registerChangeInDatos() {
