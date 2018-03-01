@@ -61,13 +61,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chart.addPoint(Math.floor(Math.random() * 10));
     }
 
-    updateChart(){
-        if (this.chartData.chart.type ==='line') {
-            this.chartData.chart.type ='bar';
+    updateChart() {
+        if (this.chartData.chart.type === 'line') {
+            this.chartData.chart.type = 'bar';
         } else {
-            this.chartData.chart.type ='line';
+            this.chartData.chart.type = 'line';
         }
-        this.chart= new Chart(this.chartData);
+        this.chart = new Chart(this.chartData);
     }
 
     registerChangeInDatos() {

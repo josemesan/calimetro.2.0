@@ -1,5 +1,4 @@
 import './vendor.ts';
-
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,10 +16,10 @@ import { CalimetroAccountModule } from './account/account.module';
 import { CalimetroEntityModule } from './entities/entity.module';
 import { CalimetroGraficasModule } from './graficas';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
-
+import {ExcelService} from './excel/excelservice.service';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
-import {
 
+import {
     JhiMainComponent,
     NavbarComponent,
     FooterComponent,
@@ -31,6 +30,7 @@ import {
 } from './layouts';
 
 // import { ChartsModule } from 'ng2-charts';
+import {ExcelComponent} from './excel/excel.component';
 
 @NgModule({
     imports: [
@@ -45,8 +45,10 @@ import {
         CalimetroEntityModule,
         CalimetroGraficasModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
+
     ],
     declarations: [
+        ExcelComponent,
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,
@@ -55,6 +57,7 @@ import {
         FooterComponent
     ],
     providers: [
+        ExcelService,
         ProfileService,
         PaginationConfig,
         UserRouteAccessService,
