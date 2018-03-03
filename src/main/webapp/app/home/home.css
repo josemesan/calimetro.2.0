@@ -1,6 +1,16 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
+.titulo1 {
+    text-align-all: center;
+    font-weight: bold;
+    font-size: 350%;
+}
+.titulo2 {
+    font-weight: bold;
+    font-size: 120%;
+}
+
 .btn-Linea1{
     border-radius: 6px;
     font-family: sans-serif;

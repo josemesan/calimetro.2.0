@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     modalRef: NgbModalRef;
     private lineas: Linea [];
     eventSubscriber: Subscription;
+    private date: any;
 
     constructor(
         private lineaService: LineaService,
@@ -27,6 +28,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager
     ) {
         this.loadAll();
+        this.date =  new Date();
+        setInterval(() => {
+            this.date =  new Date();
+        }, 10000);
     }
 
     loadAll() {
