@@ -20,6 +20,18 @@ export const PERSONS: Person[] = [
     },
     {
         id: 3,
+        name: 'Adam',
+        surname: 'Tracz',
+        age: 12
+    },
+    {
+        id: 4,
+        name: 'Adam',
+        surname: 'Tracz',
+        age: 12
+    },
+    {
+        id: 5,
         name: 'Steve',
         surname: 'Laski',
         age: 38

@@ -44,8 +44,8 @@
                 <td *ngIf="linea.visible">
                     <div>
                         <button type="submit"
-                                [routerLink]="['/graf', linea.id ]"
-                                [class]="['btn-L-'+linea.id]">
+                                [routerLink]="['/graf', linea.nombre]"
+                                [class]="['btn-'+linea.nombre.replace(' ','')]">
                                 <span><i class="fa fa-subway" aria-hidden="true"></i>
                                 <span>{{linea.nombre}}</span>
                                 </span>

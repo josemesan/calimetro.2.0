@@ -96,14 +96,14 @@ public class DatosResource {
 
     @GetMapping("/datos/fecha/{ini}/{lin}")
     @Timed
-    public List<Datos> getBetweenFechaDatosLinea(@PathVariable String ini,@PathVariable Long lin) {
+    public List<Datos> getBetweenFechaDatosLinea(@PathVariable String ini,@PathVariable String lin) {
         //--- Convertir string en zonedatetime
         LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
         LocalDateTime ldt2 = ldt1.plusHours(20);
         ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
         log.debug("REST request to get Datos segun Fecha : {}", ini);
-        return datosRepository.findByFechaHoraBetweenAndLineaId(zone1,zone2, lin);
+        return datosRepository.findByFechaHoraBetweenAndLineaNombre(zone1,zone2, lin);
     }
     @GetMapping("/datos/fecha/{ini}")
     @Timed

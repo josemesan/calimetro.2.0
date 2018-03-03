@@ -1,84 +1,84 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-.btn-L-1{
+.btn-Linea1{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #19e7ff;
 }
-.btn-L-2{
+.btn-Linea2{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: rgba(255, 10, 0, 0.82);
 }
-.btn-L-3{
+.btn-Linea3{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #ffe800;
 }
-.btn-L-4{
+.btn-Linea4{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #ff4300;
 }
-.btn-L-5{
+.btn-Linea5{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #00ff21;
 }
-.btn-L-6{
+.btn-Linea6{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #a19993;
 }
-.btn-L-7{
+.btn-Linea7{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #ffbb00;
 }
-.btn-L-8{
+.btn-Linea8{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: rgba(255, 119, 151, 0.83);
 }
-.btn-L-9{
+.btn-Linea9{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #ff00cc;
 }
-.btn-L-10{
+.btn-Linea10{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #0014ff;
 }
-.btn-L-11{
+.btn-Linea11{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;
     text-align-all: center;
     background-color: #13ff44;
 }
-.btn-L-12{
+.btn-Linea12{
     border-radius: 6px;
     font-family: sans-serif;
     min-width: 110px;

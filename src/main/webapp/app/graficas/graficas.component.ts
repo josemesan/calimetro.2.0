@@ -19,7 +19,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     private subscription: Subscription;
-    linea: number;
+    linea: String;
     datos: Datos[];
     private date;
     desde: any;

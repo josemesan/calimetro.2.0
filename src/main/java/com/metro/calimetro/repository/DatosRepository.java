@@ -24,9 +24,9 @@ import java.util.List;
 @Repository
 public interface DatosRepository extends JpaRepository<Datos, Long> {
     public List<Datos> findByFechaHoraBetween (ZonedDateTime desde, ZonedDateTime hasta);
-    public List<Datos> findByFechaHoraBetweenAndLineaId(ZonedDateTime desde,
+    public List<Datos> findByFechaHoraBetweenAndLineaNombre(ZonedDateTime desde,
                                                          ZonedDateTime hasta,
-                                                         Long linea);
+                                                         String linea);
 }
 
 
