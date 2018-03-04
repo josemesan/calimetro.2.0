@@ -12,7 +12,10 @@ import { getHighChartsTheme } from './chart-data';
 
 @Component({
     selector: 'jhi-graficas',
-    templateUrl: './graficas.component.html'
+    templateUrl: './graficas.component.html',
+    styleUrls: [
+        'graficas.css'
+    ]
 })
 export class GraficasComponent implements OnInit, OnDestroy {
     config: any;

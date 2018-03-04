@@ -19,7 +19,7 @@ export const getHighChartsTheme = {
         style: {
             color: '#E0E0E3',
             textTransform: 'uppercase',
-            fontSize: '20px'
+            fontSize: '15px'
         }
     },
     subtitle: {
