@@ -1,89 +1,67 @@
 <div class="text-xl-right">
     <span>{{date | date: 'HH:mm'}}</span>
 </div>
+
 <div class="form-group">
     <div><span class="font-weight-bold">Fecha</span>
         <input type="date" [(ngModel)]="desde" (change)="loadFechaLinea()" value="fecha">{{fecha}}
     </div>
 </div>
-<div><button (click)="updateChart()">Add Point!</button></div>
-<!--<div class="flex-row">-->
-    <!--<div class="col-md-4">-->
-        <!--<h2 class="text-left">Graficas de {{linea}}</h2>-->
-            <!--<tr *ngFor="let dato of datos"> datos id: {{dato.id}}-->
-        <!--</tr>-->
-    <!--</div>-->
-<!--</div>-->
+<div><button (click)="add()">Add Point!</button></div>
+<br>
 
-<table class="table-responsive">
-    <thead>
-        <tr>
-            <th scope="col">Graficas de {{linea}}</th>
-            <th scope="col">FECHA</th>
-            <th scope="col">VIAJEROS LINEA</th>
-            <th scope="col">INCREMENTO</th>
-            <th scope="col">VIAJEROS TOTAL</th>
-            <th scope="col">INCREMENTO TOTAL</th>
+<div class="table-striped">
+    <div class="col-md-4">
+            <tr *ngFor="let dato of datos"> datos id: {{dato.id}}
         </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>&nbsp;</td>
-            <td>20000</td>
-            <td>13140000</td>
-            <td>2%</td>
-            <td>3%</td>
-            <td>200000</td>
-        </tr>
-    </tbody>
-</table>
-<!--<div [chart]="chart" class="container"></div>-->
-<!--<div [chart]="chart" class="container"></div>-->
-<!--<div [chart]="chart" class="container"></div>-->
-<table class="table-responsive">
-    <tbody class="response_body">
-        <tr >
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-        </tr>
-        <tr >
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-        </tr>
-        <tr >
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-            <td><div [chart]="chart" class="container"></div></td>
-        </tr>
-    </tbody>
-</table>
-<!--
-<div class="row">
-    <div class="col-md-6">
-            <div style="display: block;">
-                <canvas baseChart width="400" height="400"
-                        [datasets]="lineChartData"
-                        [labels]="lineChartLabels"
-                        [options]="lineChartOptions"
-                        [colors]="lineChartColors"
-                        [legend]="lineChartLegend"
-                        [chartType]="lineChartType"
-                        (chartHover)="chartHovered($event)"
-                        (chartClick)="chartClicked($event)"></canvas>
-            </div>
     </div>
-    <div class="col-md-6" style="margin-bottom: 10px">
-        <table class="table table-responsive table-condensed">
+</div>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <th *ngFor="let label of lineChartLabels">{{label}}</th>
+                <th scope="col">VIAJEROS LINEA</th>
+                <th scope="col">INCREMENTO</th>
+                <th scope="col">VIAJEROS TOTAL</th>
+                <th scope="col">INCREMENTO TOTAL</th>
             </tr>
-            <tr *ngFor="let d of lineChartData">
-                <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </thead>
+        <tbody>
+            <tr>
+                <td><i class="fa fa-arrow-up" aria-hidden="true"> </i> 2.300.000</td>
+                <td><i class="fa fa-arrow-down" aria-hidden="true"> </i> 2,1 %</td>
+                <td><i class="fa fa-arrow-up" aria-hidden="true"> </i> 200.000</td>
+                <td><i class="fa fa-arrow-down" aria-hidden="true"> </i> 3,3 %</td>
             </tr>
-        </table>
-        <button (click)="randomize()">CLICK</button>
+        </tbody>
+    </table>
 </div>
+<div class="row">
+    <div class="col-md-4">
+        <div [chart]="chart" class="container" ></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+    </div>
+    <div class="col-md-4">
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+    </div>
+    <div class="col-md-4">
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+        <div [chart]="chart"  class="container"></div>
+        <hr>
+    </div>
 </div>
--->
+
+

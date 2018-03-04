@@ -189,14 +189,44 @@ export const getHighChartsTheme = {
         trackBorderColor: '#404043'
     },
 
-    // special colors for some of the
-    legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
-    background2: '#505053',
-    dataLabelsColor: '#B0B0B3',
-    textColor: '#C0C0C0',
-    contrastTextColor: '#F0F0F3',
-    maskColor: 'rgba(255,255,255,0.3)',
-
+        // special colors for some of the
+        legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+        background2: '#505053',
+        dataLabelsColor: '#B0B0B3',
+        textColor: '#C0C0C0',
+        contrastTextColor: '#F0F0F3',
+        maskColor: 'rgba(255,255,255,0.3)',
+        // -------------
+        responsive: {
+            rules: [{
+                chartOptions: {
+                    condition: {
+                        maxHeight: 50,
+                    },
+                    legend: {
+                        align: 'center',
+                        verticalAlign: 'bottom',
+                        layout: 'horizontal'
+                    },
+                    yAxis: {
+                        labels: {
+                            align: 'left',
+                            x: 0,
+                            y: -5
+                        },
+                        title: {
+                            text: null
+                        }
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    credits: {
+                        enabled: false
+                    }
+                }
+            }]
+        },
         series: [{
             name: 'Winter 2012-2013',
             // Define the data points. All series have a dummy year
