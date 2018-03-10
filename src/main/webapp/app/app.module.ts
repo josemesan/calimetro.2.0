@@ -48,7 +48,7 @@ import {ExcelComponent} from './excel/excel.component';
 
     ],
     declarations: [
-        ExcelComponent,
+        // ExcelComponent,
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,
@@ -57,7 +57,7 @@ import {ExcelComponent} from './excel/excel.component';
         FooterComponent
     ],
     providers: [
-        ExcelService,
+        // ExcelService,
         ProfileService,
         PaginationConfig,
         UserRouteAccessService,

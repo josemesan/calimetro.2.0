@@ -4,18 +4,42 @@
         <table class="table" *ngIf="persons">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Age</th>
+                <th>id</th>
+                <th>fechaHora</th>
+                <th>intervaloMedio</th>
+                <th>desviacionMedia</th>
+                <th>tiempoVuelta</th>
+                <th>numeroTrenes</th>
+                <th>viajeros</th>
+                <th>toc</th>
+                <th>densidad</th>
+                <th>consumo</th>
+                <th>velocidad</th>
+                <th>cocheKm</th>
+                <th>linea</th>
+                <th>intervaloMin</th>
+                <th>intervaloMax</th>
+                <th>observaciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let person of persons">
-                <td>{{person.id}}</td>
-                <td>{{person.name}}</td>
-                <td>{{person.surname}}</td>
-                <td>{{person.age}}</td>
+            <tr *ngFor="let dato of datos">
+                <td>dato.id</td>
+                <td>dato.fechaHora</td>
+                <td>dato.intervaloMedio</td>
+                <td>dato.desviacionMedia</td>
+                <td>dato.tiempoVuelta</td>
+                <td>dato.numeroTrenes</td>
+                <td>dato.viajeros</td>
+                <td>dato.toc</td>
+                <td>dato.densidad</td>
+                <td>dato.consumo</td>
+                <td>dato.velocidad</td>
+                <td>dato.cocheKm</td>
+                <td>dato.linea</td>
+                <td>dato.intervaloMin</td>
+                <td>dato.intervaloMax</td>
+                <td>dato.observaciones</td>
             </tr>
             </tbody>
         </table>

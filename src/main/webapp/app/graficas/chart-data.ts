@@ -1,4 +1,79 @@
 export const getHighChartsTheme = {
+    chart: {
+        type: 'column'
+    },
+
+    title: {
+        text: 'Highcharts responsive chart'
+    },
+
+    subtitle: {
+        text: 'Resize the frame or click buttons to change appearance'
+    },
+
+    legend: {
+        align: 'right',
+        verticalAlign: 'middle',
+        layout: 'vertical'
+    },
+
+    xAxis: {
+        categories: ['Apples', 'Oranges', 'Bananas'],
+        labels: {
+            x: -10
+        }
+    },
+
+    yAxis: {
+        allowDecimals: false,
+        title: {
+            text: 'Amount'
+        }
+    },
+
+    series: [{
+        name: 'Christmas Eve',
+        data: [1, 4, 3]
+    }, {
+        name: 'Christmas Day before dinner',
+        data: [6, 4, 2]
+    }, {
+        name: 'Christmas Day after dinner',
+        data: [8, 4, 3]
+    }],
+
+    responsive: {
+        rules: [{
+            condition: {
+                minHeight: 50,
+            },
+            chartOptions: {
+                legend: {
+                    align: 'center',
+                    verticalAlign: 'bottom',
+                    layout: 'horizontal'
+                },
+                yAxis: {
+                    labels: {
+                        align: 'left',
+                        x: 0,
+                        y: -5
+                    },
+                    title: {
+                        text: null
+                    }
+                },
+                subtitle: {
+                    text: null
+                },
+                credits: {
+                    enabled: false
+                }
+            }
+        }]
+    }
+};
+/*export const getHighChartsTheme = {
     colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
         '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
     chart: {
@@ -203,7 +278,7 @@ export const getHighChartsTheme = {
                     condition: {
                         maxHeight: 50,
                     },
-                    legend: {
+                    /*legend: {
                         align: 'center',
                         verticalAlign: 'bottom',
                         layout: 'horizontal'
@@ -296,4 +371,4 @@ export const getHighChartsTheme = {
                 [Date.UTC(1971, 5, 23), 1.08]
             ]
         }]
-    };
+    };*/
