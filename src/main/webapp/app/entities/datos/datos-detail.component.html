@@ -51,19 +51,21 @@
         <dt><span jhiTranslate="calimetroApp.datos.linea">Linea</span></dt>
         <dd>
             <div *ngIf="datos.linea">
-                <a [routerLink]="['/linea', datos.linea?.id]">{{datos.linea?.id}}</a>
+                <a [routerLink]="['/linea', datos.linea?.id]">{{datos.linea?.nombre}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="calimetroApp.datos.intervaloMin">Intervalo Min</span></dt>
         <dd>
             <div *ngIf="datos.intervaloMin">
-                <a [routerLink]="['/intervalo-min', datos.intervaloMin?.id]">{{datos.intervaloMin?.id}}</a>
+                <a [routerLink]="['/intervalo-min', datos.intervaloMin?.id]">{{datos.intervaloMin?.interMin}} min
+                    {{datos.intervaloMin?.estacionMin}} V.{{datos.intervaloMin?.viaMin}}</a>
             </div>
         </dd>
         <dt><span jhiTranslate="calimetroApp.datos.intervaloMax">Intervalo Max</span></dt>
         <dd>
             <div *ngIf="datos.intervaloMax">
-                <a [routerLink]="['/intervalo-max', datos.intervaloMax?.id]">{{datos.intervaloMax?.id}}</a>
+                <a [routerLink]="['/intervalo-max', datos.intervaloMax?.id]">{{datos.intervaloMax?.interMax}} min
+                    {{datos.intervaloMax?.estacionMax}} V.{{datos.intervaloMax?.viaMax}}</a>
             </div>
         </dd>
     </dl>
@@ -74,7 +76,7 @@
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
     </button>
 
-    <button type="button"
+    <button *jhiHasAnyAuthority="'ROLE_ADMIN'" type="button"
             [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"

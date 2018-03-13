@@ -1,20 +1,13 @@
 <div class="form-group">
+    <h2>Datos de {{linea}}</h2>
+    <hr>
     <div class="form-group">
         <div><span class="font-weight-bold">Fecha</span>
-            <input type="date" [(ngModel)]="desde" (change)="loadFecha()" value="fecha">{{fecha}}
+            <input type="date" [(ngModel)]="desde" (change)="loadFechaLinea()" value="fecha">
         </div>
     </div>
 </div>
 <div>
-    <h2>
-        <span jhiTranslate="calimetroApp.datos.home.title">Datos {{linea}}</span>
-        <button class="btn btn-primary float-right jh-create-entity create-datos" [routerLink]="['/', { outlets: { popup: ['datos-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="calimetroApp.datos.home.createLabel">
-            Create new Datos
-            </span>
-        </button>
-    </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>
@@ -44,7 +37,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let datos of datos ;trackBy: trackId">
-                <td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>
+                <td><a [routerLink]="['/datos', datos.id ]">{{datos.id}}</a></td>
                 <td>{{datos.fechaHora | date:'medium'}}</td>
                 <td>{{datos.intervaloMedio}}</td>
                 <td>{{datos.desviacionMedia}}</td>
@@ -58,19 +51,19 @@
                 <td>{{datos.cocheKm}}</td>
                 <td>
                     <div *ngIf="datos.linea">
-                        <a [routerLink]="['../linea', datos.linea?.id ]" >{{datos.linea?.nombre}}</a>
+                        <span>{{datos.linea?.nombre}}</span>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="datos.intervaloMin">
-                        <a [routerLink]="['../intervalo-min', datos.intervaloMin?.id ]" >{{datos.intervaloMin?.interMin}} min
-                            {{datos.intervaloMin?.estacionMin}} V.{{datos.intervaloMin?.viaMin}}</a>
+                        <span>{{datos.intervaloMin?.interMin}} min
+                            {{datos.intervaloMin?.estacionMin}} V.{{datos.intervaloMin?.viaMin}}</span>
                     </div>
                 </td>
                 <td>
                     <div *ngIf="datos.intervaloMax">
-                        <a [routerLink]="['../intervalo-max', datos.intervaloMax?.id ]" >{{datos.intervaloMax?.interMax}} min
-                            {{datos.intervaloMax?.estacionMax}} V.{{datos.intervaloMax?.viamax}}</a>
+                        <span>{{datos.intervaloMax?.interMax}} min
+                            {{datos.intervaloMax?.estacionMax}} V.{{datos.intervaloMax?.viamax}}</span>
                     </div>
                 </td>
                 <td>
@@ -79,30 +72,12 @@
                     </div>
                 </td>
                 <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
-                        <button type="submit"
-                                [routerLink]="['../datos', datos.id ]"
+                    <button type="submit"
+                                [routerLink]="['/datos', datos.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
                 </td>
             </tr>
             </tbody>

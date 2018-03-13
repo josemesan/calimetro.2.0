@@ -13,6 +13,7 @@ import {
     ObservacionesDeleteDialogComponent,
     observacionesRoute,
     observacionesPopupRoute,
+    ObservacionesDatoComponent,
 } from './';
 
 const ENTITY_STATES = [
@@ -32,6 +33,7 @@ const ENTITY_STATES = [
         ObservacionesDeleteDialogComponent,
         ObservacionesPopupComponent,
         ObservacionesDeletePopupComponent,
+        ObservacionesDatoComponent,
     ],
     entryComponents: [
         ObservacionesComponent,

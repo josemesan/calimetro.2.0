@@ -12,15 +12,12 @@ import {RelacionFechaTipodiaService } from '../entities/relacion-fecha-tipodia';
 )
 export class GraficasDetailComponent {
 
-    @Input()
-    private line:string;
-    datos: RelacionFechaTipodia[]=[];
+    datos: RelacionFechaTipodia[] = [];
     dato: RelacionFechaTipodia;
     tipo: TipoDia;
 
     constructor(private excelService: ExcelService) {
         this.dato = new RelacionFechaTipodia();
-        this.excelService = excelService;
         this.dato.id = 1;
         this.dato.tipoDia = TipoDia.LAB;
         this.dato.fecha = 10;

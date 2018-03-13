@@ -74,22 +74,37 @@
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.linea" for="field_linea">Linea</label>
             <select class="form-control" id="field_linea" name="linea" [(ngModel)]="datos.linea" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="lineaOption.id === datos.linea?.id ? datos.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.id}}</option>
+                <option [ngValue]="lineaOption.id === datos.linea?.id ? datos.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>
+
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMin" for="field_intervaloMin">Intervalo Min</label>
             <select class="form-control" id="field_intervaloMin" name="intervaloMin" [(ngModel)]="datos.intervaloMin">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="intervaloMinOption.id === datos.intervaloMin?.id ? datos.intervaloMin : intervaloMinOption" *ngFor="let intervaloMinOption of intervalomins; trackBy: trackIntervaloMinById">{{intervaloMinOption.id}}</option>
+                <option [ngValue]="intervaloMinOption.id === datos.intervaloMin?.id ? datos.intervaloMin : intervaloMinOption" *ngFor="let intervaloMinOption of intervalomins; trackBy: trackIntervaloMinById">
+                    {{intervaloMinOption.interMin}} min {{intervaloMinOption.estacionMin}} V.{{intervaloMinOption.viaMin}}</option>
             </select>
+            <button class="btn btn-primary" [routerLink]="['/', { outlets: { popup: ['intervalo-min-new'] } }]">
+                <span class="fa fa-plus"></span>
+                <span  jhiTranslate="calimetroApp.intervaloMin.home.createLabel">
+                Create new Intervalo Min
+            </span>
+        </button>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMax" for="field_intervaloMax">Intervalo Max</label>
             <select class="form-control" id="field_intervaloMax" name="intervaloMax" [(ngModel)]="datos.intervaloMax">
                 <option [ngValue]="null"></option>
-                <option [ngValue]="intervaloMaxOption.id === datos.intervaloMax?.id ? datos.intervaloMax : intervaloMaxOption" *ngFor="let intervaloMaxOption of intervalomaxes; trackBy: trackIntervaloMaxById">{{intervaloMaxOption.id}}</option>
+                <option [ngValue]="intervaloMaxOption.id === datos.intervaloMax?.id ? datos.intervaloMax : intervaloMaxOption" *ngFor="let intervaloMaxOption of intervalomaxes; trackBy: trackIntervaloMaxById">
+                    {{intervaloMaxOption.interMax}} min {{intervaloMaxOption.estacionMax}} V.{{intervaloMaxOption.viamax}}</option>
             </select>
+            <button class="btn btn-primary" [routerLink]="['/', { outlets: { popup: ['intervalo-max-new'] } }]">
+                <span class="fa fa-plus"></span>
+                <span  jhiTranslate="calimetroApp.intervaloMax.home.createLabel">
+            Create new Intervalo Max
+            </span>
+            </button>
         </div>
     </div>
     <div class="modal-footer">

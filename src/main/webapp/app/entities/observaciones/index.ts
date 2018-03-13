@@ -6,3 +6,4 @@ export * from './observaciones-delete-dialog.component';
 export * from './observaciones-detail.component';
 export * from './observaciones.component';
 export * from './observaciones.route';
+export * from './observaciones.dato.component';

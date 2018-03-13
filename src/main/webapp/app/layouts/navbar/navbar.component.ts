@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService } from 'ng-jhipster';
+import {JhiAlertService, JhiLanguageService} from 'ng-jhipster';
 
 import { ProfileService } from '../profiles/profile.service';
 import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION } from '../../app.constants';
+import {Linea, LineaService} from '../../entities/linea';
+import {HttpErrorResponse, HttpResponse} from '@angular/common/http';
 
 @Component({
     selector: 'jhi-navbar',
@@ -22,8 +24,11 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    private lineas: Linea [];
 
     constructor(
+        private lineaService: LineaService,
+        private jhiAlertService: JhiAlertService,
         private loginService: LoginService,
         private languageService: JhiLanguageService,
         private languageHelper: JhiLanguageHelper,
@@ -37,6 +42,13 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
@@ -76,4 +88,8 @@ export class NavbarComponent implements OnInit {
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
     }
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
+    }
+
 }

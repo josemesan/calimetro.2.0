@@ -5,6 +5,7 @@ import { DatosComponent } from './datos.component';
 import { DatosDetailComponent } from './datos-detail.component';
 import { DatosPopupComponent } from './datos-dialog.component';
 import { DatosDeletePopupComponent } from './datos-delete-dialog.component';
+import {DatosLineaComponent} from './datos.linea.component';
 
 export const datosRoute: Routes = [
     {
@@ -15,7 +16,16 @@ export const datosRoute: Routes = [
             pageTitle: 'calimetroApp.datos.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },{
+        path: 'datos/linea/:id',
+        component: DatosLineaComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.datos.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'datos/:id',
         component: DatosDetailComponent,
         data: {

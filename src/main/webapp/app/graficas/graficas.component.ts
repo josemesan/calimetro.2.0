@@ -8,7 +8,11 @@ import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
 import { Chart } from 'angular-highcharts';
-import { getHighChartsTheme } from './chart-data';
+import { ChartsThemeIntervalo } from './chart-intervalo';
+import { ChartsThemeTiempoVuelta } from './chat-tiempoVuelta';
+import { ChartsThemeDesviacion } from './chart-desviacion';
+import { HighchartsMore } from 'highcharts-more';
+import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'jhi-graficas',
@@ -27,8 +31,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
     private date: any;
     desde: any;
     chartData: any;
+    chartData2: any;
+    chartData3: any;
     chart: any;
-    chart2: any;
+    chart3: any;
 
     constructor(
         private datosService: DatosService,
@@ -38,9 +44,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         public datepipe: DatePipe,
 
-    ) { this.chartData = getHighChartsTheme;
-        this.chart = new Chart(this.chartData);
-        this.chart2 = new Chart(this.chartData);
+    ) {
+        this.chartData = ChartsThemeTiempoVuelta;
+        this.chart = new Chart;
+        this.chart.options= ChartsThemeIntervalo;
+        this.chartData2 = ChartsThemeIntervalo;
+        this.chartData3 = ChartsThemeDesviacion;
+        this.chart3 = new Chart(this.chartData3);
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();

@@ -5,6 +5,7 @@ import { ObservacionesComponent } from './observaciones.component';
 import { ObservacionesDetailComponent } from './observaciones-detail.component';
 import { ObservacionesPopupComponent } from './observaciones-dialog.component';
 import { ObservacionesDeletePopupComponent } from './observaciones-delete-dialog.component';
+import { ObservacionesDatoComponent } from './observaciones.dato.component';
 
 export const observacionesRoute: Routes = [
     {
@@ -18,6 +19,15 @@ export const observacionesRoute: Routes = [
     }, {
         path: 'observaciones/:id',
         component: ObservacionesDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.observaciones.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'observaciones/dato/:id',
+        component: ObservacionesDatoComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'calimetroApp.observaciones.home.title'

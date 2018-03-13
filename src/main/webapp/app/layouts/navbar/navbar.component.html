@@ -21,10 +21,27 @@
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <!-- menu modificado -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="datos-menu">
+                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="datos-admin">
                     <span>
                         <i class="fa fa-book" aria-hidden="true"></i>
-                        <span>Datos</span>
+                        <span>Datos por Línea</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li *ngFor="let linea of lineas ;trackBy: trackId">
+                        <a *ngIf="linea.visible" class="dropdown-item" [routerLink]="'datos/linea/'+linea.nombre" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-subway" aria-hidden="true"></i>
+                            <span>{{ linea.nombre}}</span>
+                        </a>
+                    </li>
+                    <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                </ul>
+            </li>
+            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+               <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="datos-menu">
+                    <span>
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                        <span>Gestión de Datos</span>
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
@@ -52,7 +69,6 @@
                             <span jhiTranslate="global.menu.entities.intervaloMax">Intervalo Max</span>
                         </a>
                     </li>
-
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                 </ul>
             </li>

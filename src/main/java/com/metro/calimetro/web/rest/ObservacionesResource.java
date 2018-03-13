@@ -17,6 +17,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import com.metro.calimetro.domain.Datos;
 
 /**
  * REST controller for managing Observaciones.
@@ -88,6 +89,15 @@ public class ObservacionesResource {
         log.debug("REST request to get all Observaciones");
         return observacionesRepository.findAll();
         }
+    //////////// GET SEGUN DATO AL QUE PERTENECE
+
+    @GetMapping("/observaciones/dato/{id}")
+    @Timed
+    public List<Observaciones> getDatoIdObservaciones(@PathVariable Long id) {
+        log.debug("REST request to get byDatoId Observaciones");
+        return observacionesRepository.findByDatos_Id(id);
+    }
+
 
     /**
      * GET  /observaciones/:id : get the "id" observaciones.

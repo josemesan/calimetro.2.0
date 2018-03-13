@@ -6,3 +6,4 @@ export * from './datos-delete-dialog.component';
 export * from './datos-detail.component';
 export * from './datos.component';
 export * from './datos.route';
+export * from './datos.linea.component';

@@ -11,9 +11,11 @@ import {
     DatosPopupComponent,
     DatosDeletePopupComponent,
     DatosDeleteDialogComponent,
+    DatosLineaComponent,
     datosRoute,
     datosPopupRoute,
 } from './';
+
 
 const ENTITY_STATES = [
     ...datosRoute,
@@ -27,6 +29,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         DatosComponent,
+        DatosLineaComponent,
         DatosDetailComponent,
         DatosDialogComponent,
         DatosDeleteDialogComponent,

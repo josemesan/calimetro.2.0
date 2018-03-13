@@ -1,3 +1,5 @@
+import * as Highcharts from 'highcharts';
+
 export const getHighChartsTheme = {
     chart: {
         type: 'column'
