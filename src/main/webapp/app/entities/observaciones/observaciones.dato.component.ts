@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'jhi-observaciones',
-    templateUrl: './observaciones.component.html'
+    templateUrl: './observaciones.dato.component.html'
 })
 export class ObservacionesDatoComponent implements OnInit, OnDestroy {
 observaciones: Observaciones[];

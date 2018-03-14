@@ -2,7 +2,7 @@
 
 <div>
     <h2>
-        <span jhiTranslate="calimetroApp.estacion.home.title">Estacions</span>
+        <span>Estaciones* de {{linea}}</span>
         <button class="btn btn-primary float-right jh-create-entity create-estacion" [routerLink]="['/', { outlets: { popup: ['estacion-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="calimetroApp.estacion.home.createLabel">
@@ -10,13 +10,6 @@
             </span>
         </button>
     </h2>
-    <div class="col-md-2"><br>
-        <h5> Seleccionar línea: </h5><abbr></abbr>
-        <select  class="form-control" [(ngModel)]="linea" (change)="loadEstacionesLinea()">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
-        </select>
-    </div>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>
@@ -36,20 +29,20 @@
             </thead>
             <tbody>
             <tr *ngFor="let estacion of estacions ;trackBy: trackId">
-                <td><a [routerLink]="['../estacion', estacion.id ]">{{estacion.id}}</a></td>
+                <td><a [routerLink]="['/estacion', estacion.id ]">{{estacion.id}}</a></td>
                 <td>{{estacion.nombre}}</td>
                 <td>{{estacion.nemo}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoVia.' + estacion.via}}">{{estacion.via}}</td>
                 <td>{{estacion.visible}}</td>
                 <td>
                     <div *ngIf="estacion.linea">
-                        <a [routerLink]="['../linea', estacion.linea?.id ]" >{{estacion.linea?.id}}</a>
+                        <a [routerLink]="['/linea', estacion.linea?.id ]" >{{estacion.linea?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../estacion', estacion.id ]"
+                                [routerLink]="['/estacion', estacion.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>

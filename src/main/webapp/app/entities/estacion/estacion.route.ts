@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-
+import { EstacionLineaComponent } from './estacion.linea.component';
 import { UserRouteAccessService } from '../../shared';
-import { EstacionComponent } from './estacion.component';
+import { EstacionComponent,  } from './estacion.component';
 import { EstacionDetailComponent } from './estacion-detail.component';
 import { EstacionPopupComponent } from './estacion-dialog.component';
 import { EstacionDeletePopupComponent } from './estacion-delete-dialog.component';
@@ -15,7 +15,17 @@ export const estacionRoute: Routes = [
             pageTitle: 'calimetroApp.estacion.home.title'
         },
         canActivate: [UserRouteAccessService]
-    }, {
+    },
+    {
+        path: 'estacion/linea/:id',
+        component: EstacionLineaComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.estacion.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
         path: 'estacion/:id',
         component: EstacionDetailComponent,
         data: {

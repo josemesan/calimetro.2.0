@@ -5,4 +5,5 @@ export * from './estacion-dialog.component';
 export * from './estacion-delete-dialog.component';
 export * from './estacion-detail.component';
 export * from './estacion.component';
+export * from './estacion.linea.component';
 export * from './estacion.route';

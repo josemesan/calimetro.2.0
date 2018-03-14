@@ -16,7 +16,8 @@ export const datosRoute: Routes = [
             pageTitle: 'calimetroApp.datos.home.title'
         },
         canActivate: [UserRouteAccessService]
-    },{
+    },
+    {
         path: 'datos/linea/:id',
         component: DatosLineaComponent,
         data: {

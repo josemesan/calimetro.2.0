@@ -16,7 +16,6 @@ import {
     datosPopupRoute,
 } from './';
 
-
 const ENTITY_STATES = [
     ...datosRoute,
     ...datosPopupRoute,

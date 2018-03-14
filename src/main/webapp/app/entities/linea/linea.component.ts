@@ -12,7 +12,7 @@ import { Principal } from '../../shared';
     templateUrl: './linea.component.html'
 })
 export class LineaComponent implements OnInit, OnDestroy {
-lineas: Linea[];
+    lineas: Linea[];
     currentAccount: any;
     eventSubscriber: Subscription;
 

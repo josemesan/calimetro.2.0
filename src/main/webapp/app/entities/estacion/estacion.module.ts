@@ -6,6 +6,7 @@ import {
     EstacionService,
     EstacionPopupService,
     EstacionComponent,
+    EstacionLineaComponent,
     EstacionDetailComponent,
     EstacionDialogComponent,
     EstacionPopupComponent,
@@ -27,6 +28,7 @@ const ENTITY_STATES = [
     ],
     declarations: [
         EstacionComponent,
+        EstacionLineaComponent,
         EstacionDetailComponent,
         EstacionDialogComponent,
         EstacionDeleteDialogComponent,

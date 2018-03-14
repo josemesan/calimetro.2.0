@@ -7,12 +7,13 @@ import { Estacion } from './estacion.model';
 import { EstacionService } from './estacion.service';
 import { Principal } from '../../shared';
 import {Linea, LineaService} from '../linea';
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
     selector: 'jhi-estacion',
-    templateUrl: './estacion.component.html'
+    templateUrl: './estacion.linea.component.html'
 })
-export class EstacionComponent implements OnInit, OnDestroy {
+export class EstacionLineaComponent implements OnInit, OnDestroy {
     estacions: Estacion[];
     lineas: Linea[];
     linea: String;
@@ -24,7 +25,8 @@ export class EstacionComponent implements OnInit, OnDestroy {
         private lineaService: LineaService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private route: ActivatedRoute,
     ) {
     }
     loadEstacionesLinea() {
@@ -52,7 +54,8 @@ export class EstacionComponent implements OnInit, OnDestroy {
         );
     }
     ngOnInit() {
-        //this.loadAll();
+        this.eventSubscriber = this.route.params.subscribe((params) => {
+            this.linea = (params['id']); this.loadEstacionesLinea();});
         this.loadAllLineas();
         this.loadEstacionesLinea()
         this.principal.identity().then((account) => {

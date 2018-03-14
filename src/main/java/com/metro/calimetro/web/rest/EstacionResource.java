@@ -103,6 +103,16 @@ public class EstacionResource {
         Estacion estacion = estacionRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(estacion));
     }
+    ///---------------------------------
+    @GetMapping("/estacions/linea/{nombre}")
+    @Timed
+    public List<Estacion> getBetweenFechaDatos(@PathVariable String nombre) {
+        log.debug("REST request to get Estacion by Linea : {}", nombre);
+        return estacionRepository.findByLineaNombre(nombre);
+    }
+
+
+
 
     /**
      * DELETE  /estacions/:id : delete the "id" estacion.

@@ -19,6 +19,7 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="calimetroApp.linea.nombre">Nombre</span></th>
             <th><span jhiTranslate="calimetroApp.linea.visible">Visible</span></th>
+            <th><span>Estaciones*</span></th>
             <th></th>
             </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <td><a [routerLink]="['../linea', linea.id ]">{{linea.id}}</a></td>
                 <td>{{linea.nombre}}</td>
                 <td>{{linea.visible}}</td>
+                <td><a [routerLink]="['/estacion/linea/', linea.nombre ]">Estaciones {{linea.nombre}}</a></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

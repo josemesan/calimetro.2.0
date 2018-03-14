@@ -42,13 +42,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.lineaService.query().subscribe(
-            (res: HttpResponse<Linea[]>) => {
-                this.lineas = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-
+        this.loadLineas();
         this.languageHelper.getAll().then((languages) => {
             this.languages = languages;
         });
@@ -59,6 +53,14 @@ export class NavbarComponent implements OnInit {
         });
     }
 
+    loadLineas(){
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
     changeLanguage(languageKey: string) {
       this.languageService.changeLanguage(languageKey);
     }
@@ -73,6 +75,7 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
+        //this.loadLineas();
     }
 
     logout() {

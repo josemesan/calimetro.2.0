@@ -82,17 +82,16 @@
                     </span>
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
-
-                    <li>
-                        <a class="dropdown-item" routerLink="estacion" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.entities.estacion">Estacion</span>
-                        </a>
-                    </li>
                     <li>
                         <a class="dropdown-item" routerLink="linea" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.entities.linea">Linea</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="estacion" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.entities.estacion">Estacion</span>
                         </a>
                     </li>
                     <li>
