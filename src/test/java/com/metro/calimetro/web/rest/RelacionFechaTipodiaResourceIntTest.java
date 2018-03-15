@@ -21,13 +21,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static com.metro.calimetro.web.rest.TestUtil.sameInstant;
 import static com.metro.calimetro.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -44,11 +41,11 @@ import com.metro.calimetro.domain.enumeration.TipoDia;
 @SpringBootTest(classes = CalimetroApp.class)
 public class RelacionFechaTipodiaResourceIntTest {
 
-    private static final ZonedDateTime DEFAULT_FECHA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_FECHA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
     private static final TipoDia DEFAULT_TIPO_DIA = TipoDia.LAB;
     private static final TipoDia UPDATED_TIPO_DIA = TipoDia.VIER;
+
+    private static final LocalDate DEFAULT_FECHA = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_FECHA = LocalDate.now(ZoneId.systemDefault());
 
     @Autowired
     private RelacionFechaTipodiaRepository relacionFechaTipodiaRepository;
@@ -88,8 +85,8 @@ public class RelacionFechaTipodiaResourceIntTest {
      */
     public static RelacionFechaTipodia createEntity(EntityManager em) {
         RelacionFechaTipodia relacionFechaTipodia = new RelacionFechaTipodia()
-            .fecha(DEFAULT_FECHA)
-            .tipoDia(DEFAULT_TIPO_DIA);
+            .tipoDia(DEFAULT_TIPO_DIA)
+            .fecha(DEFAULT_FECHA);
         return relacionFechaTipodia;
     }
 
@@ -113,8 +110,8 @@ public class RelacionFechaTipodiaResourceIntTest {
         List<RelacionFechaTipodia> relacionFechaTipodiaList = relacionFechaTipodiaRepository.findAll();
         assertThat(relacionFechaTipodiaList).hasSize(databaseSizeBeforeCreate + 1);
         RelacionFechaTipodia testRelacionFechaTipodia = relacionFechaTipodiaList.get(relacionFechaTipodiaList.size() - 1);
-        assertThat(testRelacionFechaTipodia.getFecha()).isEqualTo(DEFAULT_FECHA);
         assertThat(testRelacionFechaTipodia.getTipoDia()).isEqualTo(DEFAULT_TIPO_DIA);
+        assertThat(testRelacionFechaTipodia.getFecha()).isEqualTo(DEFAULT_FECHA);
     }
 
     @Test
@@ -138,6 +135,24 @@ public class RelacionFechaTipodiaResourceIntTest {
 
     @Test
     @Transactional
+    public void checkFechaIsRequired() throws Exception {
+        int databaseSizeBeforeTest = relacionFechaTipodiaRepository.findAll().size();
+        // set the field null
+        relacionFechaTipodia.setFecha(null);
+
+        // Create the RelacionFechaTipodia, which fails.
+
+        restRelacionFechaTipodiaMockMvc.perform(post("/api/relacion-fecha-tipodias")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(relacionFechaTipodia)))
+            .andExpect(status().isBadRequest());
+
+        List<RelacionFechaTipodia> relacionFechaTipodiaList = relacionFechaTipodiaRepository.findAll();
+        assertThat(relacionFechaTipodiaList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllRelacionFechaTipodias() throws Exception {
         // Initialize the database
         relacionFechaTipodiaRepository.saveAndFlush(relacionFechaTipodia);
@@ -147,8 +162,8 @@ public class RelacionFechaTipodiaResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(relacionFechaTipodia.getId().intValue())))
-            .andExpect(jsonPath("$.[*].fecha").value(hasItem(sameInstant(DEFAULT_FECHA))))
-            .andExpect(jsonPath("$.[*].tipoDia").value(hasItem(DEFAULT_TIPO_DIA.toString())));
+            .andExpect(jsonPath("$.[*].tipoDia").value(hasItem(DEFAULT_TIPO_DIA.toString())))
+            .andExpect(jsonPath("$.[*].fecha").value(hasItem(DEFAULT_FECHA.toString())));
     }
 
     @Test
@@ -162,8 +177,8 @@ public class RelacionFechaTipodiaResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(relacionFechaTipodia.getId().intValue()))
-            .andExpect(jsonPath("$.fecha").value(sameInstant(DEFAULT_FECHA)))
-            .andExpect(jsonPath("$.tipoDia").value(DEFAULT_TIPO_DIA.toString()));
+            .andExpect(jsonPath("$.tipoDia").value(DEFAULT_TIPO_DIA.toString()))
+            .andExpect(jsonPath("$.fecha").value(DEFAULT_FECHA.toString()));
     }
 
     @Test
@@ -186,8 +201,8 @@ public class RelacionFechaTipodiaResourceIntTest {
         // Disconnect from session so that the updates on updatedRelacionFechaTipodia are not directly saved in db
         em.detach(updatedRelacionFechaTipodia);
         updatedRelacionFechaTipodia
-            .fecha(UPDATED_FECHA)
-            .tipoDia(UPDATED_TIPO_DIA);
+            .tipoDia(UPDATED_TIPO_DIA)
+            .fecha(UPDATED_FECHA);
 
         restRelacionFechaTipodiaMockMvc.perform(put("/api/relacion-fecha-tipodias")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -198,8 +213,8 @@ public class RelacionFechaTipodiaResourceIntTest {
         List<RelacionFechaTipodia> relacionFechaTipodiaList = relacionFechaTipodiaRepository.findAll();
         assertThat(relacionFechaTipodiaList).hasSize(databaseSizeBeforeUpdate);
         RelacionFechaTipodia testRelacionFechaTipodia = relacionFechaTipodiaList.get(relacionFechaTipodiaList.size() - 1);
-        assertThat(testRelacionFechaTipodia.getFecha()).isEqualTo(UPDATED_FECHA);
         assertThat(testRelacionFechaTipodia.getTipoDia()).isEqualTo(UPDATED_TIPO_DIA);
+        assertThat(testRelacionFechaTipodia.getFecha()).isEqualTo(UPDATED_FECHA);
     }
 
     @Test

@@ -30,7 +30,7 @@
             <th><span jhiTranslate="calimetroApp.estacion.nemo">Nemo</span></th>
             <th><span jhiTranslate="calimetroApp.estacion.via">Via</span></th>
             <th><span jhiTranslate="calimetroApp.estacion.visible">Visible</span></th>
-            <th><span jhiTranslate="calimetroApp.estacion.linea">Linea</span></th>
+            <!--<th><span jhiTranslate="calimetroApp.estacion.linea">Linea</span></th>-->
             <th></th>
             </tr>
             </thead>
@@ -41,11 +41,11 @@
                 <td>{{estacion.nemo}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoVia.' + estacion.via}}">{{estacion.via}}</td>
                 <td>{{estacion.visible}}</td>
-                <td>
-                    <div *ngIf="estacion.linea">
-                        <a [routerLink]="['../linea', estacion.linea?.id ]" >{{estacion.linea?.id}}</a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div *ngIf="estacion.linea">-->
+                        <!--<a [routerLink]="['../linea', estacion.linea?.id ]" >{{estacion.linea?.id}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -2,7 +2,6 @@ import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { HttpResponse } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
 import { RelacionFechaTipodia } from './relacion-fecha-tipodia.model';
 import { RelacionFechaTipodiaService } from './relacion-fecha-tipodia.service';
 
@@ -11,7 +10,6 @@ export class RelacionFechaTipodiaPopupService {
     private ngbModalRef: NgbModalRef;
 
     constructor(
-        private datePipe: DatePipe,
         private modalService: NgbModal,
         private router: Router,
         private relacionFechaTipodiaService: RelacionFechaTipodiaService
@@ -31,8 +29,13 @@ export class RelacionFechaTipodiaPopupService {
                 this.relacionFechaTipodiaService.find(id)
                     .subscribe((relacionFechaTipodiaResponse: HttpResponse<RelacionFechaTipodia>) => {
                         const relacionFechaTipodia: RelacionFechaTipodia = relacionFechaTipodiaResponse.body;
-                        relacionFechaTipodia.fecha = this.datePipe
-                            .transform(relacionFechaTipodia.fecha, 'yyyy-MM-ddTHH:mm:ss');
+                        if (relacionFechaTipodia.fecha) {
+                            relacionFechaTipodia.fecha = {
+                                year: relacionFechaTipodia.fecha.getFullYear(),
+                                month: relacionFechaTipodia.fecha.getMonth() + 1,
+                                day: relacionFechaTipodia.fecha.getDate()
+                            };
+                        }
                         this.ngbModalRef = this.relacionFechaTipodiaModalRef(component, relacionFechaTipodia);
                         resolve(this.ngbModalRef);
                     });

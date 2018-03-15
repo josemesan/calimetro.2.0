@@ -64,7 +64,7 @@ export class RelacionFechaTipodiaService {
     private convertItemFromServer(relacionFechaTipodia: RelacionFechaTipodia): RelacionFechaTipodia {
         const copy: RelacionFechaTipodia = Object.assign({}, relacionFechaTipodia);
         copy.fecha = this.dateUtils
-            .convertDateTimeFromServer(relacionFechaTipodia.fecha);
+            .convertLocalDateFromServer(relacionFechaTipodia.fecha);
         return copy;
     }
 
@@ -73,8 +73,8 @@ export class RelacionFechaTipodiaService {
      */
     private convert(relacionFechaTipodia: RelacionFechaTipodia): RelacionFechaTipodia {
         const copy: RelacionFechaTipodia = Object.assign({}, relacionFechaTipodia);
-
-        copy.fecha = this.dateUtils.toDate(relacionFechaTipodia.fecha);
+        copy.fecha = this.dateUtils
+            .convertLocalDateToServer(relacionFechaTipodia.fecha);
         return copy;
     }
 }

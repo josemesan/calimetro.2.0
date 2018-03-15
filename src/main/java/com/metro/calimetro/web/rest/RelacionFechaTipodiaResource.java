@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -44,7 +45,7 @@ public class RelacionFechaTipodiaResource {
      */
     @PostMapping("/relacion-fecha-tipodias")
     @Timed
-    public ResponseEntity<RelacionFechaTipodia> createRelacionFechaTipodia(@RequestBody RelacionFechaTipodia relacionFechaTipodia) throws URISyntaxException {
+    public ResponseEntity<RelacionFechaTipodia> createRelacionFechaTipodia(@Valid @RequestBody RelacionFechaTipodia relacionFechaTipodia) throws URISyntaxException {
         log.debug("REST request to save RelacionFechaTipodia : {}", relacionFechaTipodia);
         if (relacionFechaTipodia.getId() != null) {
             throw new BadRequestAlertException("A new relacionFechaTipodia cannot already have an ID", ENTITY_NAME, "idexists");
@@ -66,7 +67,7 @@ public class RelacionFechaTipodiaResource {
      */
     @PutMapping("/relacion-fecha-tipodias")
     @Timed
-    public ResponseEntity<RelacionFechaTipodia> updateRelacionFechaTipodia(@RequestBody RelacionFechaTipodia relacionFechaTipodia) throws URISyntaxException {
+    public ResponseEntity<RelacionFechaTipodia> updateRelacionFechaTipodia(@Valid @RequestBody RelacionFechaTipodia relacionFechaTipodia) throws URISyntaxException {
         log.debug("REST request to update RelacionFechaTipodia : {}", relacionFechaTipodia);
         if (relacionFechaTipodia.getId() == null) {
             return createRelacionFechaTipodia(relacionFechaTipodia);

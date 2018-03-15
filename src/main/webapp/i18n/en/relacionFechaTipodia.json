@@ -16,8 +16,8 @@
             "detail": {
                 "title": "Relacion Fecha Tipodia"
             },
-            "fecha": "Fecha",
-            "tipoDia": "Tipo Dia"
+            "tipoDia": "Tipo Dia",
+            "fecha": "Fecha"
         }
     }
 }

@@ -25,6 +25,7 @@ export class IntervaloOfertadoComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal,
         private lineaService: LineaService,
+
     ) {
     }
 

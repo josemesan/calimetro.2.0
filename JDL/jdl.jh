@@ -11,21 +11,21 @@ entity Estacion {
 	nombre String,
     nemo String maxlength(5),
     via TipoVia,
-    visible Boolean    
-}   
+    visible Boolean
+}
 entity Linea {
 	nombre String,
     visible Boolean
 }
-entity IntervaloOfertado {  
+entity IntervaloOfertado {
     hora ZonedDateTime,
     tipoDia TipoDia,
     intervaloMax Integer,
     intervaloMin Integer
 }
 entity RelacionFechaTipodia {
-	fecha ZonedDateTime,
-    tipoDia TipoDia,    
+	fecha LocalDate,
+    tipoDia TipoDia,
 }
 entity TablaTrenes {
   	hora ZonedDateTime,
@@ -46,7 +46,7 @@ entity IntervaloMax{
 }
 entity Datos {
 	fechaHora ZonedDateTime,
-	intervaloMedio Integer,    
+	intervaloMedio Integer,
     desviacionMedia Integer,
  	tiempoVuelta Integer,
     numeroTrenes Integer,
@@ -56,16 +56,16 @@ entity Datos {
 	consumo Integer,
 	velocidad Integer,
 	cocheKm Integer
-	}    
+	}
 
-relationship OneToMany {     
+relationship OneToMany {
     Linea {estacion} to Estacion,
     Linea {datos} to Datos,
     Linea {tablaTrenes} to TablaTrenes,
     Linea {intervaloOfertado} to IntervaloOfertado,
     Datos {observaciones} to Observaciones
 }
-relationship OneToOne {  
+relationship OneToOne {
 	Datos {intervaloMin} to IntervaloMin,
     Datos {intervaloMax} to IntervaloMax
 }

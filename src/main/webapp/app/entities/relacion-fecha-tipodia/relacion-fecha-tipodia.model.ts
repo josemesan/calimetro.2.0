@@ -11,8 +11,8 @@ export const enum TipoDia {
 export class RelacionFechaTipodia implements BaseEntity {
     constructor(
         public id?: number,
-        public fecha?: any,
         public tipoDia?: TipoDia,
+        public fecha?: any,
     ) {
     }
 }

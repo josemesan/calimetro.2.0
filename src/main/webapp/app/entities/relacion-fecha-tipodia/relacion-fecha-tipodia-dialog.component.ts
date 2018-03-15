@@ -18,6 +18,7 @@ export class RelacionFechaTipodiaDialogComponent implements OnInit {
 
     relacionFechaTipodia: RelacionFechaTipodia;
     isSaving: boolean;
+    fechaDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

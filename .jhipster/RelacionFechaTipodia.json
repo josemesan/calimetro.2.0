@@ -3,19 +3,22 @@
     "relationships": [],
     "fields": [
         {
-            "fieldName": "fecha",
-            "fieldType": "ZonedDateTime"
-        },
-        {
             "fieldName": "tipoDia",
             "fieldType": "TipoDia",
             "fieldValues": "LAB,VIER,SAB,FEST,ESP"
+        },
+        {
+            "fieldName": "fecha",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "changelogDate": "20180213182048",
-    "entityTableName": "relacion_fecha_tipodia",
     "dto": "no",
-    "pagination": "no",
     "service": "no",
-    "jpaMetamodelFiltering": false
+    "entityTableName": "relacion_fecha_tipodia",
+    "jpaMetamodelFiltering": false,
+    "pagination": "no"
 }

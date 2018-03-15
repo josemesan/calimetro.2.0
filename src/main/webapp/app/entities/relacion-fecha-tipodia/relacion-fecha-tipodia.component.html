@@ -17,15 +17,15 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="calimetroApp.relacionFechaTipodia.fecha">Fecha</span></th>
-            <th><span jhiTranslate="calimetroApp.relacionFechaTipodia.tipoDia">Tipo Dia</span></th>
+                <th><span jhiTranslate="calimetroApp.relacionFechaTipodia.fecha">Fecha</span></th>
+                <th><span jhiTranslate="calimetroApp.relacionFechaTipodia.tipoDia">Tipo Dia</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let relacionFechaTipodia of relacionFechaTipodias ;trackBy: trackId">
                 <td><a [routerLink]="['../relacion-fecha-tipodia', relacionFechaTipodia.id ]">{{relacionFechaTipodia.id}}</a></td>
-                <td>{{relacionFechaTipodia.fecha | date:'medium'}}</td>
+                <td>{{relacionFechaTipodia.fecha | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + relacionFechaTipodia.tipoDia}}">{{relacionFechaTipodia.tipoDia}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

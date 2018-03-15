@@ -4,13 +4,13 @@
     <hr>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="calimetroApp.relacionFechaTipodia.fecha">Fecha</span></dt>
-        <dd>
-            <span>{{relacionFechaTipodia.fecha | date:'medium'}}</span>
-        </dd>
         <dt><span jhiTranslate="calimetroApp.relacionFechaTipodia.tipoDia">Tipo Dia</span></dt>
         <dd>
             <span jhiTranslate="{{'calimetroApp.TipoDia.' + relacionFechaTipodia.tipoDia}}">{{relacionFechaTipodia.tipoDia}}</span>
+        </dd>
+        <dt><span jhiTranslate="calimetroApp.relacionFechaTipodia.fecha">Fecha</span></dt>
+        <dd>
+            <span>{{relacionFechaTipodia.fecha | date:'mediumDate'}}</span>
         </dd>
     </dl>
 

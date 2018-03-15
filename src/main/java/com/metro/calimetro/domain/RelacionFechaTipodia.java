@@ -2,10 +2,10 @@ package com.metro.calimetro.domain;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.ZonedDateTime;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import com.metro.calimetro.domain.enumeration.TipoDia;
@@ -23,12 +23,13 @@ public class RelacionFechaTipodia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "fecha")
-    private ZonedDateTime fecha;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_dia")
     private TipoDia tipoDia;
+
+    @NotNull
+    @Column(name = "fecha", nullable = false)
+    private LocalDate fecha;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -37,19 +38,6 @@ public class RelacionFechaTipodia implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ZonedDateTime getFecha() {
-        return fecha;
-    }
-
-    public RelacionFechaTipodia fecha(ZonedDateTime fecha) {
-        this.fecha = fecha;
-        return this;
-    }
-
-    public void setFecha(ZonedDateTime fecha) {
-        this.fecha = fecha;
     }
 
     public TipoDia getTipoDia() {
@@ -63,6 +51,19 @@ public class RelacionFechaTipodia implements Serializable {
 
     public void setTipoDia(TipoDia tipoDia) {
         this.tipoDia = tipoDia;
+    }
+
+    public LocalDate getFecha() {
+        return fecha;
+    }
+
+    public RelacionFechaTipodia fecha(LocalDate fecha) {
+        this.fecha = fecha;
+        return this;
+    }
+
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -90,8 +91,8 @@ public class RelacionFechaTipodia implements Serializable {
     public String toString() {
         return "RelacionFechaTipodia{" +
             "id=" + getId() +
-            ", fecha='" + getFecha() + "'" +
             ", tipoDia='" + getTipoDia() + "'" +
+            ", fecha='" + getFecha() + "'" +
             "}";
     }
 }
