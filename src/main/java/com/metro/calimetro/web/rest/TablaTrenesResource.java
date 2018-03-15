@@ -103,6 +103,15 @@ public class TablaTrenesResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(tablaTrenes));
     }
 
+
+    ///----------------------------------------------
+    @GetMapping("/tabla-trenes/linea/{nombre}")
+    @Timed
+    public List<TablaTrenes> getBetweenFechaDatos(@PathVariable String nombre) {
+        log.debug("REST request to get Estacion by Linea : {}", nombre);
+        return tablaTrenesRepository.findByLineaNombre(nombre);
+    }
+
     /**
      * DELETE  /tabla-trenes/:id : delete the "id" tablaTrenes.
      *

@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import com.metro.calimetro.domain.Datos;
@@ -97,8 +101,18 @@ public class ObservacionesResource {
         log.debug("REST request to get byDatoId Observaciones");
         return observacionesRepository.findByDatos_Id(id);
     }
-
-
+    ///////------------------------
+    @GetMapping("/observaciones/fecha/{ini}")
+    @Timed
+    public List<Observaciones> getBetweenFechaDatos(@PathVariable String ini) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        LocalDateTime ldt2 = ldt1.plusHours(20);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
+        log.debug("REST request to get Datos segun Fecha : {}", ini);
+        return observacionesRepository.findByDatos_FechaHoraBetween(zone1,zone2);
+    }
     /**
      * GET  /observaciones/:id : get the "id" observaciones.
      *

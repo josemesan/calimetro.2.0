@@ -103,6 +103,15 @@ public class IntervaloOfertadoResource {
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(intervaloOfertado));
     }
 
+    ////-------------------------------------
+
+    @GetMapping("/intervalo-ofertados/linea/{nombre}")
+    @Timed
+    public List<IntervaloOfertado> getBetweenFechaDatos(@PathVariable String nombre) {
+        log.debug("REST request to get Estacion by Linea : {}", nombre);
+        return intervaloOfertadoRepository.findByLineaNombre(nombre);
+    }
+
     /**
      * DELETE  /intervalo-ofertados/:id : delete the "id" intervaloOfertado.
      *

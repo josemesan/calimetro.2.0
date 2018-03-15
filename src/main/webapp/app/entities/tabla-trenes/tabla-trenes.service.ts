@@ -40,6 +40,11 @@ export class TablaTrenesService {
             .map((res: HttpResponse<TablaTrenes[]>) => this.convertArrayResponse(res));
     }
 
+    queryLinea(linea: any): Observable<HttpResponse<TablaTrenes[]>> {
+        return this.http.get<TablaTrenes[]>(`${this.resourceUrl}/linea/${linea}`, {observe: 'response'})
+            .map((res: HttpResponse<TablaTrenes[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

@@ -66,7 +66,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                 this.loadAll();
             });
         });
-
     }
 
     isAuthenticated() {

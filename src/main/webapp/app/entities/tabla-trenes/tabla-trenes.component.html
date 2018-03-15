@@ -8,6 +8,13 @@
             </span>
         </button>
     </h2>
+    <div class="col-md-2"><br>
+        <h6> Seleccionar línea: </h6><abbr></abbr>
+        <select  class="form-control" [(ngModel)]="linea" (change)="loadTablaTenesLinea()">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
+        </select>
+    </div>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>
@@ -20,7 +27,7 @@
             <th><span jhiTranslate="calimetroApp.tablaTrenes.hora">Hora</span></th>
             <th><span jhiTranslate="calimetroApp.tablaTrenes.tipoDia">Tipo Dia</span></th>
             <th><span jhiTranslate="calimetroApp.tablaTrenes.numeroTrenes">Numero Trenes</span></th>
-            <th><span jhiTranslate="calimetroApp.tablaTrenes.linea">Linea</span></th>
+            <!--<th><span jhiTranslate="calimetroApp.tablaTrenes.linea">Linea</span></th>-->
             <th></th>
             </tr>
             </thead>
@@ -30,11 +37,11 @@
                 <td>{{tablaTrenes.hora | date:'medium'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + tablaTrenes.tipoDia}}">{{tablaTrenes.tipoDia}}</td>
                 <td>{{tablaTrenes.numeroTrenes}}</td>
-                <td>
-                    <div *ngIf="tablaTrenes.linea">
-                        <a [routerLink]="['../linea', tablaTrenes.linea?.id ]" >{{tablaTrenes.linea?.id}}</a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div *ngIf="tablaTrenes.linea">-->
+                        <!--<a [routerLink]="['../linea', tablaTrenes.linea?.id ]" >{{tablaTrenes.linea?.id}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

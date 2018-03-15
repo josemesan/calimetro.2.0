@@ -1,13 +1,22 @@
 <div>
     <h2>
         <span jhiTranslate="calimetroApp.observaciones.home.title">Observaciones</span>
+
         <button *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn btn-primary float-right jh-create-entity create-observaciones" [routerLink]="['/', { outlets: { popup: ['observaciones-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="calimetroApp.observaciones.home.createLabel">
             Create new Observaciones
             </span>
         </button>
+
     </h2>
+    <div class="form-group">
+        <div class="form-group">
+            <div><span class="font-weight-bold">Fecha</span>
+                <input type="date" [(ngModel)]="desde" (change)="loadFecha()" value="fecha">{{fecha}}
+            </div>
+        </div>
+    </div>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>

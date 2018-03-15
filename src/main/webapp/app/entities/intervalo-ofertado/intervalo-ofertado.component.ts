@@ -6,34 +6,48 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { IntervaloOfertado } from './intervalo-ofertado.model';
 import { IntervaloOfertadoService } from './intervalo-ofertado.service';
 import { Principal } from '../../shared';
+import {Linea, LineaService} from '../linea';
 
 @Component({
     selector: 'jhi-intervalo-ofertado',
     templateUrl: './intervalo-ofertado.component.html'
 })
 export class IntervaloOfertadoComponent implements OnInit, OnDestroy {
-intervaloOfertados: IntervaloOfertado[];
+    intervaloOfertados: IntervaloOfertado[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    lineas: Linea[];
+    linea: String;
 
     constructor(
         private intervaloOfertadoService: IntervaloOfertadoService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private lineaService: LineaService,
     ) {
     }
 
-    loadAll() {
-        this.intervaloOfertadoService.query().subscribe(
+    loadAllLineas() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    loadIntervalosLinea() {
+        this.intervaloOfertadoService.queryLinea(this.linea).subscribe(
             (res: HttpResponse<IntervaloOfertado[]>) => {
                 this.intervaloOfertados = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     ngOnInit() {
-        this.loadAll();
+        this.loadAllLineas();
+        this.loadIntervalosLinea();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -47,8 +61,13 @@ intervaloOfertados: IntervaloOfertado[];
     trackId(index: number, item: IntervaloOfertado) {
         return item.id;
     }
+
+    trackTipoDia(index: number, item: IntervaloOfertado) {
+        return item.intervaloMax.toFixed();
+    }
+
     registerChangeInIntervaloOfertados() {
-        this.eventSubscriber = this.eventManager.subscribe('intervaloOfertadoListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('intervaloOfertadoListModification', (response) => this.loadIntervalosLinea());
     }
 
     private onError(error) {

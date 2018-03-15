@@ -40,6 +40,11 @@ export class IntervaloMaxService {
             .map((res: HttpResponse<IntervaloMax[]>) => this.convertArrayResponse(res));
     }
 
+    queryFecha(desde: any): Observable<HttpResponse<IntervaloMax[]>> {
+        return this.http.get<IntervaloMax[]>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'})
+            .map((res: HttpResponse<IntervaloMax[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

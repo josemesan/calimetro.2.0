@@ -111,9 +111,6 @@ public class EstacionResource {
         return estacionRepository.findByLineaNombre(nombre);
     }
 
-
-
-
     /**
      * DELETE  /estacions/:id : delete the "id" estacion.
      *

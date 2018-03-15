@@ -40,6 +40,11 @@ export class IntervaloMinService {
             .map((res: HttpResponse<IntervaloMin[]>) => this.convertArrayResponse(res));
     }
 
+    queryFecha(desde: any): Observable<HttpResponse<IntervaloMin[]>> {
+        return this.http.get<IntervaloMin[]>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'})
+            .map((res: HttpResponse<IntervaloMin[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

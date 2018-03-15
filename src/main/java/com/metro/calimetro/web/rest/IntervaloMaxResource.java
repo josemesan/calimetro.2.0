@@ -3,6 +3,7 @@ package com.metro.calimetro.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.metro.calimetro.domain.IntervaloMax;
 
+import com.metro.calimetro.domain.Observaciones;
 import com.metro.calimetro.repository.IntervaloMaxRepository;
 import com.metro.calimetro.web.rest.errors.BadRequestAlertException;
 import com.metro.calimetro.web.rest.util.HeaderUtil;
@@ -16,6 +17,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +107,19 @@ public class IntervaloMaxResource {
         log.debug("REST request to get IntervaloMax : {}", id);
         IntervaloMax intervaloMax = intervaloMaxRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(intervaloMax));
+    }
+
+    //-----------------------------------
+    @GetMapping("/intervalo-maxes/fecha/{ini}")
+    @Timed
+    public List<IntervaloMax> getBetweenFechaDatos(@PathVariable String ini) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        LocalDateTime ldt2 = ldt1.plusHours(20);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
+        log.debug("REST request to get Intervalo-Max segun Fecha : {}", ini);
+        return intervaloMaxRepository.findByHoraBetween(zone1,zone2);
     }
 
     /**

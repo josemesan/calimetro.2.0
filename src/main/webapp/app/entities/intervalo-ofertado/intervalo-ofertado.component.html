@@ -8,6 +8,13 @@
             </span>
         </button>
     </h2>
+    <div class="col-md-2"><br>
+        <h6> Seleccionar línea: </h6><abbr></abbr>
+        <select  class="form-control" [(ngModel)]="linea" (change)="loadIntervalosLinea()">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
+        </select>
+    </div>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>
@@ -21,22 +28,22 @@
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.tipoDia">Tipo Dia</span></th>
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.intervaloMax">Intervalo Max</span></th>
             <th><span jhiTranslate="calimetroApp.intervaloOfertado.intervaloMin">Intervalo Min</span></th>
-            <th><span jhiTranslate="calimetroApp.intervaloOfertado.linea">Linea</span></th>
+            <!--<th><span jhiTranslate="calimetroApp.intervaloOfertado.linea">Linea</span></th>-->
             <th></th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let intervaloOfertado of intervaloOfertados ;trackBy: trackId">
+            <tr *ngFor="let intervaloOfertado of intervaloOfertados ;trackBy: trackTipoDia">
                 <td><a [routerLink]="['../intervalo-ofertado', intervaloOfertado.id ]">{{intervaloOfertado.id}}</a></td>
                 <td>{{intervaloOfertado.hora | date:'medium'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + intervaloOfertado.tipoDia}}">{{intervaloOfertado.tipoDia}}</td>
                 <td>{{intervaloOfertado.intervaloMax}}</td>
                 <td>{{intervaloOfertado.intervaloMin}}</td>
-                <td>
-                    <div *ngIf="intervaloOfertado.linea">
-                        <a [routerLink]="['../linea', intervaloOfertado.linea?.id ]" >{{intervaloOfertado.linea?.id}}</a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div *ngIf="intervaloOfertado.linea">-->
+                        <!--<a [routerLink]="['../linea', intervaloOfertado.linea?.id ]" >{{intervaloOfertado.linea?.id}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

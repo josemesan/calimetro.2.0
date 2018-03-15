@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import {JhiAlertService, JhiLanguageService} from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager, JhiLanguageService} from 'ng-jhipster';
 
 import { ProfileService } from '../profiles/profile.service';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService } from '../../shared';
+import {JhiLanguageHelper, Principal, LoginModalService, LoginService, Account} from '../../shared';
 
 import { VERSION } from '../../app.constants';
 import {Linea, LineaService} from '../../entities/linea';
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
     modalRef: NgbModalRef;
     version: string;
     private lineas: Linea [];
+    account: Account;
 
     constructor(
         private lineaService: LineaService,
@@ -35,7 +36,8 @@ export class NavbarComponent implements OnInit {
         private principal: Principal,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private router: Router
+        private router: Router,
+        private eventManager: JhiEventManager
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
         this.isNavbarCollapsed = true;
@@ -51,6 +53,7 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+        this.registerAuthenticationSuccess();
     }
 
     loadLineas() {
@@ -61,6 +64,7 @@ export class NavbarComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     changeLanguage(languageKey: string) {
       this.languageService.changeLanguage(languageKey);
     }
@@ -73,9 +77,17 @@ export class NavbarComponent implements OnInit {
         return this.principal.isAuthenticated();
     }
 
+    registerAuthenticationSuccess() {
+        this.eventManager.subscribe('authenticationSuccess', (message) => {
+            this.principal.identity().then((account) => {
+                this.account = account;
+                this.loadLineas();
+            });
+        });
+    }
+
     login() {
         this.modalRef = this.loginModalService.open();
-        // this.loadLineas();
     }
 
     logout() {

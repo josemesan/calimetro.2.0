@@ -40,6 +40,11 @@ export class IntervaloOfertadoService {
             .map((res: HttpResponse<IntervaloOfertado[]>) => this.convertArrayResponse(res));
     }
 
+    queryLinea(linea: any): Observable<HttpResponse<IntervaloOfertado[]>> {
+        return this.http.get<IntervaloOfertado[]>(`${this.resourceUrl}/linea/${linea}`, {observe: 'response'})
+            .map((res: HttpResponse<IntervaloOfertado[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

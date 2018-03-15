@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Datos } from './datos.model';
 import { DatosService } from './datos.service';
 import { Principal } from '../../shared';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'jhi-datos',
@@ -17,7 +17,6 @@ export class DatosComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     desde: any;
-    clas = 'btn btn-danger btn-sm';
 
     constructor(
         private datosService: DatosService,

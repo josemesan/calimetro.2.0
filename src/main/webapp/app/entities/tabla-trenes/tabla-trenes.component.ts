@@ -6,6 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { TablaTrenes } from './tabla-trenes.model';
 import { TablaTrenesService } from './tabla-trenes.service';
 import { Principal } from '../../shared';
+import {Linea, LineaService} from '../linea';
 
 @Component({
     selector: 'jhi-tabla-trenes',
@@ -15,25 +16,38 @@ export class TablaTrenesComponent implements OnInit, OnDestroy {
 tablaTrenes: TablaTrenes[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    lineas: Linea[];
+    linea: String;
 
     constructor(
         private tablaTrenesService: TablaTrenesService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        private lineaService: LineaService,
     ) {
     }
 
-    loadAll() {
-        this.tablaTrenesService.query().subscribe(
+    loadAllLineas() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    loadTablaTenesLinea() {
+        this.tablaTrenesService.queryLinea(this.linea).subscribe(
             (res: HttpResponse<TablaTrenes[]>) => {
                 this.tablaTrenes = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     ngOnInit() {
-        this.loadAll();
+        this.loadTablaTenesLinea();
+        this.loadAllLineas();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -48,7 +62,7 @@ tablaTrenes: TablaTrenes[];
         return item.id;
     }
     registerChangeInTablaTrenes() {
-        this.eventSubscriber = this.eventManager.subscribe('tablaTrenesListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('tablaTrenesListModification', (response) => this.loadTablaTenesLinea());
     }
 
     private onError(error) {

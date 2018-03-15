@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Date;
 import java.util.Objects;
 
 import com.metro.calimetro.domain.enumeration.TipoDia;

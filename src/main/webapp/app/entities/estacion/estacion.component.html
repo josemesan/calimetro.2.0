@@ -11,7 +11,7 @@
         </button>
     </h2>
     <div class="col-md-2"><br>
-        <h5> Seleccionar línea: </h5><abbr></abbr>
+        <h6> Seleccionar línea: </h6><abbr></abbr>
         <select  class="form-control" [(ngModel)]="linea" (change)="loadEstacionesLinea()">
             <option [ngValue]="null"></option>
             <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>

@@ -7,21 +7,27 @@ import { IntervaloMin } from './intervalo-min.model';
 import { IntervaloMinService } from './intervalo-min.service';
 import { Principal } from '../../shared';
 
+import { DatePipe } from '@angular/common';
+
 @Component({
     selector: 'jhi-intervalo-min',
     templateUrl: './intervalo-min.component.html'
 })
 export class IntervaloMinComponent implements OnInit, OnDestroy {
-intervaloMins: IntervaloMin[];
+    intervaloMins: IntervaloMin[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    desde: any;
 
     constructor(
         private intervaloMinService: IntervaloMinService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
-        private principal: Principal
+        private principal: Principal,
+        public datepipe: DatePipe,
     ) {
+        this.desde = new Date();
+        this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
     }
 
     loadAll() {
@@ -33,11 +39,20 @@ intervaloMins: IntervaloMin[];
         );
     }
     ngOnInit() {
-        this.loadAll();
+        this.loadFecha();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInIntervaloMins();
+    }
+
+    loadFecha() {
+        this.intervaloMinService.queryFecha(this.desde + ' 06:00').subscribe(
+            (res: HttpResponse<IntervaloMin[]>) => {
+                this.intervaloMins = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnDestroy() {

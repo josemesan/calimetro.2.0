@@ -36,23 +36,15 @@ export class EstacionComponent implements OnInit, OnDestroy {
         );
     }
     loadAllLineas() {
-        this.lineaService.query(this.linea).subscribe(
+        this.lineaService.query().subscribe(
             (res: HttpResponse<Estacion[]>) => {
                 this.lineas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    loadAll() {
-        this.estacionService.query().subscribe(
-            (res: HttpResponse<Estacion[]>) => {
-                this.estacions = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
+
     ngOnInit() {
-        // this.loadAll();
         this.loadAllLineas();
         this.loadEstacionesLinea();
         this.principal.identity().then((account) => {
