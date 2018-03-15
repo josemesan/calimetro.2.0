@@ -28,7 +28,7 @@
                 <td>{{observaciones.texto}}</td>
                 <td>
                     <div *ngIf="observaciones.datos">
-                        <span>{{observaciones.datos?.id}}</span>
+                        <span>{{observaciones.datos?.fechaHora | date:'medium'}}</span>
                     </div>
                 </td>
                 <td class="text-right">

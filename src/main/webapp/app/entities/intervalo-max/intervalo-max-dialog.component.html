@@ -25,15 +25,18 @@
                 [(ngModel)]="intervaloMax.interMax" />
         </div>
         <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.tablaTrenes.linea" for="field_linea">Linea</label>
+            <select class="form-control" id="field_linea" name="linea" [(ngModel)]="linea" (change)="loadEstacionesLinea()">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.estacionMax" for="field_estacionMax">Estacion Max</label>
-            <input type="text" class="form-control" name="estacionMax" id="field_estacionMax"
-                [(ngModel)]="intervaloMax.estacionMax" maxlength="5"/>
-            <div [hidden]="!(editForm.controls.estacionMax?.dirty && editForm.controls.estacionMax?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.estacionMax?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
-                   This field cannot be longer than 5 characters.
-                </small>
-            </div>
+            <select class="form-control" name="estacionMax" id="field_estacionMax" [(ngModel)]="intervaloMax.estacionMax">
+                <option [ngValue]="null"></option>
+                <option *ngFor="let estacionOption of estacions; trackBy: trackLineaById">{{estacionOption.nemo}}</option>
+            </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMax.viamax" for="field_viamax">Viamax</label>

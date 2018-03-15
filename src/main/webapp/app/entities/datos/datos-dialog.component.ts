@@ -12,6 +12,7 @@ import { DatosService } from './datos.service';
 import { Linea, LineaService } from '../linea';
 import { IntervaloMin, IntervaloMinService } from '../intervalo-min';
 import { IntervaloMax, IntervaloMaxService } from '../intervalo-max';
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'jhi-datos-dialog',
@@ -21,12 +22,11 @@ export class DatosDialogComponent implements OnInit {
 
     datos: Datos;
     isSaving: boolean;
-
     lineas: Linea[];
-
     intervalomins: IntervaloMin[];
-
     intervalomaxes: IntervaloMax[];
+    fecha: string;
+    fechafiltro: string;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -35,16 +35,16 @@ export class DatosDialogComponent implements OnInit {
         private lineaService: LineaService,
         private intervaloMinService: IntervaloMinService,
         private intervaloMaxService: IntervaloMaxService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        public datepipe: DatePipe,
     ) {
+
     }
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.lineaService.query()
-            .subscribe((res: HttpResponse<Linea[]>) => { this.lineas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+    loadInter() {
+        this.fechafiltro = this.datepipe.transform(this.fecha, 'yyyy-MM-dd');
         this.intervaloMinService
-            .query({filter: 'datos-is-null'})
+            .queryFecha(this.fechafiltro + ' 06:00')
             .subscribe((res: HttpResponse<IntervaloMin[]>) => {
                 if (!this.datos.intervaloMin || !this.datos.intervaloMin.id) {
                     this.intervalomins = res.body;
@@ -57,7 +57,7 @@ export class DatosDialogComponent implements OnInit {
                 }
             }, (res: HttpErrorResponse) => this.onError(res.message));
         this.intervaloMaxService
-            .query({filter: 'datos-is-null'})
+            .queryFecha(this.fechafiltro + ' 06:00')
             .subscribe((res: HttpResponse<IntervaloMax[]>) => {
                 if (!this.datos.intervaloMax || !this.datos.intervaloMax.id) {
                     this.intervalomaxes = res.body;
@@ -71,11 +71,18 @@ export class DatosDialogComponent implements OnInit {
             }, (res: HttpErrorResponse) => this.onError(res.message));
     }
 
+    ngOnInit() {
+        this.isSaving = false;
+        this.lineaService.query()
+            .subscribe((res: HttpResponse<Linea[]>) => { this.lineas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+    }
+
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
     save() {
+        this.datos.fechaHora = this.fecha;
         this.isSaving = true;
         if (this.datos.id !== undefined) {
             this.subscribeToSaveResponse(

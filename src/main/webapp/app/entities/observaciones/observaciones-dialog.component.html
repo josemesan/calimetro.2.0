@@ -17,13 +17,40 @@
             <input type="text" class="form-control" name="texto" id="field_texto"
                 [(ngModel)]="observaciones.texto" />
         </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="calimetroApp.datos.linea" for="field_linea">Linea</label>
+            <div class="input-group"  >
+                <select class="form-control" id="field_linea" name="linea" [(ngModel)]="linea" (change)="loadDatosFechaLinea()" >
+                    <option [ngValue]="null"></option>
+                    <option *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label">Fecha</label>
+            <div class="input-group"  >
+                <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha" (change)="loadDatosFechaLinea()" required/>
+            </div>
+            <div [hidden]="!(editForm.controls.fecha?.dirty && editForm.controls.fecha?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.fecha?.errors?.required" jhiTranslate="entity.validation.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.observaciones.datos" for="field_datos">Datos</label>
             <select class="form-control" id="field_datos" name="datos" [(ngModel)]="observaciones.datos" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="datosOption.id === observaciones.datos?.id ? observaciones.datos : datosOption" *ngFor="let datosOption of datos; trackBy: trackDatosById">{{datosOption.id}}</option>
+                <option [ngValue]="datosOption.id === observaciones.datos?.id ? observaciones.datos : datosOption" *ngFor="let datosOption of datos; trackBy: trackDatosById">{{datosOption.fechaHora | date:'medium'}}</option>
             </select>
+        </div>
+        <div [hidden]="!(editForm.controls.datos?.dirty && editForm.controls.datos?.invalid)">
+            <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.fecha?.errors?.required" jhiTranslate="entity.validation.required">
+                This field is required.
+            </small>
         </div>
     </div>
     <div class="modal-footer">

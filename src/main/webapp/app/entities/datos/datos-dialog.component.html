@@ -13,9 +13,9 @@
                    [(ngModel)]="datos.id" readonly />
         </div>
         <div class="form-group">
-            <label class="form-control-label" jhiTranslate="calimetroApp.datos.fechaHora" for="field_fechaHora">Fecha Hora</label>
+            <label class="form-control-label" jhiTranslate="calimetroApp.datos.fechaHora" for="field_fechaHora" >Fecha Hora</label>
             <div class="d-flex">
-                <input id="field_fechaHora" type="datetime-local" class="form-control" name="fechaHora" [(ngModel)]="datos.fechaHora"
+                <input id="field_fechaHora" (change)="loadInter()" type="datetime-local" class="form-control" name="fechaHora" [(ngModel)]="fecha"
                 />
             </div>
         </div>
@@ -69,14 +69,12 @@
             <input type="number" class="form-control" name="cocheKm" id="field_cocheKm"
                 [(ngModel)]="datos.cocheKm" />
         </div>
-
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.linea" for="field_linea">Linea</label>
             <select class="form-control" id="field_linea" name="linea" [(ngModel)]="datos.linea" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="lineaOption.id === datos.linea?.id ? datos.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>
-
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMin" for="field_intervaloMin">Intervalo Min</label>
@@ -85,11 +83,6 @@
                 <option [ngValue]="intervaloMinOption.id === datos.intervaloMin?.id ? datos.intervaloMin : intervaloMinOption" *ngFor="let intervaloMinOption of intervalomins; trackBy: trackIntervaloMinById">
                     {{intervaloMinOption.interMin}} min {{intervaloMinOption.estacionMin}} V.{{intervaloMinOption.viaMin}}</option>
             </select>
-            <button class="btn btn-primary" [routerLink]="['/', { outlets: { popup: ['intervalo-min-new'] } }]">
-                <span class="fa fa-plus"></span>
-                <span  jhiTranslate="calimetroApp.intervaloMin.home.createLabel">
-                Create new Intervalo Min
-            </span>
         </button>
         </div>
         <div class="form-group">
@@ -99,12 +92,6 @@
                 <option [ngValue]="intervaloMaxOption.id === datos.intervaloMax?.id ? datos.intervaloMax : intervaloMaxOption" *ngFor="let intervaloMaxOption of intervalomaxes; trackBy: trackIntervaloMaxById">
                     {{intervaloMaxOption.interMax}} min {{intervaloMaxOption.estacionMax}} V.{{intervaloMaxOption.viamax}}</option>
             </select>
-            <button class="btn btn-primary" [routerLink]="['/', { outlets: { popup: ['intervalo-max-new'] } }]">
-                <span class="fa fa-plus"></span>
-                <span  jhiTranslate="calimetroApp.intervaloMax.home.createLabel">
-            Create new Intervalo Max
-            </span>
-            </button>
         </div>
     </div>
     <div class="modal-footer">

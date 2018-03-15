@@ -4,11 +4,14 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {JhiAlertService, JhiEventManager} from 'ng-jhipster';
 
 import { IntervaloMin } from './intervalo-min.model';
 import { IntervaloMinPopupService } from './intervalo-min-popup.service';
 import { IntervaloMinService } from './intervalo-min.service';
+import {Estacion} from '../estacion/estacion.model';
+import {Linea, LineaService} from '../linea';
+import {EstacionService} from '../estacion/estacion.service';
 
 @Component({
     selector: 'jhi-intervalo-min-dialog',
@@ -18,16 +21,40 @@ export class IntervaloMinDialogComponent implements OnInit {
 
     intervaloMin: IntervaloMin;
     isSaving: boolean;
+    estacions: Estacion[];
+    lineas: Linea[];
+    linea: String;
 
     constructor(
         public activeModal: NgbActiveModal,
         private intervaloMinService: IntervaloMinService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private estacionService: EstacionService,
+        private lineaService: LineaService,
+        private jhiAlertService: JhiAlertService,
     ) {
     }
 
     ngOnInit() {
+        this.loadAllLineas();
+        this.loadEstacionesLinea();
         this.isSaving = false;
+    }
+    loadEstacionesLinea() {
+        this.estacionService.queryLinea(this.linea).subscribe(
+            (res: HttpResponse<Estacion[]>) => {
+                this.estacions = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+    loadAllLineas() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Estacion[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     clear() {
@@ -58,6 +85,9 @@ export class IntervaloMinDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
+    }
+    private onError(error) {
+        this.jhiAlertService.error(error.message, null, null);
     }
 }
 

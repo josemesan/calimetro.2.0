@@ -11,7 +11,7 @@
         <dt><span jhiTranslate="calimetroApp.observaciones.datos">Datos</span></dt>
         <dd>
             <div *ngIf="observaciones.datos">
-                <a [routerLink]="['/datos', observaciones.datos?.id]">{{observaciones.datos?.id}}</a>
+                <a [routerLink]="['/datos', observaciones.datos?.id]">{{observaciones.datos?.fechaHora | date:'medium'}}</a>
             </div>
         </dd>
     </dl>

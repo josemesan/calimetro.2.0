@@ -10,6 +10,7 @@ import { Observaciones } from './observaciones.model';
 import { ObservacionesPopupService } from './observaciones-popup.service';
 import { ObservacionesService } from './observaciones.service';
 import { Datos, DatosService } from '../datos';
+import { LineaService, Linea } from '../linea';
 
 @Component({
     selector: 'jhi-observaciones-dialog',
@@ -19,22 +20,40 @@ export class ObservacionesDialogComponent implements OnInit {
 
     observaciones: Observaciones;
     isSaving: boolean;
-
     datos: Datos[];
+    fecha: String;
+    lineas: Linea[];
+    linea: String;
 
     constructor(
         public activeModal: NgbActiveModal,
         private jhiAlertService: JhiAlertService,
         private observacionesService: ObservacionesService,
         private datosService: DatosService,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private lineaService: LineaService,
     ) {
+    }
+
+    loadDatosFechaLinea() {
+        if (this.fecha != null) {
+            this.datosService.queryFechaLinea(this.fecha + ' 06:00', this.linea)
+                .subscribe((res: HttpResponse<Datos[]>) => { this.datos = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+            }
+    }
+
+    loadLineas() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     ngOnInit() {
         this.isSaving = false;
-        this.datosService.query()
-            .subscribe((res: HttpResponse<Datos[]>) => { this.datos = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.loadLineas();
     }
 
     clear() {

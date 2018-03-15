@@ -37,7 +37,7 @@
                 <td>{{observaciones.texto}}</td>
                 <td>
                     <div *ngIf="observaciones.datos">
-                        <a [routerLink]="['/datos', observaciones.datos?.id ]" >{{observaciones.datos?.id}}</a>
+                        <a [routerLink]="['/datos', observaciones.datos?.id ]" >{{observaciones.datos?.fechaHora | date:'medium'}}</a>
                     </div>
                 </td>
                 <td class="text-right">

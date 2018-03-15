@@ -21,6 +21,7 @@ export class TablaTrenesDialogComponent implements OnInit {
     isSaving: boolean;
 
     lineas: Linea[];
+    hora: string;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -42,6 +43,7 @@ export class TablaTrenesDialogComponent implements OnInit {
     }
 
     save() {
+        this.tablaTrenes.hora = '2018-01-01 ' + this.hora;
         this.isSaving = true;
         if (this.tablaTrenes.id !== undefined) {
             this.subscribeToSaveResponse(

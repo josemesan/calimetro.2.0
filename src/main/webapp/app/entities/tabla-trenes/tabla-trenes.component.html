@@ -34,7 +34,7 @@
             <tbody>
             <tr *ngFor="let tablaTrenes of tablaTrenes ;trackBy: trackId">
                 <td><a [routerLink]="['../tabla-trenes', tablaTrenes.id ]">{{tablaTrenes.id}}</a></td>
-                <td>{{tablaTrenes.hora | date:'medium'}}</td>
+                <td>{{tablaTrenes.hora | date:'HH:mm'}}</td>
                 <td jhiTranslate="{{'calimetroApp.TipoDia.' + tablaTrenes.tipoDia}}">{{tablaTrenes.tipoDia}}</td>
                 <td>{{tablaTrenes.numeroTrenes}}</td>
                 <!--<td>-->
