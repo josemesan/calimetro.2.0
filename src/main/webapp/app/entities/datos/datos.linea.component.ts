@@ -34,7 +34,7 @@ export class DatosLineaComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.eventSubscriber = this.route.params.subscribe((params) => {
-            this.linea = (params['id']); this.loadFechaLinea();});
+            this.linea = (params['id']); this.loadFechaLinea(); });
 
         this.principal.identity().then((account) => {
             this.currentAccount = account;
@@ -52,7 +52,7 @@ export class DatosLineaComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
-        //this.loadFechaLinea();
+        // this.loadFechaLinea();
     }
 
     trackId(index: number, item: Datos) {

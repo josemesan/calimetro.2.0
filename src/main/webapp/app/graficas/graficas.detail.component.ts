@@ -4,7 +4,6 @@ import { RelacionFechaTipodia } from '../entities/relacion-fecha-tipodia';
 import { TipoDia } from '../entities/relacion-fecha-tipodia/relacion-fecha-tipodia.model';
 import {RelacionFechaTipodiaService } from '../entities/relacion-fecha-tipodia';
 
-
 @Component( {
     selector: 'jhi-graficas-detail',
     templateUrl: './graficas.detail.component.html',

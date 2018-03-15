@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Datos } from './datos.model';
 import { DatosService } from './datos.service';
 import { Principal } from '../../shared';
-import {DatePipe} from "@angular/common";
+import {DatePipe} from '@angular/common';
 
 @Component({
     selector: 'jhi-datos',

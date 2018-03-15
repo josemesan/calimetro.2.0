@@ -7,7 +7,7 @@ import { Estacion } from './estacion.model';
 import { EstacionService } from './estacion.service';
 import { Principal } from '../../shared';
 import {Linea, LineaService} from '../linea';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'jhi-estacion',
@@ -37,7 +37,7 @@ export class EstacionLineaComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    loadAllLineas(){
+    loadAllLineas() {
         this.lineaService.query(this.linea).subscribe(
             (res: HttpResponse<Estacion[]>) => {
                 this.lineas = res.body;
@@ -55,9 +55,9 @@ export class EstacionLineaComponent implements OnInit, OnDestroy {
     }
     ngOnInit() {
         this.eventSubscriber = this.route.params.subscribe((params) => {
-            this.linea = (params['id']); this.loadEstacionesLinea();});
+            this.linea = (params['id']); this.loadEstacionesLinea(); } );
         this.loadAllLineas();
-        this.loadEstacionesLinea()
+        this.loadEstacionesLinea();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

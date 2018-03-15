@@ -47,7 +47,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     ) {
         this.chartData = ChartsThemeTiempoVuelta;
         this.chart = new Chart;
-        this.chart.options= ChartsThemeIntervalo;
+        this.chart.options = ChartsThemeIntervalo;
         this.chartData2 = ChartsThemeIntervalo;
         this.chartData3 = ChartsThemeDesviacion;
         this.chart3 = new Chart(this.chartData3);

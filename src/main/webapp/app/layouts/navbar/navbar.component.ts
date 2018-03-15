@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    loadLineas(){
+    loadLineas() {
         this.lineaService.query().subscribe(
             (res: HttpResponse<Linea[]>) => {
                 this.lineas = res.body;
@@ -75,7 +75,7 @@ export class NavbarComponent implements OnInit {
 
     login() {
         this.modalRef = this.loginModalService.open();
-        //this.loadLineas();
+        // this.loadLineas();
     }
 
     logout() {

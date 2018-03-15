@@ -6,7 +6,7 @@ import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
 import { Observaciones } from './observaciones.model';
 import { ObservacionesService } from './observaciones.service';
 import { Principal } from '../../shared';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
     selector: 'jhi-observaciones',
