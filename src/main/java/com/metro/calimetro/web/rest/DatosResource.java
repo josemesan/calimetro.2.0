@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -116,6 +115,59 @@ public class DatosResource {
         log.debug("REST request to get Datos segun Fecha : {}", ini);
         return datosRepository.findByFechaHoraBetween(zone1,zone2);
 
+    }
+//--------------------------------- viajeros
+    @GetMapping("/datos/viajeros/{ini}/{lin}")
+    @Timed
+    public List<Long> getBetweenFechaDatosLineaViajeros(@PathVariable String ini,@PathVariable String lin) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        LocalDateTime ldt2 = ldt1.plusHours(20);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
+        log.debug("REST request to get Datos Viajeros : {}", ini,lin);
+        List<Long> viajeros = new ArrayList<Long>();
+        List<Datos> datos= datosRepository.findByFechaHoraBetween(zone1,zone2);
+        Integer viajerosLinea = 0;
+        Integer viajerosTotal = 0;
+
+        for (Datos dato: datos) {
+            String linea=dato.getLinea().getNombre();
+            if (linea.compareTo(lin) == 0) {
+                viajerosTotal= viajerosTotal + dato.getViajeros();
+                viajerosLinea= viajerosLinea + dato.getViajeros();
+            }
+            else {
+                viajerosTotal = viajerosTotal + dato.getViajeros();
+            }
+        }
+        LocalDateTime ldt1Ayer = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1Ayer = ldt1Ayer.atZone(ZoneId.of("Europe/Paris"));
+        zone1Ayer = zone1Ayer.minusDays(1);
+        LocalDateTime ldt2Ayer = ldt1Ayer.plusHours(20);
+        ZonedDateTime zone2Ayer = ldt2Ayer.atZone(ZoneId.of("Europe/Paris"));
+        zone2Ayer = zone2Ayer.minusDays(1);
+
+        datos= datosRepository.findByFechaHoraBetween(zone1Ayer,zone2Ayer);
+        Integer viajerosLineaAyer = 0;
+        Integer viajerosTotalAyer = 0;
+
+        for (Datos dato: datos) {
+            String linea=dato.getLinea().getNombre();
+            if (linea.compareTo(lin) == 0) {
+                viajerosTotalAyer= viajerosTotalAyer + dato.getViajeros();
+                viajerosLineaAyer= viajerosLineaAyer + dato.getViajeros();
+            }
+            else {
+                viajerosTotalAyer = viajerosTotalAyer + dato.getViajeros();
+            }
+        }
+        viajeros.add(Long.valueOf(viajerosLinea));
+        viajeros.add(Long.valueOf(viajerosTotal));
+        viajeros.add(Long.valueOf(viajerosLineaAyer));
+        viajeros.add(Long.valueOf(viajerosTotalAyer));
+
+        return viajeros;
     }
 
     /**

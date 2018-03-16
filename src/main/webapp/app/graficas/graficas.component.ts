@@ -12,7 +12,6 @@ import { ChartsThemeIntervalo } from './chart-intervalo';
 import { ChartsThemeTiempoVuelta } from './chat-tiempoVuelta';
 import { ChartsThemeDesviacion } from './chart-desviacion';
 import { HighchartsMore } from 'highcharts-more';
-import * as Highcharts from 'highcharts';
 
 @Component({
     selector: 'jhi-graficas',
@@ -35,6 +34,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     chartData3: any;
     chart: any;
     chart3: any;
+    viajeros: number[] = [0, 0, 0, 0];
 
     constructor(
         private datosService: DatosService,
@@ -65,9 +65,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
         this.subscription = this.route.params.subscribe((params) => {
             this.linea = (params['id']); });
+
         this.registerChangeInGraficas();
         this.registerChangeInDatos();
         this.loadFechaLinea();
+        this.loadViajerosFechaLinea();
     }
     // ------------
     add() {
@@ -86,6 +88,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
     registerChangeInDatos() {
         this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
     }
+    registerChangeInViajeros() {
+        this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.loadFechaLinea());
+    }
 
     registerChangeInGraficas() {
         this.eventSubscriber = this.eventManager.subscribe(
@@ -94,10 +99,24 @@ export class GraficasComponent implements OnInit, OnDestroy {
         );
     }
 
+    update() {
+        this.loadFechaLinea();
+        this.loadViajerosFechaLinea();
+    }
+
     loadFechaLinea() {
         this.datosService.queryFechaLinea(this.desde.toString() + ' 06:00', this.linea).subscribe(
             (res: HttpResponse<Datos[]>) => {
                 this.datos = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    loadViajerosFechaLinea() {
+        this.datosService.queryViajerosFechaLinea(this.desde.toString() + ' 06:00', this.linea).subscribe(
+            (res: HttpResponse<number[]>) => {
+                this.viajeros = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

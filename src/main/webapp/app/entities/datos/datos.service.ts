@@ -47,6 +47,9 @@ export class DatosService {
         return this.http.get<Datos[]>(`${this.resourceUrl}/fecha/${desde}/${linea}`, {observe: 'response'})
             .map((res: HttpResponse<Datos[]>) => this.convertArrayResponse(res));
     }
+    queryViajerosFechaLinea(desde: any, linea: String): Observable<HttpResponse<number[]>> {
+        return this.http.get<number[]>(`${this.resourceUrl}/viajeros/${desde}/${linea}`, {observe: 'response'});
+    }
 
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
