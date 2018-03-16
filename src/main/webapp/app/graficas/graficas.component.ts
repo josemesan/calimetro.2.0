@@ -63,7 +63,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        chartHolder = Highcharts.chart(this.chartData2);
+        chartHolder = Highcharts.chart;
 
         this.principal.identity().then((account) => {
             this.currentAccount = account;
