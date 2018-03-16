@@ -3,6 +3,8 @@ import { ExcelService} from '../excel/excelservice.service';
 import { Datos, DatosService } from '../entities/datos';
 
 import { DatosExcel } from '../excel/datos.excel.model';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
 @Component({
     selector: 'jhi-graficas-excel',
@@ -14,12 +16,13 @@ export class GraficasExcelComponent {
     private datosEnvio: Datos[];
     @Input()
     private lineaEnvio: string;
-
     datoExcel: DatosExcel;
     datosExcel: DatosExcel[] = [];
+    eventSubscriber: Subscription;
 
     constructor(
         private excelService: ExcelService,
+        private eventManager: JhiEventManager,
     ) {
     }
     exportToExcel() {
@@ -42,5 +45,9 @@ export class GraficasExcelComponent {
             this.datosExcel.push(this.datoExcel);
     }
         this.excelService.exportAsExcelFile(this.datosExcel, 'datos');
+    }
+
+    registerChangeInDatosExcel() {
+        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.exportToExcel());
     }
 }

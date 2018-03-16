@@ -45,7 +45,7 @@ export const ChartsThemeIntervalo = {
         ],
         zIndex: 1,
         marker: {
-            fillColor: 'white',
+            fillColor: 'grey',
             lineWidth: 2,
             }
      }, {

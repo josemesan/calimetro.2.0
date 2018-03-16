@@ -12,6 +12,10 @@ import { ChartsThemeIntervalo } from './chart-intervalo';
 import { ChartsThemeTiempoVuelta } from './chat-tiempoVuelta';
 import { ChartsThemeDesviacion } from './chart-desviacion';
 import { HighchartsMore } from 'highcharts-more';
+import * as Highcharts from 'highcharts';
+declare var require: any;
+require('highcharts/highcharts-more')(Highcharts);
+let chartHolder;
 
 @Component({
     selector: 'jhi-graficas',
@@ -33,6 +37,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     chartData2: any;
     chartData3: any;
     chart: any;
+    chart2: any;
     chart3: any;
     viajeros: number[] = [0, 0, 0, 0];
 
@@ -43,14 +48,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private route: ActivatedRoute,
         public datepipe: DatePipe,
-
     ) {
         this.chartData = ChartsThemeTiempoVuelta;
         this.chart = new Chart;
         this.chart.options = ChartsThemeIntervalo;
         this.chartData2 = ChartsThemeIntervalo;
         this.chartData3 = ChartsThemeDesviacion;
-        this.chart3 = new Chart(this.chartData3);
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();
@@ -60,6 +63,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        chartHolder = Highcharts.chart('container', this.chartData2);
+
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
