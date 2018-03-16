@@ -37,8 +37,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
     chartData2: any;
     chartData3: any;
     chart: any;
-    chart2: any;
-    chart3: any;
+    // chart2: any;
+    // chart3: any;
     viajeros: number[] = [0, 0, 0, 0];
 
     constructor(
@@ -63,7 +63,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        chartHolder = Highcharts.chart('container', this.chartData2);
+        chartHolder = Highcharts.chart(this.chartData2);
 
         this.principal.identity().then((account) => {
             this.currentAccount = account;
@@ -77,18 +77,18 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.loadViajerosFechaLinea();
     }
     // ------------
-    add() {
-        this.chart.addPoint(Math.floor(Math.random() * 10));
-    }
-
-    updateChart() {
-        if (this.chartData.chart.type === 'line') {
-            this.chartData.chart.type = 'bar';
-        } else {
-            this.chartData.chart.type = 'line';
-        }
-        this.chart = new Chart(this.chartData);
-    }
+    // add() {
+    //     this.chart.addPoint(Math.floor(Math.random() * 10));
+    // }
+    //
+    // updateChart() {
+    //     if (this.chartData.chart.type === 'line') {
+    //         this.chartData.chart.type = 'bar';
+    //     } else {
+    //         this.chartData.chart.type = 'line';
+    //     }
+    //     this.chart = new Chart(this.chartData);
+    // }
 
     registerChangeInDatos() {
         this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
