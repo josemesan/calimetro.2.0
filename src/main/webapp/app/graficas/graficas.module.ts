@@ -9,7 +9,7 @@ import {ExcelComponent} from '../excel/excel.component';
 import { CalimetroSharedModule } from '../shared';
 
 import { GRAFICAS_ROUTE, GraficasComponent } from './';
-import {GraficasDetailComponent} from './graficas.detail.component';
+import { GraficasExcelComponent } from './graficas.excel.component';
 
 @NgModule({
     imports: [
@@ -19,7 +19,7 @@ import {GraficasDetailComponent} from './graficas.detail.component';
     ],
     declarations: [
         GraficasComponent,
-        GraficasDetailComponent,
+        GraficasExcelComponent,
         ExcelComponent,
     ],
     entryComponents: [

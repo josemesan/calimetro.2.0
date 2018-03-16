@@ -1,3 +1,7 @@
+<h2>
+    Gráficos de {{linea}}
+</h2>
+
 <div class="text-xl-right">
     <span>{{date | date: 'HH:mm'}}</span>
 </div>
@@ -6,13 +10,13 @@
         <input type="date" [(ngModel)]="desde" (change)="loadFechaLinea()" value="fecha">{{fecha}}
     </div>
 </div>
-<div><button (click)="add()">Add Point!</button></div>
+
+<div><button (click)="add()">Añandir punto!</button></div>
 <br>
 
 <div class="table-striped">
     <div class="col-md-4">
-            <tr *ngFor="let dato of datos"> datos id: {{dato.id}}
-        </tr>
+            <tr *ngFor="let dato of datos"> datos id: {{dato.id}}</tr>
     </div>
 </div>
 
@@ -36,31 +40,36 @@
         </tbody>
     </table>
 </div>
+
 <div class="row">
     <div class="col-md-4">
-        <div [chart]="chart"></div><button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>
+        <div [chart]="chart3"></div>
+        <!--<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>-->
         <hr>
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
         <hr>
         <div [chart]="chart3"></div>
         <hr>
     </div>
     <div class="col-md-4">
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
+        <!--<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>-->
         <hr>
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
         <hr>
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
         <hr>
     </div>
     <div class="col-md-4">
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
+        <!--<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>-->
         <hr>
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
         <hr>
-        <div [chart]="chart"></div>
+        <div [chart]="chart3"></div>
         <hr>
     </div>
 </div>
+<jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>
 
 

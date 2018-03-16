@@ -1,0 +1,47 @@
+    <h4>TABLA DE DATOS</h4>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Linea</th>
+                <th>Intervalo</th>
+                <th>Desviacion</th>
+                <th>T.Vuelta</th>
+                <th>NºTrenes</th>
+                <th>Viajeros</th>
+                <th>TOC</th>
+                <th>Densidad</th>
+                <th>Consumo</th>
+                <th>Velocidad</th>
+                <th>Cch/Km</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr *ngFor="let dato of datosEnvio">
+                <td><i aria-hidden="true"> </i> {{ dato.id}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'dd-mm-yyyy'}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'HH:mm'}} </td>
+                <td><i aria-hidden="true"> </i> {{ lineaEnvio }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.intervaloMedio}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.desviacionMedia}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.tiempoVuelta}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.numeroTrenes}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.viajeros}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.toc}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.densidad}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.consumo}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.velocidad}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.cocheKm}} </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <button (click)="exportToExcel()" class="btn btn-primary">Export to Excel</button>
+
+
+
+
