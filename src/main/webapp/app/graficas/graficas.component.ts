@@ -29,17 +29,19 @@ export class GraficasComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     private subscription: Subscription;
+
     linea: String;
     datos: Datos[];
+
     private date: any;
     desde: any;
     chartData: any;
     chartData2: any;
     chartData3: any;
     chart: any;
-    // chart2: any;
-    // chart3: any;
     viajeros: number[] = [0, 0, 0, 0];
+
+    serie: any[];
 
     constructor(
         private datosService: DatosService,
@@ -50,10 +52,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
         public datepipe: DatePipe,
     ) {
         this.chartData = ChartsThemeTiempoVuelta;
-        this.chart = new Chart;
-        this.chart.options = ChartsThemeIntervalo;
         this.chartData2 = ChartsThemeIntervalo;
         this.chartData3 = ChartsThemeDesviacion;
+
+        this.chart = new Chart;
+        this.chart.options = ChartsThemeIntervalo;
+
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
         this.date =  new Date();
@@ -61,6 +65,16 @@ export class GraficasComponent implements OnInit, OnDestroy {
             this.date =  new Date();
         }, 10000);
     }
+
+    // crearSerie() {
+    //     for (let i = 0; i < this.datos.length; i++) {
+    //         this.serie= new ArrayType(
+    //             this.datos[i].fechaHora,
+    //             this.datos[i].intervaloMedio,
+    //             this.datos[i].desviacionMedia
+    //         );
+    //     }
+    // }
 
     ngOnInit() {
         chartHolder = Highcharts.chart;
@@ -73,9 +87,19 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
         this.registerChangeInGraficas();
         this.registerChangeInDatos();
+        // this.registerChangeInSerie();
         this.loadFechaLinea();
         this.loadViajerosFechaLinea();
+       // this.crearSerie();
     }
+
+    updateGraf(){
+        ChartsThemeIntervalo.series[0].data = [this.datos[0].fechaHora,
+            this.datos[0].intervaloMedio,
+            this.datos[0].desviacionMedia];
+        this.chart.options = ChartsThemeIntervalo;
+    }
+
     // ------------
     // add() {
     //     this.chart.addPoint(Math.floor(Math.random() * 10));
@@ -96,6 +120,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
     registerChangeInViajeros() {
         this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.loadFechaLinea());
     }
+    // registerChangeInSerie() {
+    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.crearSerie());
+    // }
 
     registerChangeInGraficas() {
         this.eventSubscriber = this.eventManager.subscribe(
@@ -127,9 +154,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
         );
     }
 
-    previousState() {
-        window.history.back();
-    }
+    // previousState() {
+    //     window.history.back();
+    // }
 
     ngOnDestroy() {
             this.subscription.unsubscribe();
