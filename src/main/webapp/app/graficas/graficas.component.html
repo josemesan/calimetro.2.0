@@ -1,33 +1,39 @@
 <h2>
     Gráficos de {{linea}}
-</h2>
-<h2>
-linea: {{linea}}<br>
-tipo: {{tipo}}<br>
-viajeros:{{viajeros}}<br>
-datos: {{datos}}<br>
-intervalos ofer:{{intervaloOfertados}}<br>
-tabla trenes: {{tablaTrenes}}<br>
-</h2>
+</h2><hr>
 
-<!--<div class="text-xl-right">-->
-    <!--<span>{{date | date: 'HH:mm'}}</span>-->
-<!--</div>-->
-
-<div class="form-group">
-    <div><span class="font-weight-bold">Fecha</span>
-        <input type="date" [(ngModel)]="desde" (change)="updateAll()">{{desde}}
-    </div>
-</div>
-
-<div><button (click)="updateGraf()">Añandir punto!</button></div>
-<br>
-
-<div class="table-striped">
+<div class="row">
     <div class="col-md-4">
-            <tr *ngFor="let dato of datos"> datos id: {{dato.id}}</tr>
+        <h6>
+            linea: {{linea}}<br>
+            tipo: {{tipo}}<br>
+            viajeros:{{viajeros}}<br>
+            datos: {{datos}}<br>
+            intervalos ofer:{{intervaloOfertados[0].hora}}<br>
+            tabla trenes: {{tablaTrenes}}<br>
+            inte: {{dataInt }}<br>
+            des: {{dataDes }}<br>
+            Vuelta: {{dataVue }}<br>
+            Numen:{{dataNuT }}<br>
+            Voaje: {{dataVia }}<br>
+            Toc: {{dataTOC }}<br>
+            Densidad: {{dataDen }}<br>
+            Consu: {{dataCon }}<br>
+            Velo: {{dataVel }}<br>
+            Coches: {{dataCoK }}<br>
+            Taba: {{dataTaT }}<br>
+            InterOf: {{dataInO }}<br>
+        </h6>
     </div>
 </div>
+<hr>
+<button (click)="addSerieChart()"> Actualizar</button>
+
+<div class="col-md-4">
+    <h4>Fecha:</h4>
+    <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
+</div>
+<br>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -50,7 +56,7 @@ tabla trenes: {{tablaTrenes}}<br>
     </table>
 </div>
 
-<div [chart]="chart"></div>
+<div [chart]="chartIntervalo"></div>
 
 <!--<div class="row">-->
     <!--<div class="col-md-4">-->

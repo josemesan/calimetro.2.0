@@ -18,29 +18,11 @@ export const ChartsThemeTiempoVuelta = {
         }
     },
 
-    series: [ {
-        type: 'column',
-        name: 'Intervalo Medio',
-        data: [ [Date.UTC (1992, 1, 1, 8, 0), 7],
-            [Date.UTC(1992, 1, 1, 10, 0), 3],
-            [Date.UTC(1992, 1, 1, 15, 0), 3],
-            [Date.UTC(1992, 1, 1, 20, 0), 9],
-            [Date.UTC(1992, 1, 1, 23, 0), 13],
-        ]
-    }, {
+    series: [
+        {
         step: 'center',
         type: 'line',
         name: 'Intervalo Minimo',
-        data: [ [Date.UTC (1992, 1, 1, 8, 0), 7],
-            [Date.UTC(1992, 1, 1, 10, 0), 3],
-            [Date.UTC(1992, 1, 1, 15, 0), 3],
-            [Date.UTC(1992, 1, 1, 20, 0), 9],
-            [Date.UTC(1992, 1, 1, 23, 0), 13],
-        ]
-    }, {
-        step: 'center',
-        type: 'line',
-        name: 'Intervalo Maximo',
         data: [ [Date.UTC (1992, 1, 1, 8, 0), 7],
             [Date.UTC(1992, 1, 1, 10, 0), 3],
             [Date.UTC(1992, 1, 1, 15, 0), 3],

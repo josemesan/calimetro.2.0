@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="form-control-label">Fecha</label>
             <div class="input-group"  >
-                <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha" (change)="loadDatosFechaLinea()" required/>
+                <input type="date" class="form-control" name="fecha" [(ngModel)]="fecha" (change)="loadDatosFechaLinea()"  required/>
             </div>
             <div [hidden]="!(editForm.controls.fecha?.dirty && editForm.controls.fecha?.invalid)">
                 <small class="form-text text-danger"
@@ -41,7 +41,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.observaciones.datos" for="field_datos">Datos</label>
-            <select class="form-control" id="field_datos" name="datos" [(ngModel)]="observaciones.datos" >
+            <select class="form-control" id="field_datos" name="datos" [(ngModel)]="observaciones.datos">
                 <option [ngValue]="null"></option>
                 <option [ngValue]="datosOption.id === observaciones.datos?.id ? observaciones.datos : datosOption" *ngFor="let datosOption of datos; trackBy: trackDatosById">{{datosOption.fechaHora | date:'medium'}}</option>
             </select>

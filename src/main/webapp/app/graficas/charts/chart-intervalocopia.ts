@@ -1,11 +1,14 @@
 export const ChartsThemeIntervalo = {
 
     title: {
-        text: 'July temperatures'
+        text: 'Intervalo medio'
     },
 
     xAxis: {
-        type: 'datetime'
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            hour: '%H h',
+        },
     },
 
     series: [{
@@ -49,6 +52,7 @@ export const ChartsThemeIntervalo = {
             lineWidth: 2,
             }
      }, {
+        step: 'left',
         name: 'Range',
         data: [
             [1246406400000, 14.3, 27.7],

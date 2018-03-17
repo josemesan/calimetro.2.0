@@ -8,18 +8,18 @@ import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
 import { Chart } from 'angular-highcharts';
-import { ChartsThemeIntervalo } from './chart-intervalo';
-import { ChartsThemeTiempoVuelta } from './chat-tiempoVuelta';
-import { ChartsThemeDesviacion } from './chart-desviacion';
+import { ChartsThemeIntervalo } from './charts/chart-intervalo';
+import { ChartsThemeTiempoVuelta } from './charts/chat-tiempoVuelta';
+import { ChartsThemeDesviacion } from './charts/chart-desviacion';
 import { HighchartsMore } from 'highcharts-more';
 import * as Highcharts from 'highcharts';
 import {RelacionFechaTipodiaService, TipoDia} from '../entities/relacion-fecha-tipodia';
 import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo-ofertado';
 import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
+import {ArrayType} from '@angular/compiler/src/output/output_ast';
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
-// let chartHolder;
 
 @Component({
     selector: 'jhi-graficas',
@@ -32,7 +32,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
     config: any;
     currentAccount: any;
     eventSubscriber: Subscription;
-    // subscription: Subscription;
 
     linea: String;
     datos: Datos[];
@@ -40,15 +39,25 @@ export class GraficasComponent implements OnInit, OnDestroy {
     intervaloOfertados: IntervaloOfertado[];
     tablaTrenes: TablaTrenes[];
 
-    private date: any;
+    date: any;
     desde: any;
     chartData: any;
     chartData2: any;
     chartData3: any;
-    chart: any;
+    chartIntervalo: any;
     viajeros: number[] = [0, 0, 0, 0];
-
-    serie: any[];
+    public dataInt: any[] = [];
+    dataDes: any[] = [];
+    dataVue: any[] = [];
+    dataNuT: any[] = [];
+    dataVia: any[] = [];
+    dataTOC: any[] = [];
+    dataDen: any[] = [];
+    dataCon: any[] = [];
+    dataVel: any[] = [];
+    dataCoK: any[] = [];
+    dataTaT: any[] = [];
+    dataInO: any[] = [];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -62,24 +71,70 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private intervaloOfertadoService: IntervaloOfertadoService,
         private tablaTrenesService: TablaTrenesService,
     ) {
-        this.chartData = ChartsThemeTiempoVuelta;
-        this.chartData2 = ChartsThemeIntervalo;
-        this.chartData3 = ChartsThemeDesviacion;
 
-        this.chart = new Chart;
-        this.chart.options = ChartsThemeIntervalo;
-
-        // this.date =  new Date();
-        // setInterval(() => {
-        //     this.date =  new Date();
-        // }, 10000);
     }
 
+    loadChartIntervalo() {
+        this.chartIntervalo = new Chart;
+        this.chartIntervalo.options = ChartsThemeTiempoVuelta;
+    }
+
+    addSerieChart() {
+
+        //this.chartIntervalo.removeSerie(0 )
+
+        this.chartIntervalo.addSerie({
+            name: 'Intervalo Minimo',
+            data: this.dataInt
+        }, true);
+    }
+
+    loadSeriesChart() {
+        this.dataInt = [];
+        this.dataDes = [];
+        this.dataVue = [];
+        this.dataNuT = [];
+        this.dataVia = [];
+        this.dataTOC = [];
+        this.dataDen = [];
+        this.dataCon = [];
+        this.dataVel = [];
+        this.dataCoK = [];
+        this.dataTaT = [];
+        this.dataInO = [];
+
+      for (let i = 0; i < this.datos.length; i++) {
+            // this.date = this.datepipe.transform(this.datos[i].fechaHora, 'HH:mm');
+            this.date =this.datos[i].fechaHora;
+
+            this.dataInt.push([this.date, this.datos[i].intervaloMedio]);
+            this.dataDes.push([this.date, this.datos[i].desviacionMedia]);
+            this.dataVue.push([this.date, this.datos[i].tiempoVuelta]);
+            this.dataNuT.push([this.date, this.datos[i].numeroTrenes]);
+            this.dataVia.push([this.date, this.datos[i].viajeros]);
+            this.dataTOC.push([this.date, this.datos[i].toc]);
+            this.dataDen.push([this.date, this.datos[i].densidad]);
+            this.dataCon.push([this.date, this.datos[i].consumo]);
+            this.dataVel.push([this.date, this.datos[i].velocidad]);
+            this.dataCoK.push([this.date, this.datos[i].cocheKm]);
+        }
+        for (let i = 0; i < this.tablaTrenes.length; i++) {
+            this.date = this.datepipe.transform(this.tablaTrenes[i].hora, 'HH:mm');
+
+            this.dataTaT.push([this.date, this.tablaTrenes[i].numeroTrenes]);
+        }
+        for (let i = 0; i < this.intervaloOfertados.length; i++) {
+            this.date = this.datepipe.transform(this.intervaloOfertados[i].hora, 'HH:mm');
+
+            this.dataInO.push([this.date, this.intervaloOfertados[i].intervaloMin,
+                this.intervaloOfertados[i].intervaloMax]);
+        }
+
+   }
+
     ngOnInit() {
-        // chartHolder = Highcharts.chart;
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
-
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
@@ -87,45 +142,23 @@ export class GraficasComponent implements OnInit, OnDestroy {
             this.linea = (params['id']); });
 
         this.loadAll();
+
     }
 
     updateGraf() {
-        ChartsThemeIntervalo.series[0].data = [this.datos[0].fechaHora,
-            this.datos[0].intervaloMedio,
-            this.datos[0].desviacionMedia];
-        this.chart.options = ChartsThemeIntervalo;
+        this.chartIntervalo.options = ChartsThemeIntervalo;
     }
 
     loadAll() {
-
         this.loadDatosFechaLinea();
-        // this.registerChangeInDatos();
-
-        // this.loadTipoDia();
-        // this.registerChangeInTipo();
-
         this.loadViajerosFechaLinea();
-        // this.registerChangeInViajeros();
-
         this.loadTablaLineaTipo();
-        // this.registerChangeInTablaTrenes();
-
         this.loadIntervaloLineaTipo();
-        // this.registerChangeInIntervaloOfertados();
-
-        // this.registerChangeInGraficas();
+        this.loadSeriesChart();
+        this.loadChartIntervalo();
   }
 
-    updateAll() {
-        this.loadDatosFechaLinea();
-        // this.loadTipoDia();
-        this.loadViajerosFechaLinea();
-        this.loadTablaLineaTipo();
-        this.loadIntervaloLineaTipo();
-
-    }
-
-    loadIntervaloLineaTipo() {
+   loadIntervaloLineaTipo() {
         this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
             (resT: HttpResponse<TipoDia>) => {
                 this.tipo = resT.body;
@@ -173,38 +206,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
         );
     }
 
-    loadTipoDia() {
-        this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
-            (res: HttpResponse<TipoDia>) => {
-                this.tipo = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-    }
-
-    // registerChangeInTablaTrenes() {
-    //     this.eventSubscriber = this.eventManager.subscribe('tablaTrenesListModification', (response) => this.loadTablaLineaTipo());
-    // }
-    // registerChangeInIntervaloOfertados() {
-    //     this.eventSubscriber = this.eventManager.subscribe('intervaloOfertadostModification', (response) => this.loadIntervaloLineaTipo());
-    // }
-    // registerChangeInDatos() {
-    //     this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadDatosFechaLinea());
-    // }
-    // registerChangeInTipo() {
-    //     this.eventSubscriber = this.eventManager.subscribe('tipoListModification', (response) => this.loadTipoDia());
-    // }
-    // registerChangeInViajeros() {
-    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.loadViajerosFechaLinea());
-    // }
-    //
-    // registerChangeInGraficas() {
-    //     this.eventSubscriber = this.eventManager.subscribe(
-    //         'GraficasListModification',
-    //         (response) => this.eventSubscriber.unsubscribe()
-    //     );
-    // }
-
     ngOnDestroy() {
             this.eventSubscriber.unsubscribe();
             this.eventManager.destroy(this.eventSubscriber);
@@ -213,34 +214,4 @@ export class GraficasComponent implements OnInit, OnDestroy {
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
-
-    // crearSerie() {
-    //     for (let i = 0; i < this.datos.length; i++) {
-    //         this.serie= new ArrayType(
-    //             this.datos[i].fechaHora,
-    //             this.datos[i].intervaloMedio,
-    //             this.datos[i].desviacionMedia
-    //         );
-    //     }
-    // }
-
-    // registerChangeInSerie() {
-    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.crearSerie());
-    // }
-    // ------------
-    // add() {
-    //     this.chart.addPoint(Math.floor(Math.random() * 10));
-    // }
-    //
-    // updateChart() {
-    //     if (this.chartData.chart.type === 'line') {
-    //         this.chartData.chart.type = 'bar';
-    //     } else {
-    //         this.chartData.chart.type = 'line';
-    //     }
-    //     this.chart = new Chart(this.chartData);
-    // }
-    // previousState() {
-    //     window.history.back();
-    // }
 }
