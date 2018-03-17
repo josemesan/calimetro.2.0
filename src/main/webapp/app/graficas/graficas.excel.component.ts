@@ -16,6 +16,7 @@ export class GraficasExcelComponent {
     private datosEnvio: Datos[];
     @Input()
     private lineaEnvio: string;
+
     datoExcel: DatosExcel;
     datosExcel: DatosExcel[] = [];
     eventSubscriber: Subscription;

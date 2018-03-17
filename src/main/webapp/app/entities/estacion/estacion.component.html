@@ -10,8 +10,9 @@
             </span>
         </button>
     </h2>
-    <div class="col-md-2"><br>
-        <h6> Seleccionar línea: </h6><abbr></abbr>
+    <hr>
+    <div class="col-md-4">
+        <h4> Seleccionar línea: </h4>
         <select  class="form-control" [(ngModel)]="linea" (change)="loadEstacionesLinea()">
             <option [ngValue]="null"></option>
             <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>

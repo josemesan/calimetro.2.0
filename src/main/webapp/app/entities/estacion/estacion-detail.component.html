@@ -23,7 +23,7 @@
         <dt><span jhiTranslate="calimetroApp.estacion.linea">Linea</span></dt>
         <dd>
             <div *ngIf="estacion.linea">
-                <a [routerLink]="['/linea', estacion.linea?.id]">{{estacion.linea?.id}}</a>
+                <a [routerLink]="['/linea', estacion.linea?.id]">{{estacion.linea?.nombre}}</a>
             </div>
         </dd>
     </dl>

@@ -8,13 +8,29 @@
             </span>
         </button>
     </h2>
-    <div class="col-md-2"><br>
-        <h6> Seleccionar línea: </h6><abbr></abbr>
-        <select  class="form-control" [(ngModel)]="linea" (change)="loadIntervalosLinea()">
-            <option [ngValue]="null"></option>
-            <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
-        </select>
+    <hr>
+    <div class="row"><br>
+        <div class="col-md-4">
+            <h4> Seleccionar línea: </h4>
+            <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadIntervalosLinea()">>
+                <option [ngValue]="null"></option>
+                <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
+            </select>
+        </div>
+
+        <div class="col-md-4">
+            <h4> Seleccionar tipo de día: </h4>
+            <select  class="form-control" [(ngModel)]="tipo" (click)="loadIntervalosLinea()">
+                    <option [ngValue]="null"></option>
+                    <option><span>LAB</span></option>
+                    <option><span>VIER</span></option>
+                    <option><span>SAB</span></option>
+                    <option><span>FEST</span></option>
+                    <option><span>ESP</span></option>
+            </select>
+        </div>
     </div>
+    <hr>
     <jhi-alert></jhi-alert>
     <div class="row">
     </div>

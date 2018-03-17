@@ -1,12 +1,10 @@
+<h2>Datos de {{linea}}</h2>
+<hr>
 <div class="form-group">
-    <h2>Datos de {{linea}}</h2>
-    <hr>
-    <div class="form-group">
-        <div><span class="font-weight-bold">Fecha</span>
-            <input type="date" [(ngModel)]="desde" (change)="loadFechaLinea()" value="fecha">
-        </div>
+    <div class="col-md-4">
+        <h4>Fecha:</h4>
+        <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadFechaLinea()">
     </div>
-</div>
 <div>
     <jhi-alert></jhi-alert>
     <div class="row">

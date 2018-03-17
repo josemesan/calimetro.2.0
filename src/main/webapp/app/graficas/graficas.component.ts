@@ -13,9 +13,13 @@ import { ChartsThemeTiempoVuelta } from './chat-tiempoVuelta';
 import { ChartsThemeDesviacion } from './chart-desviacion';
 import { HighchartsMore } from 'highcharts-more';
 import * as Highcharts from 'highcharts';
+import {RelacionFechaTipodiaService, TipoDia} from '../entities/relacion-fecha-tipodia';
+import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo-ofertado';
+import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
+
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
-let chartHolder;
+// let chartHolder;
 
 @Component({
     selector: 'jhi-graficas',
@@ -28,10 +32,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
     config: any;
     currentAccount: any;
     eventSubscriber: Subscription;
-    private subscription: Subscription;
+    // subscription: Subscription;
 
     linea: String;
     datos: Datos[];
+    tipo: TipoDia;
+    intervaloOfertados: IntervaloOfertado[];
+    tablaTrenes: TablaTrenes[];
 
     private date: any;
     desde: any;
@@ -44,12 +51,16 @@ export class GraficasComponent implements OnInit, OnDestroy {
     serie: any[];
 
     constructor(
-        private datosService: DatosService,
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private principal: Principal,
         private route: ActivatedRoute,
         public datepipe: DatePipe,
+
+        private datosService: DatosService,
+        private relacionFechaTipodiaService: RelacionFechaTipodiaService,
+        private intervaloOfertadoService: IntervaloOfertadoService,
+        private tablaTrenesService: TablaTrenesService,
     ) {
         this.chartData = ChartsThemeTiempoVuelta;
         this.chartData2 = ChartsThemeIntervalo;
@@ -58,85 +69,93 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chart = new Chart;
         this.chart.options = ChartsThemeIntervalo;
 
-        this.desde = new Date();
-        this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
-        this.date =  new Date();
-        setInterval(() => {
-            this.date =  new Date();
-        }, 10000);
+        // this.date =  new Date();
+        // setInterval(() => {
+        //     this.date =  new Date();
+        // }, 10000);
     }
 
-    // crearSerie() {
-    //     for (let i = 0; i < this.datos.length; i++) {
-    //         this.serie= new ArrayType(
-    //             this.datos[i].fechaHora,
-    //             this.datos[i].intervaloMedio,
-    //             this.datos[i].desviacionMedia
-    //         );
-    //     }
-    // }
-
     ngOnInit() {
-        chartHolder = Highcharts.chart;
+        // chartHolder = Highcharts.chart;
+        this.desde = new Date();
+        this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
 
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
-        this.subscription = this.route.params.subscribe((params) => {
+        this.eventSubscriber = this.route.params.subscribe((params) => {
             this.linea = (params['id']); });
 
-        this.registerChangeInGraficas();
-        this.registerChangeInDatos();
-        // this.registerChangeInSerie();
-        this.loadFechaLinea();
-        this.loadViajerosFechaLinea();
-       // this.crearSerie();
+        this.loadAll();
     }
 
-    updateGraf(){
+    updateGraf() {
         ChartsThemeIntervalo.series[0].data = [this.datos[0].fechaHora,
             this.datos[0].intervaloMedio,
             this.datos[0].desviacionMedia];
         this.chart.options = ChartsThemeIntervalo;
     }
 
-    // ------------
-    // add() {
-    //     this.chart.addPoint(Math.floor(Math.random() * 10));
-    // }
-    //
-    // updateChart() {
-    //     if (this.chartData.chart.type === 'line') {
-    //         this.chartData.chart.type = 'bar';
-    //     } else {
-    //         this.chartData.chart.type = 'line';
-    //     }
-    //     this.chart = new Chart(this.chartData);
-    // }
+    loadAll() {
 
-    registerChangeInDatos() {
-        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
-    }
-    registerChangeInViajeros() {
-        this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.loadFechaLinea());
-    }
-    // registerChangeInSerie() {
-    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.crearSerie());
-    // }
+        this.loadDatosFechaLinea();
+        // this.registerChangeInDatos();
 
-    registerChangeInGraficas() {
-        this.eventSubscriber = this.eventManager.subscribe(
-            'GraficasListModification',
-            (response) => this.subscription.unsubscribe()
+        // this.loadTipoDia();
+        // this.registerChangeInTipo();
+
+        this.loadViajerosFechaLinea();
+        // this.registerChangeInViajeros();
+
+        this.loadTablaLineaTipo();
+        // this.registerChangeInTablaTrenes();
+
+        this.loadIntervaloLineaTipo();
+        // this.registerChangeInIntervaloOfertados();
+
+        // this.registerChangeInGraficas();
+  }
+
+    updateAll() {
+        this.loadDatosFechaLinea();
+        // this.loadTipoDia();
+        this.loadViajerosFechaLinea();
+        this.loadTablaLineaTipo();
+        this.loadIntervaloLineaTipo();
+
+    }
+
+    loadIntervaloLineaTipo() {
+        this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
+            (resT: HttpResponse<TipoDia>) => {
+                this.tipo = resT.body;
+                this.intervaloOfertadoService.queryLineaTipoDia(this.linea, this.tipo).subscribe(
+                    (res: HttpResponse<IntervaloOfertado[]>) => {
+                        this.intervaloOfertados = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
 
-    update() {
-        this.loadFechaLinea();
-        this.loadViajerosFechaLinea();
+    loadTablaLineaTipo() {
+        this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
+            (resT: HttpResponse<TipoDia>) => {
+                this.tipo = resT.body;
+                this.tablaTrenesService.queryLineaTipoDia(this.linea, this.tipo).subscribe(
+                    (res: HttpResponse<TablaTrenes[]>) => {
+                        this.tablaTrenes = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
-    loadFechaLinea() {
+    loadDatosFechaLinea() {
         this.datosService.queryFechaLinea(this.desde.toString() + ' 06:00', this.linea).subscribe(
             (res: HttpResponse<Datos[]>) => {
                 this.datos = res.body;
@@ -154,16 +173,74 @@ export class GraficasComponent implements OnInit, OnDestroy {
         );
     }
 
-    // previousState() {
-    //     window.history.back();
+    loadTipoDia() {
+        this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
+            (res: HttpResponse<TipoDia>) => {
+                this.tipo = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+    }
+
+    // registerChangeInTablaTrenes() {
+    //     this.eventSubscriber = this.eventManager.subscribe('tablaTrenesListModification', (response) => this.loadTablaLineaTipo());
+    // }
+    // registerChangeInIntervaloOfertados() {
+    //     this.eventSubscriber = this.eventManager.subscribe('intervaloOfertadostModification', (response) => this.loadIntervaloLineaTipo());
+    // }
+    // registerChangeInDatos() {
+    //     this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadDatosFechaLinea());
+    // }
+    // registerChangeInTipo() {
+    //     this.eventSubscriber = this.eventManager.subscribe('tipoListModification', (response) => this.loadTipoDia());
+    // }
+    // registerChangeInViajeros() {
+    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.loadViajerosFechaLinea());
+    // }
+    //
+    // registerChangeInGraficas() {
+    //     this.eventSubscriber = this.eventManager.subscribe(
+    //         'GraficasListModification',
+    //         (response) => this.eventSubscriber.unsubscribe()
+    //     );
     // }
 
     ngOnDestroy() {
-            this.subscription.unsubscribe();
+            this.eventSubscriber.unsubscribe();
             this.eventManager.destroy(this.eventSubscriber);
     }
 
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
+
+    // crearSerie() {
+    //     for (let i = 0; i < this.datos.length; i++) {
+    //         this.serie= new ArrayType(
+    //             this.datos[i].fechaHora,
+    //             this.datos[i].intervaloMedio,
+    //             this.datos[i].desviacionMedia
+    //         );
+    //     }
+    // }
+
+    // registerChangeInSerie() {
+    //     this.eventSubscriber = this.eventManager.subscribe('viajerosListModification', (response) => this.crearSerie());
+    // }
+    // ------------
+    // add() {
+    //     this.chart.addPoint(Math.floor(Math.random() * 10));
+    // }
+    //
+    // updateChart() {
+    //     if (this.chartData.chart.type === 'line') {
+    //         this.chartData.chart.type = 'bar';
+    //     } else {
+    //         this.chartData.chart.type = 'line';
+    //     }
+    //     this.chart = new Chart(this.chartData);
+    // }
+    // previousState() {
+    //     window.history.back();
+    // }
 }

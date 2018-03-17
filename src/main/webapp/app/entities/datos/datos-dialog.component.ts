@@ -25,7 +25,7 @@ export class DatosDialogComponent implements OnInit {
     lineas: Linea[];
     intervalomins: IntervaloMin[];
     intervalomaxes: IntervaloMax[];
-    fecha: string;
+    // fecha: string;
     fechafiltro: string;
 
     constructor(
@@ -42,39 +42,44 @@ export class DatosDialogComponent implements OnInit {
     }
 
     loadInter() {
-        this.fechafiltro = this.datepipe.transform(this.fecha, 'yyyy-MM-dd');
-        this.intervaloMinService
-            .queryFecha(this.fechafiltro + ' 06:00')
-            .subscribe((res: HttpResponse<IntervaloMin[]>) => {
-                if (!this.datos.intervaloMin || !this.datos.intervaloMin.id) {
-                    this.intervalomins = res.body;
-                } else {
-                    this.intervaloMinService
-                        .find(this.datos.intervaloMin.id)
-                        .subscribe((subRes: HttpResponse<IntervaloMin>) => {
-                            this.intervalomins = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
-        this.intervaloMaxService
-            .queryFecha(this.fechafiltro + ' 06:00')
-            .subscribe((res: HttpResponse<IntervaloMax[]>) => {
-                if (!this.datos.intervaloMax || !this.datos.intervaloMax.id) {
-                    this.intervalomaxes = res.body;
-                } else {
-                    this.intervaloMaxService
-                        .find(this.datos.intervaloMax.id)
-                        .subscribe((subRes: HttpResponse<IntervaloMax>) => {
-                            this.intervalomaxes = [subRes.body].concat(res.body);
-                        }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
-                }
-            }, (res: HttpErrorResponse) => this.onError(res.message));
+
+        if (this.datos.fechaHora != null) {
+            this.fechafiltro = this.datepipe.transform(this.datos.fechaHora, 'yyyy-MM-dd');
+
+            this.intervaloMinService
+                .queryFecha(this.fechafiltro + ' 06:00')
+                .subscribe((res: HttpResponse<IntervaloMin[]>) => {
+                    if (!this.datos.intervaloMin || !this.datos.intervaloMin.id) {
+                        this.intervalomins = res.body;
+                    } else {
+                        this.intervaloMinService
+                            .find(this.datos.intervaloMin.id)
+                            .subscribe((subRes: HttpResponse<IntervaloMin>) => {
+                                this.intervalomins = [subRes.body].concat(res.body);
+                            }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                    }
+                }, (res: HttpErrorResponse) => this.onError(res.message));
+            this.intervaloMaxService
+                .queryFecha(this.fechafiltro + ' 06:00')
+                .subscribe((res: HttpResponse<IntervaloMax[]>) => {
+                    if (!this.datos.intervaloMax || !this.datos.intervaloMax.id) {
+                        this.intervalomaxes = res.body;
+                    } else {
+                        this.intervaloMaxService
+                            .find(this.datos.intervaloMax.id)
+                            .subscribe((subRes: HttpResponse<IntervaloMax>) => {
+                                this.intervalomaxes = [subRes.body].concat(res.body);
+                            }, (subRes: HttpErrorResponse) => this.onError(subRes.message));
+                    }
+                }, (res: HttpErrorResponse) => this.onError(res.message));
+        }
     }
 
     ngOnInit() {
         this.isSaving = false;
         this.lineaService.query()
             .subscribe((res: HttpResponse<Linea[]>) => { this.lineas = res.body; }, (res: HttpErrorResponse) => this.onError(res.message));
+        this.loadInter();
     }
 
     clear() {
@@ -82,7 +87,6 @@ export class DatosDialogComponent implements OnInit {
     }
 
     save() {
-        this.datos.fechaHora = this.fecha;
         this.isSaving = true;
         if (this.datos.id !== undefined) {
             this.subscribeToSaveResponse(

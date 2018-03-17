@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { TablaTrenes } from './tabla-trenes.model';
 import { createRequestOption } from '../../shared';
+import {TipoDia} from '../relacion-fecha-tipodia';
 
 export type EntityResponseType = HttpResponse<TablaTrenes>;
 
@@ -40,8 +41,8 @@ export class TablaTrenesService {
             .map((res: HttpResponse<TablaTrenes[]>) => this.convertArrayResponse(res));
     }
 
-    queryLinea(linea: any): Observable<HttpResponse<TablaTrenes[]>> {
-        return this.http.get<TablaTrenes[]>(`${this.resourceUrl}/linea/${linea}`, {observe: 'response'})
+    queryLineaTipoDia(linea: any, tipo: TipoDia): Observable<HttpResponse<TablaTrenes[]>> {
+        return this.http.get<TablaTrenes[]>(`${this.resourceUrl}/lineaTipo/${linea}/${tipo}`, {observe: 'response'})
             .map((res: HttpResponse<TablaTrenes[]>) => this.convertArrayResponse(res));
     }
 

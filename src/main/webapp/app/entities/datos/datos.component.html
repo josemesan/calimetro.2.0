@@ -1,7 +1,6 @@
-
 <div>
     <h2>
-        <span jhiTranslate="calimetroApp.datos.home.title">Datos {{linea}}</span>
+        <span jhiTranslate="calimetroApp.datos.home.title">Datos</span>
         <button class="btn btn-primary float-right jh-create-entity create-datos" [routerLink]="['/', { outlets: { popup: ['datos-new'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="calimetroApp.datos.home.createLabel">
@@ -9,12 +8,20 @@
             </span>
         </button>
     </h2>
-    <div class="form-group">
-        <div class="form-group">
-            <div><span class="font-weight-bold">Fecha</span>
-                <input type="date" [(ngModel)]="desde" (change)="loadFecha()" value="fecha">{{fecha}}
-            </div>
+    <hr>
+    <div class="row"><br>
+        <div class="col-md-4">
+            <h4>Fecha:</h4>
+            <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadFechaLinea()">
         </div>
+        <div class="col-md-4">
+            <h4> Seleccionar línea: </h4>
+            <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadFechaLinea()">>
+                <option [ngValue]="null"></option>
+                <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
+            </select>
+        </div>
+
     </div>
     <jhi-alert></jhi-alert>
     <div class="row">

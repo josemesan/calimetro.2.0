@@ -7,6 +7,7 @@ import { IntervaloOfertado } from './intervalo-ofertado.model';
 import { IntervaloOfertadoService } from './intervalo-ofertado.service';
 import { Principal } from '../../shared';
 import {Linea, LineaService} from '../linea';
+import {TipoDia} from '../relacion-fecha-tipodia';
 
 @Component({
     selector: 'jhi-intervalo-ofertado',
@@ -18,6 +19,8 @@ export class IntervaloOfertadoComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     lineas: Linea[];
     linea: String;
+    tipo: TipoDia;
+    mostrar = false;
 
     constructor(
         private intervaloOfertadoService: IntervaloOfertadoService,
@@ -29,6 +32,10 @@ export class IntervaloOfertadoComponent implements OnInit, OnDestroy {
     ) {
     }
 
+    motrarSelect() {
+        this.mostrar = true;
+    }
+
     loadAllLineas() {
         this.lineaService.query().subscribe(
             (res: HttpResponse<Linea[]>) => {
@@ -37,18 +44,21 @@ export class IntervaloOfertadoComponent implements OnInit, OnDestroy {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     loadIntervalosLinea() {
-        this.intervaloOfertadoService.queryLinea(this.linea).subscribe(
-            (res: HttpResponse<IntervaloOfertado[]>) => {
-                this.intervaloOfertados = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+         if (this.linea && this.tipo) {
+            this.intervaloOfertadoService.queryLineaTipoDia(this.linea, this.tipo).subscribe(
+                (res: HttpResponse<IntervaloOfertado[]>) => {
+                    this.intervaloOfertados = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
     }
 
     ngOnInit() {
         this.loadAllLineas();
-        this.loadIntervalosLinea();
+        // this.loadIntervalosLinea();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

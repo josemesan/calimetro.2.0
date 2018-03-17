@@ -15,13 +15,6 @@ export class DatosExcel implements BaseEntity {
         public consumo?: number,
         public velocidad?: number,
         public cocheKm?: number,
-
-        // public intervaloMin?: string,
-        // public estacionMin?: number,
-        // public viaMin?: string,
-        // public intervaloMax?: string,
-        // public estacionMax?: number,
-        // public viaMax?: string,
     ) {
     }
 }

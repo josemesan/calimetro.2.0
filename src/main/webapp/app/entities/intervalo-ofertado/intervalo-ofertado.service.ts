@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { IntervaloOfertado } from './intervalo-ofertado.model';
 import { createRequestOption } from '../../shared';
+import {TipoDia} from '../relacion-fecha-tipodia';
 
 export type EntityResponseType = HttpResponse<IntervaloOfertado>;
 
@@ -40,8 +41,8 @@ export class IntervaloOfertadoService {
             .map((res: HttpResponse<IntervaloOfertado[]>) => this.convertArrayResponse(res));
     }
 
-    queryLinea(linea: any): Observable<HttpResponse<IntervaloOfertado[]>> {
-        return this.http.get<IntervaloOfertado[]>(`${this.resourceUrl}/linea/${linea}`, {observe: 'response'})
+    queryLineaTipoDia(linea: any, tipo: TipoDia): Observable<HttpResponse<IntervaloOfertado[]>> {
+        return this.http.get<IntervaloOfertado[]>(`${this.resourceUrl}/lineaTipo/${linea}/${tipo}`, {observe: 'response'})
             .map((res: HttpResponse<IntervaloOfertado[]>) => this.convertArrayResponse(res));
     }
 

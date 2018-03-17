@@ -7,6 +7,7 @@ import { Datos } from './datos.model';
 import { DatosService } from './datos.service';
 import { Principal } from '../../shared';
 import { DatePipe } from '@angular/common';
+import {Linea, LineaService} from '../linea';
 
 @Component({
     selector: 'jhi-datos',
@@ -17,6 +18,8 @@ export class DatosComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     desde: any;
+    linea: string;
+    lineas: Linea[];
 
     constructor(
         private datosService: DatosService,
@@ -24,34 +27,38 @@ export class DatosComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal,
         public datepipe: DatePipe,
+        private lineaService: LineaService,
     ) {
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
     }
 
-    loadAll() {
-        this.datosService.query().subscribe(
-            (res: HttpResponse<Datos[]>) => {
-                this.datos = res.body;
+    loadAllLineas() {
+        this.lineaService.query().subscribe(
+            (res: HttpResponse<Linea[]>) => {
+                this.lineas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
+
     ngOnInit() {
-        this.loadFecha();
+        this.loadAllLineas();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
         this.registerChangeInDatos();
     }
 
-    loadFecha() {
-        this.datosService.queryFecha(this.desde + ' 06:00').subscribe(
-            (res: HttpResponse<Datos[]>) => {
-                this.datos = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+    loadFechaLinea() {
+        if (this.desde && this.linea) {
+            this.datosService.queryFechaLinea(this.desde + ' 06:00', this.linea).subscribe(
+                (res: HttpResponse<Datos[]>) => {
+                    this.datos = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
     }
 
     ngOnDestroy() {
@@ -62,7 +69,7 @@ export class DatosComponent implements OnInit, OnDestroy {
         return item.id;
     }
     registerChangeInDatos() {
-        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFecha());
+        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
     }
 
     private onError(error) {

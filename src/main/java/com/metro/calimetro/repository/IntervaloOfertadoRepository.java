@@ -1,6 +1,7 @@
 package com.metro.calimetro.repository;
 
 import com.metro.calimetro.domain.IntervaloOfertado;
+import com.metro.calimetro.domain.enumeration.TipoDia;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -14,5 +15,5 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface IntervaloOfertadoRepository extends JpaRepository<IntervaloOfertado, Long> {
-    public List<IntervaloOfertado> findByLineaNombre(String linea);
+    public List<IntervaloOfertado> findByLineaNombreAndTipoDia(String linea, TipoDia tipoDia);
 }

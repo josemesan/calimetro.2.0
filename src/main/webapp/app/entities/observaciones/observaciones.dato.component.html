@@ -24,7 +24,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let observaciones of observaciones ;trackBy: trackId">
-                <td><a [routerLink]="['/observaciones', observaciones.id ]">{{observaciones.id}}</a></td>
+                <td>{{observaciones.id}}</td>
                 <td>{{observaciones.texto}}</td>
                 <td>
                     <div *ngIf="observaciones.datos">

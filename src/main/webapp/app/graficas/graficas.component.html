@@ -2,14 +2,21 @@
     Gráficos de {{linea}}
 </h2>
 <h2>
-serie {{serie}}
+linea: {{linea}}<br>
+tipo: {{tipo}}<br>
+viajeros:{{viajeros}}<br>
+datos: {{datos}}<br>
+intervalos ofer:{{intervaloOfertados}}<br>
+tabla trenes: {{tablaTrenes}}<br>
 </h2>
-<div class="text-xl-right">
-    <span>{{date | date: 'HH:mm'}}</span>
-</div>
+
+<!--<div class="text-xl-right">-->
+    <!--<span>{{date | date: 'HH:mm'}}</span>-->
+<!--</div>-->
+
 <div class="form-group">
     <div><span class="font-weight-bold">Fecha</span>
-        <input type="date" [(ngModel)]="desde" (change)="update()" value="fecha">{{fecha}}
+        <input type="date" [(ngModel)]="desde" (change)="updateAll()">{{desde}}
     </div>
 </div>
 

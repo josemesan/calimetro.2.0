@@ -3,6 +3,7 @@ package com.metro.calimetro.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.metro.calimetro.domain.TablaTrenes;
 
+import com.metro.calimetro.domain.enumeration.TipoDia;
 import com.metro.calimetro.repository.TablaTrenesRepository;
 import com.metro.calimetro.web.rest.errors.BadRequestAlertException;
 import com.metro.calimetro.web.rest.util.HeaderUtil;
@@ -105,11 +106,11 @@ public class TablaTrenesResource {
 
 
     ///----------------------------------------------
-    @GetMapping("/tabla-trenes/linea/{nombre}")
+    @GetMapping("/tabla-trenes/lineaTipo/{nombre}/{tipo}")
     @Timed
-    public List<TablaTrenes> getBetweenFechaDatos(@PathVariable String nombre) {
-        log.debug("REST request to get Estacion by Linea : {}", nombre);
-        return tablaTrenesRepository.findByLineaNombre(nombre);
+    public List<TablaTrenes> getBetweenFechaDatos(@PathVariable String nombre, @PathVariable TipoDia tipo) {
+        log.debug("REST request to get Estacion by Linea and tipo: : {}", nombre, tipo);
+        return tablaTrenesRepository.findByLineaNombreAndTipoDia(nombre, tipo);
     }
 
     /**

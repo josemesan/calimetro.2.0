@@ -5,7 +5,7 @@ import { SERVER_API_URL } from '../../app.constants';
 
 import { JhiDateUtils } from 'ng-jhipster';
 
-import { RelacionFechaTipodia } from './relacion-fecha-tipodia.model';
+import {RelacionFechaTipodia, TipoDia} from './relacion-fecha-tipodia.model';
 import { createRequestOption } from '../../shared';
 
 export type EntityResponseType = HttpResponse<RelacionFechaTipodia>;
@@ -32,6 +32,10 @@ export class RelacionFechaTipodiaService {
     find(id: number): Observable<EntityResponseType> {
         return this.http.get<RelacionFechaTipodia>(`${this.resourceUrl}/${id}`, { observe: 'response'})
             .map((res: EntityResponseType) => this.convertResponse(res));
+    }
+
+    queryFechaTipoDia(desde: any): Observable<HttpResponse<TipoDia>> {
+        return this.http.get<TipoDia>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'});
     }
 
     query(req?: any): Observable<HttpResponse<RelacionFechaTipodia[]>> {

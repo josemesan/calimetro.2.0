@@ -3,6 +3,7 @@ package com.metro.calimetro.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.metro.calimetro.domain.IntervaloOfertado;
 
+import com.metro.calimetro.domain.enumeration.TipoDia;
 import com.metro.calimetro.repository.IntervaloOfertadoRepository;
 import com.metro.calimetro.web.rest.errors.BadRequestAlertException;
 import com.metro.calimetro.web.rest.util.HeaderUtil;
@@ -105,11 +106,11 @@ public class IntervaloOfertadoResource {
 
     ////-------------------------------------
 
-    @GetMapping("/intervalo-ofertados/linea/{nombre}")
+    @GetMapping("/intervalo-ofertados/lineaTipo/{nombre}/{tipo}")
     @Timed
-    public List<IntervaloOfertado> getBetweenFechaDatos(@PathVariable String nombre) {
-        log.debug("REST request to get Estacion by Linea : {}", nombre);
-        return intervaloOfertadoRepository.findByLineaNombre(nombre);
+    public List<IntervaloOfertado> getIntervaloByLineaTipo(@PathVariable String nombre, @PathVariable TipoDia tipo) {
+        log.debug("REST request to get Estacion by Linea and tipo: {}", nombre, tipo);
+        return intervaloOfertadoRepository.findByLineaNombreAndTipoDia(nombre, tipo);
     }
 
     /**

@@ -45,7 +45,7 @@
             <label class="form-control-label" jhiTranslate="calimetroApp.estacion.linea" for="field_linea">Linea</label>
             <select class="form-control" id="field_linea" name="linea" [(ngModel)]="estacion.linea" >
                 <option [ngValue]="null"></option>
-                <option [ngValue]="lineaOption.id === estacion.linea?.id ? estacion.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.id}}</option>
+                <option [ngValue]="lineaOption.id === estacion.linea?.id ? estacion.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>
         </div>
     </div>

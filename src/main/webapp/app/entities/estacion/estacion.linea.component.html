@@ -36,7 +36,7 @@
                 <td>{{estacion.visible}}</td>
                 <td>
                     <div *ngIf="estacion.linea">
-                        <a [routerLink]="['/linea', estacion.linea?.id ]" >{{estacion.linea?.id}}</a>
+                        <a [routerLink]="['/linea', estacion.linea?.id ]" >{{estacion.linea?.nombre}}</a>
                     </div>
                 </td>
                 <td class="text-right">

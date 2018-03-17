@@ -23,7 +23,7 @@
         <dt><span jhiTranslate="calimetroApp.intervaloOfertado.linea">Linea</span></dt>
         <dd>
             <div *ngIf="intervaloOfertado.linea">
-                <a [routerLink]="['/linea', intervaloOfertado.linea?.id]">{{intervaloOfertado.linea?.id}}</a>
+                <a [routerLink]="['/linea', intervaloOfertado.linea?.id]">{{intervaloOfertado.linea?.nombre}}</a>
             </div>
         </dd>
     </dl>

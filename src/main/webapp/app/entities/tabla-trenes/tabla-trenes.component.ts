@@ -7,17 +7,20 @@ import { TablaTrenes } from './tabla-trenes.model';
 import { TablaTrenesService } from './tabla-trenes.service';
 import { Principal } from '../../shared';
 import {Linea, LineaService} from '../linea';
+import {TipoDia} from '../relacion-fecha-tipodia';
 
 @Component({
     selector: 'jhi-tabla-trenes',
     templateUrl: './tabla-trenes.component.html'
 })
 export class TablaTrenesComponent implements OnInit, OnDestroy {
-tablaTrenes: TablaTrenes[];
+    tablaTrenes: TablaTrenes[];
     currentAccount: any;
     eventSubscriber: Subscription;
     lineas: Linea[];
     linea: String;
+    tipo: TipoDia;
+    mostrar = false;
 
     constructor(
         private tablaTrenesService: TablaTrenesService,
@@ -26,6 +29,10 @@ tablaTrenes: TablaTrenes[];
         private principal: Principal,
         private lineaService: LineaService,
     ) {
+    }
+
+    motrarSelect() {
+        this.mostrar = true;
     }
 
     loadAllLineas() {
@@ -37,17 +44,19 @@ tablaTrenes: TablaTrenes[];
         );
     }
     loadTablaTenesLinea() {
-        this.tablaTrenesService.queryLinea(this.linea).subscribe(
-            (res: HttpResponse<TablaTrenes[]>) => {
-                this.tablaTrenes = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
+        if (this.linea && this.tipo) {
+            this.tablaTrenesService.queryLineaTipoDia(this.linea, this.tipo).subscribe(
+                (res: HttpResponse<TablaTrenes[]>) => {
+                    this.tablaTrenes = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        }
     }
 
     ngOnInit() {
-        this.loadTablaTenesLinea();
         this.loadAllLineas();
+        // this.loadTablaTenesLinea();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });

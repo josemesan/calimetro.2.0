@@ -32,7 +32,7 @@ export class IntervaloOfertadoPopupService {
                     .subscribe((intervaloOfertadoResponse: HttpResponse<IntervaloOfertado>) => {
                         const intervaloOfertado: IntervaloOfertado = intervaloOfertadoResponse.body;
                         intervaloOfertado.hora = this.datePipe
-                            .transform(intervaloOfertado.hora, 'yyyy-MM-ddTHH:mm:ss');
+                            .transform(intervaloOfertado.hora, 'HH:mm');
                         this.ngbModalRef = this.intervaloOfertadoModalRef(component, intervaloOfertado);
                         resolve(this.ngbModalRef);
                     });

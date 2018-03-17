@@ -21,7 +21,7 @@ export class IntervaloOfertadoDialogComponent implements OnInit {
     isSaving: boolean;
 
     lineas: Linea[];
-    hora: string;
+    // hora: string;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -43,7 +43,7 @@ export class IntervaloOfertadoDialogComponent implements OnInit {
     }
 
     save() {
-        this.intervaloOfertado.hora = '2018-01-01 ' + this.hora;
+        this.intervaloOfertado.hora = '2018-01-01 ' + this.intervaloOfertado.hora;
         this.isSaving = true;
         if (this.intervaloOfertado.id !== undefined) {
             this.subscribeToSaveResponse(

@@ -3,6 +3,7 @@ package com.metro.calimetro.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.metro.calimetro.domain.RelacionFechaTipodia;
 
+import com.metro.calimetro.domain.enumeration.TipoDia;
 import com.metro.calimetro.repository.RelacionFechaTipodiaRepository;
 import com.metro.calimetro.web.rest.errors.BadRequestAlertException;
 import com.metro.calimetro.web.rest.util.HeaderUtil;
@@ -106,11 +107,30 @@ public class RelacionFechaTipodiaResource {
     }
 
     ////*********------------------
-    @GetMapping("/relacion-fecha-tipodias/fehca/{id}")
+    @GetMapping("/relacion-fecha-tipodias/fecha/{id}")
     @Timed
-    public List<RelacionFechaTipodia> getFechaRelacionFechaTipodias() {
-        log.debug("REST request to get all RelacionFechaTipodias");
-        return relacionFechaTipodiaRepository.findAll();
+    public TipoDia getFechaRelacionFechaTipodias(@PathVariable LocalDate id) {
+        log.debug("REST request to get By Fecha RelacionFechaTipodias");
+        TipoDia tipoDia = TipoDia.LAB;
+        String dia;
+        List<RelacionFechaTipodia> relacionLista = relacionFechaTipodiaRepository.findByFecha(id);
+
+        if (relacionLista.size() == 0) {
+            dia = id.getDayOfWeek().toString();
+            switch (dia) {
+                case "FRIDAY":
+                        return TipoDia.VIER;
+                case "SATURDAY":
+                        return TipoDia.SAB;
+                case "SUNDAY":
+                        return TipoDia.FEST;
+                default:
+                        return TipoDia.LAB;
+            }
+        }
+        else {
+            return relacionLista.get(0).getTipoDia();
+        }
     }
 
     /**
