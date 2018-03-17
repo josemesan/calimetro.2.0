@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +103,14 @@ public class RelacionFechaTipodiaResource {
         log.debug("REST request to get RelacionFechaTipodia : {}", id);
         RelacionFechaTipodia relacionFechaTipodia = relacionFechaTipodiaRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(relacionFechaTipodia));
+    }
+
+    ////*********------------------
+    @GetMapping("/relacion-fecha-tipodias/fehca/{id}")
+    @Timed
+    public List<RelacionFechaTipodia> getFechaRelacionFechaTipodias() {
+        log.debug("REST request to get all RelacionFechaTipodias");
+        return relacionFechaTipodiaRepository.findAll();
     }
 
     /**
