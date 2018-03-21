@@ -3,31 +3,27 @@
 </h2><hr>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <h6>
-            <!--linea: {{linea}}<br>-->
-            <!--tipo: {{tipo}}<br>-->
-            <!--viajeros:{{viajeros}}<br>-->
-            <!--datos: {{datos}}<br>-->
-            <!--intervalos ofer:{{intervaloOfertados[0].hora}}<br>-->
-            <!--tabla trenes: {{tablaTrenes}}<br>-->
-            <!--inte: {{dataInt }}<br>-->
-            <!--des: {{dataDes }}<br>-->
-            <!--Vuelta: {{dataVue }}<br>-->
-            <!--Numen:{{dataNuT }}<br>-->
-            <!--Voaje: {{dataVia }}<br>-->
-            <!--Toc: {{dataTOC }}<br>-->
-            <!--Densidad: {{dataDen }}<br>-->
-            <!--Consu: {{dataCon }}<br>-->
-            <!--Velo: {{dataVel }}<br>-->
-            <!--Coches: {{dataCoK }}<br>-->
-            <!--Taba: {{dataTaT }}<br>-->
-            <!--InterOf: {{dataInO }}<br>-->
+            tipo de dia: {{dataTipodia[0]}}
+            desdes {{desde}}<br>
+            desde 2 {{desde2}}<br>
+
+            <tr *ngFor="let dato of dataInt">
+                InterMed: {{dato}}</tr>
+
+            <tr *ngFor="let dato of dataInO2">
+                InterOfer: {{dato}}</tr>
+            <!--<tr *ngFor="let dato of dataTipodia[1]">-->
+                <!--InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>-->
+            <!--<tr *ngFor="let dato of dataTipodia[2]">-->
+                <!--InterTaT: {{dato.hora}}</tr>-->
+
         </h6>
     </div>
 </div>
 <hr>
-<button (click)="loadChartIntervalo()"> Actualizar</button>
+<button (click)="updateGraf()"> Actualizar</button>
 
 <div class="col-md-4">
     <h4>Fecha:</h4>
