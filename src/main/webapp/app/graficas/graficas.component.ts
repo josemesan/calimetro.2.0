@@ -8,15 +8,19 @@ import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';
 import { Chart } from 'angular-highcharts';
-import { ChartsThemeIntervalo } from './charts/chart-intervalo';
-import { ChartsThemeTiempoVuelta } from './charts/chat-tiempoVuelta';
-import { ChartsThemeDesviacion } from './charts/chart-desviacion';
+
 import { HighchartsMore } from 'highcharts-more';
 import * as Highcharts from 'highcharts';
 import {RelacionFechaTipodiaService, TipoDia} from '../entities/relacion-fecha-tipodia';
 import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo-ofertado';
 import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
-import {ArrayType} from '@angular/compiler/src/output/output_ast';
+
+import {ChartDesviacion,
+        ChartIntervalo,
+        ChartNumeroTrenes,
+        ChartTiempoVueltaVelocidad,
+        ChartTOC,
+        ChartViajerosDensidad} from './charts/chart-Theme';
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
@@ -42,6 +46,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
     desde2: any;
 
     chartIntervalo: any;
+    chartDesviacion: any;
+    chartNumeroTrenes: any;
+    chartTiempoVueltaVelocidad: any;
+    chartTOC: any;
+    chartViajerosDensidad: any;
+
     viajeros: number[] = [0, 0, 0, 0];
     dataInt: any[] = [];
     dataDes: any[] = [];
@@ -78,13 +88,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
     loadChartIntervalo() {
         this.chartIntervalo = new Chart;
-        this.chartIntervalo.options = ChartsThemeIntervalo;
+        this.chartIntervalo.options = ChartIntervalo;
         this.chartIntervalo.removeSerie(1);
         this.chartIntervalo.removeSerie(0);
 
         this.chartIntervalo.addSerie({
             step: 'left',
-            name: 'Range',
+            name: 'Intervalo Ofertado',
             data: this.dataInO2,
             type: 'arearange',
             lineWidth: 0,
@@ -97,6 +107,47 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
         this.chartIntervalo.addSerie({
             name: 'Intervalo medio',
+            data: this.dataInt,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+    }
+    loadChartDesviacion() {
+        this.chartDesviacion = new Chart;
+        this.chartDesviacion.options = ChartDesviacion;
+        this.chartDesviacion.removeSerie(0);
+        // this.chartIntervalo.removeSerie(0);
+
+        this.chartDesviacion.addSerie({
+            name: 'Desidad',
+            data: this.dataDes,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+    }
+    loadChartNumeroTrenes() {
+        this.chartNumeroTrenes = new Chart;
+        this.chartNumeroTrenes.options = ChartNumeroTrenes;
+        this.chartNumeroTrenes.removeSerie(1);
+        this.chartNumeroTrenes.removeSerie(0);
+
+        this.chartNumeroTrenes.addSerie({
+            name: 'Numero trenes',
+            data: this.dataNuT,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+        this.chartNumeroTrenes.addSerie({
+            name: 'Tabla trenes',
             data: this.dataTaT2,
             zIndex: 1,
             marker: {
@@ -105,6 +156,85 @@ export class GraficasComponent implements OnInit, OnDestroy {
             }
         });
     }
+    loadChartTiempoVueltaVelocidad() {
+
+        this.chartTiempoVueltaVelocidad = new Chart;
+        this.chartTiempoVueltaVelocidad.options = ChartTiempoVueltaVelocidad;
+        this.chartTiempoVueltaVelocidad.removeSerie(1);
+        this.chartTiempoVueltaVelocidad.removeSerie(0);
+
+        this.chartTiempoVueltaVelocidad.addSerie({
+            name: 'Tiempo de Vuelta',
+            data: this.dataVue,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+        this.chartTiempoVueltaVelocidad.addSerie({
+            name: 'Velocidad',
+            data: this.dataVel,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+    }
+    loadChartTOC() {
+        this.chartTOC = new Chart;
+        this.chartTOC.options = ChartTOC;
+        //this.chartIntervalo.removeSerie(1);
+        this.chartTOC.removeSerie(0);
+
+        this.chartTOC.addSerie({
+            name: 'TOC',
+            data: this.dataTOC,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+    }
+    loadChartViajerosDensidad() {
+
+        this.chartViajerosDensidad = new Chart;
+        this.chartViajerosDensidad.options =ChartViajerosDensidad;
+        this.chartViajerosDensidad.removeSerie(1);
+        this.chartViajerosDensidad.removeSerie(0);
+
+        this.chartViajerosDensidad.addSerie({
+            name: 'Numero de viajeros',
+            data: this.dataVia,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+        this.chartViajerosDensidad.addSerie({
+            name: 'Densidad',
+            data: this.dataDen,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+    }
+
+    loadCharts(){
+        this.loadChartIntervalo();
+        this.loadChartNumeroTrenes();
+        this.loadChartTiempoVueltaVelocidad()
+        this.loadChartTOC();
+        this.loadChartDesviacion();
+        this.loadChartViajerosDensidad();
+    }
+
+    // -------------------------
 
     loadSeriesDatos() {
 
@@ -121,8 +251,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
         if (this.datos.length > 0) {
             for (let i = 0; i < this.datos.length; i++) {
-                // this.date = this.datos[i].fechaHora;
-                // this.datos[i].fechaHora = Date.UTC(this.date.getUTCFullYear(), this.date.getUTCMonth(), this.date.getUTCDate(),  this.date.getUTCHours(), this.date.getUTCMinutes(), this.date.getUTCSeconds());
                 this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio]);
                 this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia]);
                 this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta]);
@@ -149,14 +277,14 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.loadAll();
     }
 
-    updateGraf() {
-        this.chartIntervalo.options = ChartsThemeIntervalo;
-    }
+    // updateGraf() {
+    //     this.chartIntervalo.options = ChartsThemeIntervalo;
+    // }
 
     loadAll() {
         this.loadDatosFechaLinea();
         this.loadTipodia();
-
+        this.loadCharts();
     }
 
     updateTipodia(newTipodia) {
@@ -177,7 +305,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                         this.date.getUTCSeconds());
                     this.dataTaT2.push([this.desde2,this.dataTaT[i].numeroTrenes]);
                 }
-                this.loadChartIntervalo();
+                this.loadCharts();
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -197,7 +325,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                         this.date.getUTCSeconds());
                     this.dataInO2.push([this.desde2,this.dataInO[i].intervaloMin,this.dataInO[i].intervaloMax]);
                 }
-                this.loadChartIntervalo();
+                this.loadCharts();
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -211,7 +339,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                     this.dataTipodia[0] = resT.body;
                     this.updatedataInO(this.tipo);
                     this.updatedataTaT(this.tipo);
-                    this.loadChartIntervalo();
+                    this.loadCharts();
                 //}
             },
             (res: HttpErrorResponse) => {this.onError(res.message);

@@ -2,26 +2,26 @@
     Gráficos de {{linea}}
 </h2><hr>
 
-<div class="row">
-    <div class="col-md-9">
-        <h6>
-            tipo de dia: {{dataTipodia[0]}}
-            desdes {{desde}}<br>
-            desde 2 {{desde2}}<br>
+<!--<div class="row">-->
+    <!--<div class="col-md-9">-->
+        <!--&lt;!&ndash;<h6>&ndash;&gt;-->
+            <!--&lt;!&ndash;tipo de dia: {{dataTipodia[0]}}&ndash;&gt;-->
+            <!--&lt;!&ndash;desdes {{desde}}<br>&ndash;&gt;-->
+            <!--&lt;!&ndash;desde 2 {{desde2}}<br>&ndash;&gt;-->
 
-            <tr *ngFor="let dato of dataInt">
-                InterMed: {{dato}}</tr>
+            <!--&lt;!&ndash;<tr *ngFor="let dato of dataInt">&ndash;&gt;-->
+                <!--&lt;!&ndash;InterMed: {{dato}}</tr>&ndash;&gt;-->
 
-            <tr *ngFor="let dato of dataInO2">
-                InterOfer: {{dato}}</tr>
-            <!--<tr *ngFor="let dato of dataTipodia[1]">-->
-                <!--InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>-->
-            <!--<tr *ngFor="let dato of dataTipodia[2]">-->
-                <!--InterTaT: {{dato.hora}}</tr>-->
+            <!--&lt;!&ndash;<tr *ngFor="let dato of dataInO2">&ndash;&gt;-->
+                <!--&lt;!&ndash;InterOfer: {{dato}}</tr>&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[1]">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>&ndash;&gt;&ndash;&gt;-->
+            <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[2]">&ndash;&gt;&ndash;&gt;-->
+                <!--&lt;!&ndash;&lt;!&ndash;InterTaT: {{dato.hora}}</tr>&ndash;&gt;&ndash;&gt;-->
 
-        </h6>
-    </div>
-</div>
+        <!--&lt;!&ndash;</h6>&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
 <hr>
 <button (click)="updateGraf()"> Actualizar</button>
 
@@ -51,28 +51,25 @@
         </tbody>
     </table>
 </div>
+<!--<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>-->
 
-<div [chart]="chartIntervalo"></div>
-
-<!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-        <!--<div [chart]="chart"></div>-->
-        <!--&lt;!&ndash;<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>&ndash;&gt;-->
-        <!--<hr>-->
-        <!--<div [chart]="chart"></div>-->
-        <!--<hr>-->
-        <!--<div [chart]="chart"></div>-->
-        <!--<hr>-->
-    <!--</div>-->
-    <!--<div class="col-md-4">-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--&lt;!&ndash;<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>&ndash;&gt;-->
-        <!--<hr>-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--<hr>-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--<hr>-->
-    <!--</div>-->
+<div class="row">
+    <div class="col-md-6">
+        <div [chart]="chartIntervalo"></div>
+        <hr>
+        <div [chart]="chartDesviacion"></div>
+        <hr>
+        <div [chart]="chartTiempoVueltaVelocidad"></div>
+        <hr>
+    </div>
+    <div class="col-md-6">
+        <div [chart]="chartNumeroTrenes"></div>
+        <hr>
+        <div [chart]="chartViajerosDensidad"></div>
+        <hr>
+        <div [chart]="chartTOC"></div>
+        <hr>
+    </div>
     <!--<div class="col-md-4">-->
         <!--<div [chart]="chart3"></div>-->
         <!--&lt;!&ndash;<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>&ndash;&gt;-->
@@ -82,5 +79,5 @@
         <!--<div [chart]="chart3"></div>-->
         <!--<hr>-->
     <!--</div>-->
-<!--</div>-->
+</div>
 <jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>
