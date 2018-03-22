@@ -32,7 +32,7 @@ export class TablaTrenesPopupService {
                     .subscribe((tablaTrenesResponse: HttpResponse<TablaTrenes>) => {
                         const tablaTrenes: TablaTrenes = tablaTrenesResponse.body;
                         tablaTrenes.hora = this.datePipe
-                            .transform(tablaTrenes.hora, 'yyyy-MM-ddTHH:mm:ss');
+                            .transform(tablaTrenes.hora, 'HH:mm');
                         this.ngbModalRef = this.tablaTrenesModalRef(component, tablaTrenes);
                         resolve(this.ngbModalRef);
                     });

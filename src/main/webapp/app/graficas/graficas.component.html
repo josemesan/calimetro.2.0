@@ -13,7 +13,7 @@
                 <!--&lt;!&ndash;InterMed: {{dato}}</tr>&ndash;&gt;-->
 
             <!--&lt;!&ndash;<tr *ngFor="let dato of dataInO2">&ndash;&gt;-->
-                <!--&lt;!&ndash;InterOfer: {{dato}}</tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;InterOfer: {{dato[0] | date:'medium'}}</tr>&ndash;&gt;-->
             <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[1]">&ndash;&gt;&ndash;&gt;-->
                 <!--&lt;!&ndash;&lt;!&ndash;InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>&ndash;&gt;&ndash;&gt;-->
             <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[2]">&ndash;&gt;&ndash;&gt;-->
@@ -22,12 +22,11 @@
         <!--&lt;!&ndash;</h6>&ndash;&gt;-->
     <!--</div>-->
 <!--</div>-->
-<hr>
-<button (click)="updateGraf()"> Actualizar</button>
+<!--<hr>-->
 
 <div class="col-md-4">
     <h4>Fecha:</h4>
-    <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
+    <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()"> Tipo día: {{tipo}}
 </div>
 <br>
 

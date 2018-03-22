@@ -69,8 +69,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     dataTaT: any[] = [];
     dataTaT2: any[] = [];
 
-
-    dataTipodia: any[] = [this.tipo, this.dataInO, this.dataTaT];
+    // dataTipodia: any[] = [this.tipo, this.dataInO, this.dataTaT];
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -138,17 +137,21 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartNumeroTrenes.removeSerie(0);
 
         this.chartNumeroTrenes.addSerie({
-            name: 'Numero trenes',
-            data: this.dataNuT,
-            zIndex: 1,
+            step: 'left',
+            name: 'Tabla trenes',
+            data: this.dataTaT2,
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            fillOpacity: 0.3,
+            zIndex: 0,
             marker: {
-                fillColor: 'grey',
-                lineWidth: 2,
+                enabled: false
             }
         });
         this.chartNumeroTrenes.addSerie({
             name: 'Tabla trenes',
-            data: this.dataTaT2,
+            data: this.dataNuT,
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
@@ -185,7 +188,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
     loadChartTOC() {
         this.chartTOC = new Chart;
         this.chartTOC.options = ChartTOC;
-        //this.chartIntervalo.removeSerie(1);
         this.chartTOC.removeSerie(0);
 
         this.chartTOC.addSerie({
@@ -201,7 +203,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     loadChartViajerosDensidad() {
 
         this.chartViajerosDensidad = new Chart;
-        this.chartViajerosDensidad.options =ChartViajerosDensidad;
+        this.chartViajerosDensidad.options = ChartViajerosDensidad;
         this.chartViajerosDensidad.removeSerie(1);
         this.chartViajerosDensidad.removeSerie(0);
 
@@ -225,10 +227,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadCharts(){
+    loadCharts() {
         this.loadChartIntervalo();
         this.loadChartNumeroTrenes();
-        this.loadChartTiempoVueltaVelocidad()
+        this.loadChartTiempoVueltaVelocidad();
         this.loadChartTOC();
         this.loadChartDesviacion();
         this.loadChartViajerosDensidad();
@@ -263,6 +265,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
             }
         }
+        this.loadCharts();
     }
 
     ngOnInit() {
@@ -287,9 +290,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.loadCharts();
     }
 
-    updateTipodia(newTipodia) {
-        this.dataTipodia[0] = newTipodia;
-    }
+    // updateTipodia(newTipodia) {
+    //     this.dataTipodia[0] = newTipodia;
+    // }
 
     updatedataTaT(tipodia) {
         this.tablaTrenesService.queryLineaTipoDia(this.linea, tipodia).subscribe(
@@ -298,12 +301,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 this.dataTaT2 = [];
                 for (let i = 0; i < this.dataTaT.length; i++) {
                     this.date = this.dataTaT[i].hora;
-                    this.desde2 = new Date (this.datepipe.transform(this.desde, 'yyyy,MM,dd'));
+                    this.desde2 = new Date (this.desde);
                     this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
                         this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
                         this.date.getUTCHours(), this.date.getUTCMinutes(),
                         this.date.getUTCSeconds());
-                    this.dataTaT2.push([this.desde2,this.dataTaT[i].numeroTrenes]);
+                    this.dataTaT2.push([this.desde2, 0, this.dataTaT[i].numeroTrenes]);
                 }
                 this.loadCharts();
             },
@@ -318,12 +321,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 this.dataInO2 = [];
                 for (let i = 0; i < this.dataInO.length; i++) {
                     this.date = this.dataInO[i].hora;
-                    this.desde2 = new Date (this.datepipe.transform(this.desde, 'yyyy,MM,dd'));
+                    this.desde2 = new Date (this.desde);
                     this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
                         this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
                         this.date.getUTCHours(), this.date.getUTCMinutes(),
                         this.date.getUTCSeconds());
-                    this.dataInO2.push([this.desde2,this.dataInO[i].intervaloMin,this.dataInO[i].intervaloMax]);
+                    this.dataInO2.push([this.desde2, this.dataInO[i].intervaloMin, this.dataInO[i].intervaloMax]);
                 }
                 this.loadCharts();
             },
@@ -335,12 +338,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
             (resT: HttpResponse<TipoDia>) => {
                 this.tipo = resT.body;
-                //if (this.tipo !== this.dataTipodia[0]) {
-                    this.dataTipodia[0] = resT.body;
+                // if (this.tipo !== this.dataTipodia[0]) {
+                    this.tipo = resT.body;
                     this.updatedataInO(this.tipo);
                     this.updatedataTaT(this.tipo);
-                    this.loadCharts();
-                //}
+                    // this.loadCharts();
+                // }
             },
             (res: HttpErrorResponse) => {this.onError(res.message);
             }
