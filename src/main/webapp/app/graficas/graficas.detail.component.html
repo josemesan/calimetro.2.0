@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col-md-3">
+        <h2>
+            Gráficos de {{linea}}
+        </h2>
+    </div>
+    <div class="col-md-3">
+        <h6>Fecha ( {{tipo}} ):</h6>
+        <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
+    </div>
+</div>
+<br>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">VIAJEROS LINEA</th>
+                <th scope="col">INCREMENTO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {{viajeros[0]}}
+                </td>
+                <td>
+                    <i *ngIf="(this.viajeros[0]-this.viajeros[2]) < 0" class="fa fa-arrow-down" aria-hidden="true" style="color:red"></i>
+                    <i *ngIf="(this.viajeros[0]-this.viajeros[2]) > 0" class="fa fa-arrow-up" aria-hidden="true" style="color:blue"></i>
+                    <i *ngIf="(this.viajeros[0]-this.viajeros[2]) == 0" class="fa fa-arrows-h" aria-hidden="true" style="color:lightgreen"></i>
+                    {{viajeros[0]-viajeros[2]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--<div class="row">-->
+    <!--<div class="col-md-9">-->
+        <div [chart]="chartDetalle"></div>
+    <!--</div>-->
+    <!--<div class="col-md-2">-->
+        <!--<div class="table-responsive">-->
+            <!--<table class="table table-striped">-->
+                <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th scope="col">Hora</th>-->
+                        <!--<th scope="col">Valor</th>-->
+                    <!--</tr>-->
+                <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr *ngFor="let dato of dataInt">-->
+                        <!--<td>{{dato[0]| date:'HH:mm'}}</td>-->
+                        <!--<td>{{dato[1]}}</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<hr>-->
+    <!--</div>-->
+<!--</div>-->
+<jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>

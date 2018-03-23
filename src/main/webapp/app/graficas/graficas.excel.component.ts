@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit, Input} from '@angular/core';
 import { ExcelService} from '../excel/excelservice.service';
 import { Datos, DatosService } from '../entities/datos';
+import { DatePipe } from '@angular/common';
 
 import { DatosExcel } from '../excel/datos.excel.model';
 import {Subscription} from 'rxjs/Subscription';
@@ -24,9 +25,10 @@ export class GraficasExcelComponent {
     constructor(
         private excelService: ExcelService,
         private eventManager: JhiEventManager,
+        public datepipe: DatePipe,
     ) {
     }
-    exportToExcel() {
+    exportToExcelDatos() {
         for (let i = 0; i < this.datosEnvio.length; i++) {
             this.datoExcel = new DatosExcel(
                 this.datosEnvio[i].id,
@@ -48,7 +50,11 @@ export class GraficasExcelComponent {
         this.excelService.exportAsExcelFile(this.datosExcel, 'datos');
     }
 
-    registerChangeInDatosExcel() {
-        this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.exportToExcel());
+    exportToExcel() {
+        for (let i = 0; i < this.datosEnvio.length; i++) {
+            this.datosEnvio[i].fechaHora = this.datepipe.transform(this.datosEnvio[i].fechaHora, 'yyyy-MM-dd');
+        }
+        this.excelService.exportAsExcelFile(this.datosEnvio, 'datos');
     }
+
 }

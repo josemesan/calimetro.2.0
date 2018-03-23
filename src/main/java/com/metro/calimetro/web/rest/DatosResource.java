@@ -22,6 +22,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
+import java.util.Collections;
+
 /**
  * REST controller for managing Datos.
  */
@@ -102,7 +104,18 @@ public class DatosResource {
         LocalDateTime ldt2 = ldt1.plusHours(20);
         ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
         log.debug("REST request to get Datos segun Fecha : {}", ini);
-        return datosRepository.findByFechaHoraBetweenAndLineaNombre(zone1,zone2, lin);
+
+        List<Datos> lista = datosRepository.findByFechaHoraBetweenAndLineaNombre(zone1,zone2, lin);
+        lista.sort(new Comparator<Datos>() {
+            @Override
+            public int compare(Datos o1, Datos o2) {
+                return o1.getFechaHora().compareTo(o2.getFechaHora());
+            }
+        });
+        return lista;
+
+
+
     }
     @GetMapping("/datos/fecha/{ini}")
     @Timed
@@ -113,9 +126,17 @@ public class DatosResource {
         LocalDateTime ldt2 = ldt1.plusHours(20);
         ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
         log.debug("REST request to get Datos segun Fecha : {}", ini);
-        return datosRepository.findByFechaHoraBetween(zone1,zone2);
 
+        List<Datos> lista = datosRepository.findByFechaHoraBetween(zone1,zone2);
+        lista.sort(new Comparator<Datos>() {
+            @Override
+            public int compare(Datos o1, Datos o2) {
+                return o1.getFechaHora().compareTo(o2.getFechaHora());
+            }
+        });
+        return lista;
     }
+
 //--------------------------------- viajeros
     @GetMapping("/datos/viajeros/{ini}/{lin}")
     @Timed

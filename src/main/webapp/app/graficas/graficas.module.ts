@@ -8,8 +8,12 @@ import {ExcelComponent} from '../excel/excel.component';
 
 import { CalimetroSharedModule } from '../shared';
 
-import { GRAFICAS_ROUTE, GraficasComponent } from './';
+import { GRAFICAS_ROUTE } from './';
+import { GraficasComponent } from './graficas.component';
+import { GraficasGeneralComponent } from './graficas.general.component';
+
 import { GraficasExcelComponent } from './graficas.excel.component';
+import { GraficasDetailComponent } from './graficas.detail.component';
 
 @NgModule({
     imports: [
@@ -19,7 +23,9 @@ import { GraficasExcelComponent } from './graficas.excel.component';
     ],
     declarations: [
         GraficasComponent,
+        GraficasDetailComponent,
         GraficasExcelComponent,
+        GraficasGeneralComponent,
         ExcelComponent,
     ],
     entryComponents: [

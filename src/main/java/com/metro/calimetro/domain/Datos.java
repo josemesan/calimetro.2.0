@@ -3,9 +3,11 @@ package com.metro.calimetro.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Comparator;
 
 import java.io.Serializable;
 import java.time.ZonedDateTime;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -71,6 +73,9 @@ public class Datos implements Serializable {
     @JsonIgnore
     private Set<Observaciones> observaciones = new HashSet<>();
 
+    ///-------------------------------------------
+
+    //--------------------------------
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -287,6 +292,7 @@ public class Datos implements Serializable {
         this.observaciones = observaciones;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+
 
     @Override
     public boolean equals(Object o) {

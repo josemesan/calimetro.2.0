@@ -26,31 +26,27 @@ declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
 
 @Component({
-    selector: 'jhi-graficas',
-    templateUrl: './graficas.component.html',
+    selector: 'jhi-graficas-detail',
+    templateUrl: './graficas.detail.component.html',
     styleUrls: [
         'graficas.css'
     ]
 })
-export class GraficasComponent implements OnInit, OnDestroy {
+export class GraficasDetailComponent implements OnInit, OnDestroy {
     config: any;
     currentAccount: any;
     eventSubscriber: Subscription;
 
     linea: String;
     datos: Datos[] = [];
-    tipo: TipoDia = null;
+    tipo: TipoDia;
+    tipoChart: any;
 
     date: any;
     desde: any;
     desde2: any;
 
-    chartIntervalo: any;
-    chartDesviacion: any;
-    chartNumeroTrenes: any;
-    chartTiempoVueltaVelocidad: any;
-    chartTOC: any;
-    chartViajerosDensidad: any;
+    chartDetalle: any;
 
     viajeros: number[] = [0, 0, 0, 0];
     dataInt: any[] = [];
@@ -84,12 +80,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     loadChartIntervalo() {
-        this.chartIntervalo = new Chart;
-        this.chartIntervalo.options = ChartIntervalo;
-        this.chartIntervalo.removeSerie(1);
-        this.chartIntervalo.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartIntervalo;
+        this.chartDetalle.removeSerie(1);
+        this.chartDetalle.removeSerie(0);
 
-        this.chartIntervalo.addSerie({
+        this.chartDetalle.addSerie({
             step: 'left',
             name: 'Intervalo Ofertado',
             data: this.dataInO2,
@@ -102,7 +98,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 enabled: false
             }
         });
-        this.chartIntervalo.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Intervalo medio',
             data: this.dataInt,
             zIndex: 1,
@@ -113,12 +109,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
     }
     loadChartDesviacion() {
-        this.chartDesviacion = new Chart;
-        this.chartDesviacion.options = ChartDesviacion;
-        this.chartDesviacion.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartDesviacion;
+        this.chartDetalle.removeSerie(0);
         // this.chartIntervalo.removeSerie(0);
 
-        this.chartDesviacion.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Desidad',
             data: this.dataDes,
             zIndex: 1,
@@ -129,12 +125,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
     }
     loadChartNumeroTrenes() {
-        this.chartNumeroTrenes = new Chart;
-        this.chartNumeroTrenes.options = ChartNumeroTrenes;
-        this.chartNumeroTrenes.removeSerie(1);
-        this.chartNumeroTrenes.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartNumeroTrenes;
+        this.chartDetalle.removeSerie(1);
+        this.chartDetalle.removeSerie(0);
 
-        this.chartNumeroTrenes.addSerie({
+        this.chartDetalle.addSerie({
             step: 'left',
             name: 'Tabla trenes',
             data: this.dataTaT2,
@@ -147,7 +143,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 enabled: false
             }
         });
-        this.chartNumeroTrenes.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Tabla trenes',
             data: this.dataNuT,
             zIndex: 1,
@@ -159,12 +155,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
     loadChartTiempoVueltaVelocidad() {
 
-        this.chartTiempoVueltaVelocidad = new Chart;
-        this.chartTiempoVueltaVelocidad.options = ChartTiempoVueltaVelocidad;
-        this.chartTiempoVueltaVelocidad.removeSerie(1);
-        this.chartTiempoVueltaVelocidad.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartTiempoVueltaVelocidad;
+        this.chartDetalle.removeSerie(1);
+        this.chartDetalle.removeSerie(0);
 
-        this.chartTiempoVueltaVelocidad.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Tiempo de Vuelta',
             data: this.dataVue,
             zIndex: 1,
@@ -173,7 +169,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 lineWidth: 2,
             }
         });
-        this.chartTiempoVueltaVelocidad.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Velocidad',
             data: this.dataVel,
             zIndex: 1,
@@ -184,11 +180,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
         });
     }
     loadChartTOC() {
-        this.chartTOC = new Chart;
-        this.chartTOC.options = ChartTOC;
-        this.chartTOC.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartTOC;
+        this.chartDetalle.removeSerie(0);
 
-        this.chartTOC.addSerie({
+        this.chartDetalle.addSerie({
             name: 'TOC',
             data: this.dataTOC,
             zIndex: 1,
@@ -200,12 +196,12 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
     loadChartViajerosDensidad() {
 
-        this.chartViajerosDensidad = new Chart;
-        this.chartViajerosDensidad.options = ChartViajerosDensidad;
-        this.chartViajerosDensidad.removeSerie(1);
-        this.chartViajerosDensidad.removeSerie(0);
+        this.chartDetalle = new Chart;
+        this.chartDetalle.options = ChartViajerosDensidad;
+        this.chartDetalle.removeSerie(1);
+        this.chartDetalle.removeSerie(0);
 
-        this.chartViajerosDensidad.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Numero de viajeros',
             data: this.dataVia,
             zIndex: 1,
@@ -214,7 +210,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 lineWidth: 2,
             }
         });
-        this.chartViajerosDensidad.addSerie({
+        this.chartDetalle.addSerie({
             name: 'Densidad',
             data: this.dataDen,
             zIndex: 1,
@@ -226,15 +222,30 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     loadCharts() {
-        this.loadChartIntervalo();
-        this.loadChartNumeroTrenes();
-        this.loadChartTiempoVueltaVelocidad();
-        this.loadChartTOC();
-        this.loadChartDesviacion();
-        this.loadChartViajerosDensidad();
-    }
 
-    // -------------------------
+            switch (this.tipoChart) {
+                case 'INTERVALO':
+                    this.loadChartIntervalo();
+                    break;
+                case 'DESVIACION':
+                    this.loadChartDesviacion();
+                    break;
+                case 'NUMERO':
+                    this.loadChartNumeroTrenes();
+                    break;
+                case 'TIEMPO':
+                    this.loadChartTiempoVueltaVelocidad();
+                    break;
+                case 'TOC':
+                    this.loadChartTOC();
+                    break;
+                case 'DENSIDAD':
+                    this.loadChartViajerosDensidad();
+                    break;
+                default:
+                    this.loadChartIntervalo();
+            }
+    }
 
     loadSeriesDatos() {
 
@@ -263,7 +274,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
             }
         }
-       this.loadCharts();
+        this.loadCharts();
     }
 
     ngOnInit() {
@@ -273,7 +284,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
             this.currentAccount = account;
         });
         this.eventSubscriber = this.route.params.subscribe((params) => {
-            this.linea = (params['id']); });
+            this.linea = (params['id']), this.desde = (params['fecha']), this.tipoChart = (params['tipo']); });
 
         this.loadAll();
     }
@@ -330,11 +341,13 @@ export class GraficasComponent implements OnInit, OnDestroy {
     loadTipodia() {
         this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
             (resT: HttpResponse<TipoDia>) => {
-                if (this.tipo !== resT.body) {
+                this.tipo = resT.body;
+                // if (this.tipo !== this.dataTipodia[0]) {
                     this.tipo = resT.body;
                     this.updatedataInO(this.tipo);
                     this.updatedataTaT(this.tipo);
-                }
+                    // this.loadCharts();
+                // }
             },
             (res: HttpErrorResponse) => {this.onError(res.message);
             }

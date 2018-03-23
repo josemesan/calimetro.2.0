@@ -1,6 +1,15 @@
-<h2>
-    Gráficos de {{linea}}
-</h2><hr>
+<div class="row">
+    <div class="col-md-3">
+        <h2>
+            Gráficos de {{linea}}
+        </h2>
+    </div>
+    <div class="col-md-3">
+        <h6>Fecha ( {{tipo}} ):</h6>
+        <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
+    </div>
+</div>
+<br>
 
 <!--<div class="row">-->
     <!--<div class="col-md-9">-->
@@ -16,19 +25,13 @@
                 <!--&lt;!&ndash;InterOfer: {{dato[0] | date:'medium'}}</tr>&ndash;&gt;-->
             <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[1]">&ndash;&gt;&ndash;&gt;-->
                 <!--&lt;!&ndash;&lt;!&ndash;InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>&ndash;&gt;&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[2]">&ndash;&gt;&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash;InterTaT: {{dato.hora}}</tr>&ndash;&gt;&ndash;&gt;-->
+            <!--<tr *ngFor="let dato  of dataInt">-->
+                <!--Inter: {{dato[0]}}, Inter: {{dato[1]}}</tr></tr>-->
 
         <!--&lt;!&ndash;</h6>&ndash;&gt;-->
     <!--</div>-->
 <!--</div>-->
 <!--<hr>-->
-
-<div class="col-md-4">
-    <h4>Fecha:</h4>
-    <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()"> Tipo día: {{tipo}}
-</div>
-<br>
 
 <div class="table-responsive">
     <table class="table table-striped">
@@ -42,41 +45,38 @@
         </thead>
         <tbody>
             <tr>
-                <td><i class="fa fa-arrow-up" aria-hidden="true"> </i> {{viajeros[0]}}</td>
-                <td><i class="fa fa-arrow-down" aria-hidden="true"> </i> {{viajeros[0]-viajeros[2]}} </td>
-                <td><i class="fa fa-arrow-up" aria-hidden="true"> </i> {{viajeros[1]}}</td>
-                <td><i class="fa fa-arrow-down" aria-hidden="true"> </i> {{viajeros[1]-viajeros[3]}}</td>
+                <td>{{viajeros[0]}}</td>
+                <td>    <i *ngIf="(this.viajeros[0]-this.viajeros[2]) < 0" class="fa fa-arrow-down" aria-hidden="true" style="color:red"></i>
+                        <i *ngIf="(this.viajeros[0]-this.viajeros[2]) > 0" class="fa fa-arrow-up" aria-hidden="true" style="color:blue"></i>
+                        <i *ngIf="(this.viajeros[0]-this.viajeros[2]) == 0" class="fa fa-arrows-h" aria-hidden="true" style="color:lightgreen"></i>
+                        {{viajeros[0]-viajeros[2]}} </td>
+                <td>{{viajeros[1]}}</td>
+                <td>    <i *ngIf="(this.viajeros[0]-this.viajeros[3]) < 0" class="fa fa-arrow-down" aria-hidden="true" style="color:red"></i>
+                        <i *ngIf="(this.viajeros[0]-this.viajeros[3]) > 0" class="fa fa-arrow-up" aria-hidden="true" style="color:blue"></i>
+                        <i *ngIf="(this.viajeros[0]-this.viajeros[3]) == 0" class="fa fa-arrows-h" aria-hidden="true" style="color:lightgreen"></i>
+                    {{viajeros[1]-viajeros[3]}}</td>
             </tr>
         </tbody>
     </table>
 </div>
-<!--<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>-->
 
 <div class="row">
     <div class="col-md-6">
-        <div [chart]="chartIntervalo"></div>
+        <div [chart]="chartIntervalo"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'INTERVALO']">Vista detallada</button>
         <hr>
-        <div [chart]="chartDesviacion"></div>
+        <div [chart]="chartDesviacion"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'DESVIACION']">Vista detallada</button>
         <hr>
-        <div [chart]="chartTiempoVueltaVelocidad"></div>
+        <div [chart]="chartTiempoVueltaVelocidad"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'TIEMPO']">Vista detallada</button>
         <hr>
     </div>
     <div class="col-md-6">
-        <div [chart]="chartNumeroTrenes"></div>
+        <div [chart]="chartNumeroTrenes"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'NUMERO']">Vista detallada</button>
         <hr>
-        <div [chart]="chartViajerosDensidad"></div>
+        <div [chart]="chartViajerosDensidad"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'DENSIDAD']">Vista detallada</button>
         <hr>
-        <div [chart]="chartTOC"></div>
+        <div [chart]="chartTOC"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'TOC']">Vista detallada</button>
         <hr>
     </div>
-    <!--<div class="col-md-4">-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--&lt;!&ndash;<button type="submit" routerLink="2018-03-04/bar"> detalle grafica </button>&ndash;&gt;-->
-        <!--<hr>-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--<hr>-->
-        <!--<div [chart]="chart3"></div>-->
-        <!--<hr>-->
-    <!--</div>-->
 </div>
 <jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>
+

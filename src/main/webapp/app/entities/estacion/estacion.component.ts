@@ -37,7 +37,7 @@ export class EstacionComponent implements OnInit, OnDestroy {
     }
     loadAllLineas() {
         this.lineaService.query().subscribe(
-            (res: HttpResponse<Estacion[]>) => {
+            (res: HttpResponse<Linea[]>) => {
                 this.lineas = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
