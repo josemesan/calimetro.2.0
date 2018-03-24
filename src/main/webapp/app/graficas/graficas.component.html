@@ -5,42 +5,20 @@
         </h2>
     </div>
     <div class="col-md-3">
-        <h6>Fecha ( {{tipo}} ):</h6>
+        <h6> <span jhiTranslate="global.fecha">Fecha</span> ( {{tipo}} ):</h6>
         <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
     </div>
 </div>
 <br>
-
-<!--<div class="row">-->
-    <!--<div class="col-md-9">-->
-        <!--&lt;!&ndash;<h6>&ndash;&gt;-->
-            <!--&lt;!&ndash;tipo de dia: {{dataTipodia[0]}}&ndash;&gt;-->
-            <!--&lt;!&ndash;desdes {{desde}}<br>&ndash;&gt;-->
-            <!--&lt;!&ndash;desde 2 {{desde2}}<br>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<tr *ngFor="let dato of dataInt">&ndash;&gt;-->
-                <!--&lt;!&ndash;InterMed: {{dato}}</tr>&ndash;&gt;-->
-
-            <!--&lt;!&ndash;<tr *ngFor="let dato of dataInO2">&ndash;&gt;-->
-                <!--&lt;!&ndash;InterOfer: {{dato[0] | date:'medium'}}</tr>&ndash;&gt;-->
-            <!--&lt;!&ndash;&lt;!&ndash;<tr *ngFor="let dato of dataTipodia[1]">&ndash;&gt;&ndash;&gt;-->
-                <!--&lt;!&ndash;&lt;!&ndash;InterOfer: {{dato.hora}},{{dato.intervaloMax}},{{dato.intervaloMin}}</tr>&ndash;&gt;&ndash;&gt;-->
-            <!--<tr *ngFor="let dato  of dataInt">-->
-                <!--Inter: {{dato[0]}}, Inter: {{dato[1]}}</tr></tr>-->
-
-        <!--&lt;!&ndash;</h6>&ndash;&gt;-->
-    <!--</div>-->
-<!--</div>-->
-<!--<hr>-->
-
-<div class="table-responsive">
+<div *ngIf="datos.length == 0"><h4 jhiTranslate="global.sindatos">Fecha sin datos</h4> </div>
+<div class="table-responsive" *ngIf="datos.length">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">VIAJEROS LINEA</th>
-                <th scope="col">INCREMENTO</th>
-                <th scope="col">VIAJEROS TOTAL</th>
-                <th scope="col">INCREMENTO TOTAL</th>
+                <th scope="col" width="30%">Viajeros Linea</th>
+                <th scope="col" width="20%">Variacion Linea</th>
+                <th scope="col" width="30%">Viajeros Total</th>
+                <th scope="col" width="20%">Variacion Total</th>
             </tr>
         </thead>
         <tbody>
@@ -60,7 +38,7 @@
     </table>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="datos.length">
     <div class="col-md-6">
         <div [chart]="chartIntervalo"></div><button type="submit" [routerLink]="['/graf/', linea, desde, 'INTERVALO']">Vista detallada</button>
         <hr>

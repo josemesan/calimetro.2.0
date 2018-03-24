@@ -3,7 +3,7 @@
         "title": "¡Bienvenido a CaliMetro!",
         "subtitle": "Aplicación de seguimiento para indicadores de calidad del servicio ferroviario. Si tiene cualquier problema contacte con el administrador:",
         "logged": {
-            "message":  "Esta logueado"
+            "message":  "Esta logueado como: "
         },
         "question": "Si tiene preguntas sobre CaliMetro:",
         "link": {

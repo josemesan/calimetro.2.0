@@ -1,5 +1,6 @@
-    <h4 jhiTranslate="global.tablaDatos">TABLA DE DATOS</h4>
-    <div class="table-responsive">
+
+    <div class="table-responsive" *ngIf="datosEnvio.length > 0">
+        <h4 jhiTranslate="global.tablaDatos">TABLA DE DATOS</h4>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -38,9 +39,10 @@
             </tr>
             </tbody>
         </table>
+        <hr>
+        <button (click)="exportToExcelDatos()" class="btn btn-primary">Export to Excel</button>
     </div>
-    <hr>
-    <button (click)="exportToExcelDatos()" class="btn btn-primary">Export to Excel</button>
+
 
 
 

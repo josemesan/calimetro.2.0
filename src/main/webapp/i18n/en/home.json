@@ -3,7 +3,7 @@
         "title": "Welcome to CaliMetro!",
         "subtitle": "Follow-up application for rail service quality indicators. If you have any problems, contact the administrator:",
         "logged": {
-            "message": "You are logged"
+            "message": "You are logged how: "
         },
         "question": "If you have any question on CaliMetro:",
         "link": {

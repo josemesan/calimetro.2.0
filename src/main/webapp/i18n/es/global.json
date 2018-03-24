@@ -1,5 +1,7 @@
 {
     "global": {
+        "sindatos": "Fecha sin datos, seleccione otro dia",
+        "observaciones": "Tabla de Observaciones",
         "tablaDatos": "Tabla de datos",
         "tipo": "Seleccionar tipo de día:",
         "linea": "Seleccionar línea:",

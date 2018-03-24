@@ -1,5 +1,7 @@
 {
     "global": {
+        "sindatos": "Date without data, select another day",
+        "observaciones": "Observations table",
         "tablaDatos": "Data table",
         "tipo": "Select day type:",
         "linea": "Select line:",

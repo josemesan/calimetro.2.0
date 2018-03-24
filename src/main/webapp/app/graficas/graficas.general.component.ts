@@ -183,7 +183,9 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
                 for (let j = 0; j < this.lineas.length; j++) {
                     if ((this.lineas[j].id === this.datos[i].linea.id) && (this.lineas[j].visible) ) {
                         this.dataCon[j] = this.dataCon[j] + this.datos[i].consumo;
-                        this.dataVel[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
+                        if (this.datos[i].velocidad) {
+                            this.dataVel[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
+                        }
                         this.dataVia[j] = this.dataVia[j] + this.datos[i].viajeros;
                         this.dataCoc[j] = this.dataCoc[j] + this.datos[i].cocheKm;
                     }
@@ -204,9 +206,6 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
         this.loadAll();
         // this.registerChangeRoute();
     }
-    // registerChangeRoute() {
-    //     this.eventSubscriber = this.eventManager.subscribe('routeChanged', (response) => this.loadAll());
-    // }
 
     loadAll() {
         this.loadDatosFecha();

@@ -264,16 +264,36 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
         if (this.datos.length > 0) {
             for (let i = 0; i < this.datos.length; i++) {
-                this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio]);
-                this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia]);
-                this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta]);
-                this.dataNuT.push([this.datos[i].fechaHora.valueOf(), this.datos[i].numeroTrenes]);
-                this.dataVia.push([this.datos[i].fechaHora.valueOf(), this.datos[i].viajeros]);
-                this.dataTOC.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
-                this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad]);
-                this.dataCon.push([this.datos[i].fechaHora.valueOf(), this.datos[i].consumo]);
-                this.dataVel.push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
-                this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
+                if (this.datos[i].intervaloMedio) {
+                    this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio]);
+                }
+                if (this.datos[i].desviacionMedia) {
+                    this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia]);
+                }
+                if (this.datos[i].tiempoVuelta) {
+                    this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta]);
+                }
+                if (this.datos[i].numeroTrenes) {
+                    this.dataNuT.push([this.datos[i].fechaHora.valueOf(), this.datos[i].numeroTrenes]);
+                }
+                if (this.datos[i].viajeros) {
+                    this.dataVia.push([this.datos[i].fechaHora.valueOf(), this.datos[i].viajeros]);
+                }
+                if (this.datos[i].toc) {
+                    this.dataTOC.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
+                }
+                if (this.datos[i].densidad) {
+                    this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad]);
+                }
+                if (this.datos[i].consumo) {
+                    this.dataCon.push([this.datos[i].fechaHora.valueOf(), this.datos[i].consumo]);
+                }
+                if (this.datos[i].velocidad) {
+                    this.dataVel.push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
+                }
+                if (this.datos[i].cocheKm) {
+                    this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
+                }
             }
         }
        this.loadCharts();

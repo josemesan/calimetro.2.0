@@ -164,7 +164,7 @@ public class DatosResource {
         }
         LocalDateTime ldt1Ayer = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         ZonedDateTime zone1Ayer = ldt1Ayer.atZone(ZoneId.of("Europe/Paris"));
-        zone1Ayer = zone1Ayer.minusDays(1);
+        zone1Ayer = zone1Ayer.minusDays(7);
         LocalDateTime ldt2Ayer = ldt1Ayer.plusHours(20);
         ZonedDateTime zone2Ayer = ldt2Ayer.atZone(ZoneId.of("Europe/Paris"));
         zone2Ayer = zone2Ayer.minusDays(1);

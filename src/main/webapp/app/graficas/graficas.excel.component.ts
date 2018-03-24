@@ -14,9 +14,9 @@ import {JhiEventManager} from 'ng-jhipster';
 export class GraficasExcelComponent {
 
     @Input()
-    private datosEnvio: Datos[];
+    datosEnvio: Datos[];
     @Input()
-    private lineaEnvio: string;
+    lineaEnvio: string;
 
     datoExcel: DatosExcel;
     datosExcel: DatosExcel[] = [];

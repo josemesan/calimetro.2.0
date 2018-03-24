@@ -5,37 +5,17 @@
         </h2>
     </div>
     <div class="col-md-3">
-        <h6>Fecha ( {{tipo}} ):</h6>
+        <h6> <span jhiTranslate="global.fecha">Fecha</span> ( {{tipo}} ):</h6>
         <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
     </div>
 </div>
-<!--<div class="row">-->
-    <!--<div class="col-md-10">-->
-        <div [chart]="chartDetalle"></div>
-    <!--</div>-->
-    <!--<div class="col-md-2">-->
-            <!--<button type="submit" [routerLink]="['/graf/general/VELOCIDAD']" [class]="['btn-general1']">-->
-                <!--<i class="fa fa-area-chart" aria-hidden="true"></i>-->
-                <!--<span>Velocidad</span>-->
-            <!--</button>-->
-            <!--<br>-->
-            <!--<button type="submit" [routerLink]="['/graf/general/CONSUMO']" [class]="['btn-general2']">-->
-                <!--<i class="fa fa-bar-chart" aria-hidden="true"></i>-->
-                <!--<span>Consumo</span>-->
-            <!--</button>-->
-            <!--<br>-->
-            <!--<button type="submit" [routerLink]="['/graf/general/VIAJEROS']" [class]="['btn-general3']">-->
-                <!--<i class="fa fa-line-chart" aria-hidden="true"></i>-->
-                <!--<span>Viajeros</span>-->
-            <!--</button>-->
-            <!--<br>-->
-            <!--<button type="submit" [routerLink]="['/graf/general/COCHESKM']" [class]="['btn-general4']">-->
-                <!--<i class="fa fa-pie-chart" aria-hidden="true"></i>-->
-                <!--<span>Cch/Km</span>-->
-            <!--</button>-->
-    <!--</div>-->
-<!--</div>-->
+
 <br>
+
+<div *ngIf="datos.length == 0"><h4 jhiTranslate="global.sindatos">Fecha sin datos</h4> </div>
+
+<div [chart]="chartDetalle" *ngIf="datos.length"></div>
+
 
 
 

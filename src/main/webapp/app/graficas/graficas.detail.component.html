@@ -5,18 +5,20 @@
         </h2>
     </div>
     <div class="col-md-3">
-        <h6>Fecha ( {{tipo}} ):</h6>
+        <h6> <span jhiTranslate="global.fecha">Fecha</span> ( {{tipo}} ):</h6>
         <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadAll()">
     </div>
 </div>
 <br>
 
-<div class="table-responsive">
+<div *ngIf="datos.length == 0"><h4 jhiTranslate="global.sindatos">Fecha sin datos</h4> </div>
+
+<div class="table-responsive"  *ngIf="datos.length">
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">VIAJEROS LINEA</th>
-                <th scope="col">INCREMENTO</th>
+                <th width="50%" scope="col">Viajeros de la Linea</th>
+                <th scope="col">Variacion</th>
             </tr>
         </thead>
         <tbody>
@@ -35,29 +37,25 @@
     </table>
 </div>
 
-<!--<div class="row">-->
-    <!--<div class="col-md-9">-->
-        <div [chart]="chartDetalle"></div>
-    <!--</div>-->
-    <!--<div class="col-md-2">-->
-        <!--<div class="table-responsive">-->
-            <!--<table class="table table-striped">-->
-                <!--<thead>-->
-                    <!--<tr>-->
-                        <!--<th scope="col">Hora</th>-->
-                        <!--<th scope="col">Valor</th>-->
-                    <!--</tr>-->
-                <!--</thead>-->
-                    <!--<tbody>-->
-                    <!--<tr *ngFor="let dato of dataInt">-->
-                        <!--<td>{{dato[0]| date:'HH:mm'}}</td>-->
-                        <!--<td>{{dato[1]}}</td>-->
-                    <!--</tr>-->
-                    <!--</tbody>-->
-                <!--</table>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<hr>-->
-    <!--</div>-->
-<!--</div>-->
+<div [chart]="chartDetalle" *ngIf="datos.length"></div>
+
+
+<div class="table-responsive" *ngIf="observacionesFinal.length > 0">
+    <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="20%" scope="col">Hora/Fecha</th>
+                <th scope="col">Observaciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let observacion of observacionesFinal">
+                <td>{{observacion[0]}}</td>
+                <td>{{observacion[1]}}</td>
+        </tbody>
+    </table>
+</div>
+<hr>
+
 <jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>
