@@ -11,7 +11,7 @@
     <hr>
     <div class="row"><br>
         <div class="col-md-4">
-            <h4> Seleccionar línea: </h4>
+            <h4 jhiTranslate="global.linea"> Seleccionar línea: </h4>
             <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadTablaTenesLinea()">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-4">
-            <h4> Seleccionar tipo de día: </h4><abbr></abbr>
+            <h4 jhiTranslate="global.tipo"> Seleccionar tipo de día: </h4>
             <select  class="form-control" [(ngModel)]="tipo" (click)="loadTablaTenesLinea()">
                 <option [ngValue]="null"></option>
                 <option><span>LAB</span></option>

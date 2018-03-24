@@ -1,5 +1,9 @@
 {
     "global": {
+        "tablaDatos": "Data table",
+        "tipo": "Select day type:",
+        "linea": "Select line:",
+        "fecha": "Date:",
         "title": "Calimetro",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
@@ -18,6 +22,8 @@
                 "intervaloMax": "Intervalo Max",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+            "datos": "Data per line",
+            "datosG": "Data management",
             "account": {
                 "main": "Account",
                 "settings": "Settings",

@@ -2,18 +2,18 @@
     <div class="col-md-3">
             <span class="hipster img-fluid rounded"></span>
             <hr>
-            <span class="text-info">
-                <br jhiTranslate="home.title">Aplicación de seguimiento para indicadores de calidad del servicio ferroviario.</br>
+            <span  jhiTranslate="home.subtitle" class="text-info">
+                <br >Aplicación de seguimiento para indicadores de calidad del servicio ferroviario.</br>
                 Si tiene cualquier problema contacte con el administrador:
              </span>
                 <a href="mailto:administrador@calimetro.es">administrador@calimetro.es</a>
     </div>
     <div class="col-md-3">
-        <span class="titulo1">¡Bienvenido<br>a</br>CaliMetro!</span>
+        <span jhiTranslate="home.title" class="titulo1"></span>
         <div [ngSwitch]="isAuthenticated()">
             <hr>
             <div class="alert alert-success" *ngSwitchCase="true">
-                <span *ngIf="account"> You are logged in as user "{{account.login}}". </span>
+                <span *ngIf="account" jhiTranslate="home.logged.message"> You are logged in as user "{{account.login}}". </span>
             </div>
         </div>
     </div>
@@ -21,8 +21,8 @@
     <div [ngSwitch]="isAuthenticated()">
         <div class="col-form-label"*ngSwitchCase="false">
             <div class="alert alert-warning">
-                <span>¿Aún no tienes una cuenta?</span><br>
-                <a class="alert-link" routerLink="register">Regístrate haciendo click aquí</a>
+                <span jhiTranslate="home.cuenta">¿Aún no tienes una cuenta?</span><br>
+                <a jhiTranslate="home.registrate" class="alert-link" routerLink="register">Regístrate haciendo click aquí</a>
             </div>
         </div>
     </div>
@@ -31,10 +31,10 @@
         <div  *ngSwitchCase="true">
             <table class="table-responsive">
                 <thead>
-                    <th class="titulo2">
-                        Gráficos disponibles:<hr>
+                    <th class="titulo2" jhiTranslate="home.chart">
+                        Gráficos disponibles:
                     </th>
-                </thead>
+                </thead> <hr>
                 <tbody class="center-pill">
                 <tr *ngFor="let linea of lineas ;trackBy: trackId">
                     <td *ngIf="linea.visible">
@@ -56,22 +56,24 @@
 
     <div class="col-md-3" [ngSwitch]="isAuthenticated()">
         <div  *ngSwitchCase="true">
-            <span class="titulo2">
-                Gráficos globales:<hr>
-            </span>
+            <div>
+                <span class="titulo2" jhiTranslate="home.chartG">
+                    Gráficos globales:
+                </span>
+            </div><hr>
             <button type="submit" [routerLink]="['graf/general/VELOCIDAD']" [class]="['btn-general1']">
                                     <i class="fa fa-area-chart" aria-hidden="true"></i>
-                                    <span>Velocidad</span>
+                                    <span jhiTranslate="home.velocidad">Velocidad</span>
             </button>
             <br>
             <button type="submit" [routerLink]="['graf/general/CONSUMO']" [class]="['btn-general2']">
                 <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                <span>Consumo</span>
+                <span jhiTranslate="home.consumo">Consumo</span>
             </button>
             <br>
             <button type="submit" [routerLink]="['graf/general/VIAJEROS']" [class]="['btn-general3']">
                 <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                <span>Viajeros</span>
+                <span jhiTranslate="home.viajeros">Viajeros</span>
             </button>
             <br>
             <button type="submit" [routerLink]="['graf/general/COCHESKM']" [class]="['btn-general4']">

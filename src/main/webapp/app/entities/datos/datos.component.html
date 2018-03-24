@@ -11,11 +11,11 @@
     <hr>
     <div class="row"><br>
         <div class="col-md-4">
-            <h4>Fecha:</h4>
+            <h4 jhiTranslate="global.fecha">Fecha:</h4>
             <input class="form-control" type="date" [(ngModel)]="desde" (change)="loadFechaLinea()">
         </div>
         <div class="col-md-4">
-            <h4> Seleccionar línea: </h4>
+            <h4 jhiTranslate="global.linea"> Seleccionar línea: </h4>
             <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadFechaLinea()">>
                 <option [ngValue]="null"></option>
                 <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>

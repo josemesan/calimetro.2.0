@@ -1,0 +1,11 @@
+{
+    "calimetroApp": {
+        "grafica" : {
+            "home": {
+                "title": "Line charts",
+                "titleF": "Detailed chart",
+                "titleG": "Global charts"
+            }
+        }
+    }
+}

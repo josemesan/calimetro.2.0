@@ -11,6 +11,7 @@ export const GRAFICAS_ROUTE: Routes = [
         component: GraficasComponent,
         data: {
             authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.grafica.home.title'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -18,7 +19,8 @@ export const GRAFICAS_ROUTE: Routes = [
         path: 'graf/:id/:fecha/:tipo',
         component: GraficasDetailComponent,
         data: {
-        authorities: ['ROLE_USER'],
+            authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.grafica.home.titleF'
         },
         canActivate: [UserRouteAccessService]
     },
@@ -27,6 +29,7 @@ export const GRAFICAS_ROUTE: Routes = [
         component: GraficasGeneralComponent,
         data: {
             authorities: ['ROLE_USER'],
+            pageTitle: 'calimetroApp.grafica.home.titleG'
     },
     canActivate: [UserRouteAccessService]
     },

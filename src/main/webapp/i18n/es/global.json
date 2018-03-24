@@ -1,5 +1,9 @@
 {
     "global": {
+        "tablaDatos": "Tabla de datos",
+        "tipo": "Seleccionar tipo de día:",
+        "linea": "Seleccionar línea:",
+        "fecha": "Fecha:",
         "title": "Calimetro",
         "browsehappy": "Está usando un navegador <strong>no actualizado</strong>. Por favor, <a href=\"http://browsehappy.com/?locale=en\">actualice su navegador</a> para mejorar su experiencia.",
         "menu": {
@@ -18,6 +22,8 @@
                 "intervaloMax": "Intervalo Max",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
+            "datos": "Datos por línea",
+            "datosG": "Gestión de datos",
             "account": {
                 "main": "Cuenta",
                 "settings": "Ajustes",
