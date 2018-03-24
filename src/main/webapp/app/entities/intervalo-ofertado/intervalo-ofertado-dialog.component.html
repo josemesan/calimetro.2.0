@@ -16,12 +16,12 @@
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloOfertado.hora" for="field_hora">Hora</label>
             <div class="d-flex">
                 <input id="field_hora" type="time" class="form-control" name="hora" [(ngModel)]="intervaloOfertado.hora"
-                />
+                       required/>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloOfertado.tipoDia" for="field_tipoDia">Tipo Dia</label>
-            <select class="form-control" name="tipoDia" [(ngModel)]="intervaloOfertado.tipoDia" id="field_tipoDia" >
+            <select required class="form-control" name="tipoDia" [(ngModel)]="intervaloOfertado.tipoDia" id="field_tipoDia" >
                 <option value="LAB">{{'calimetroApp.TipoDia.LAB' | translate}}</option>
                 <option value="VIER">{{'calimetroApp.TipoDia.VIER' | translate}}</option>
                 <option value="SAB">{{'calimetroApp.TipoDia.SAB' | translate}}</option>
@@ -32,17 +32,17 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloOfertado.intervaloMax" for="field_intervaloMax">Intervalo Max</label>
             <input type="number" class="form-control" name="intervaloMax" id="field_intervaloMax"
-                [(ngModel)]="intervaloOfertado.intervaloMax" />
+                [(ngModel)]="intervaloOfertado.intervaloMax" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloOfertado.intervaloMin" for="field_intervaloMin">Intervalo Min</label>
             <input type="number" class="form-control" name="intervaloMin" id="field_intervaloMin"
-                [(ngModel)]="intervaloOfertado.intervaloMin" />
+                [(ngModel)]="intervaloOfertado.intervaloMin" required/>
         </div>
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloOfertado.linea" for="field_linea">Linea</label>
-            <select class="form-control" id="field_linea" name="linea" [(ngModel)]="intervaloOfertado.linea" >
+            <select required class="form-control" id="field_linea" name="linea" [(ngModel)]="intervaloOfertado.linea" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="lineaOption.id === intervaloOfertado.linea?.id ? intervaloOfertado.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>

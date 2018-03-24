@@ -15,12 +15,12 @@
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.estacion.nombre" for="field_nombre">Nombre</label>
             <input type="text" class="form-control" name="nombre" id="field_nombre"
-                [(ngModel)]="estacion.nombre" />
+                [(ngModel)]="estacion.nombre" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.estacion.nemo" for="field_nemo">Nemo</label>
             <input type="text" class="form-control" name="nemo" id="field_nemo"
-                [(ngModel)]="estacion.nemo" maxlength="5"/>
+                [(ngModel)]="estacion.nemo" maxlength="5" required/>
             <div [hidden]="!(editForm.controls.nemo?.dirty && editForm.controls.nemo?.invalid)">
                 <small class="form-text text-danger"
                    [hidden]="!editForm.controls.nemo?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" translateValues="{ max: 5 }">
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.estacion.via" for="field_via">Via</label>
-            <select class="form-control" name="via" [(ngModel)]="estacion.via" id="field_via" >
+            <select required class="form-control" name="via" [(ngModel)]="estacion.via" id="field_via" >
                 <option value="I">{{'calimetroApp.TipoVia.I' | translate}}</option>
                 <option value="II">{{'calimetroApp.TipoVia.II' | translate}}</option>
             </select>
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.estacion.linea" for="field_linea">Linea</label>
-            <select class="form-control" id="field_linea" name="linea" [(ngModel)]="estacion.linea" >
+            <select required class="form-control" id="field_linea" name="linea" [(ngModel)]="estacion.linea" >
                 <option [ngValue]="null"></option>
                 <option [ngValue]="lineaOption.id === estacion.linea?.id ? estacion.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>

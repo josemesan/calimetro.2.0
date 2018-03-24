@@ -37,6 +37,7 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
     datos: Datos[] = [];
     tipo: TipoDia = null;
     tipoChart: any;
+    serie: any[] = [];
 
     lineas: Linea[] = [];
 
@@ -98,23 +99,21 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
 
         this.chartDetalle = new Chart;
         this.chartDetalle.options = ChartGeneralVia;
+        this.serie = [];
         for (let j = 0; j < this.lineas.length; j++) {
-            this.chartDetalle.removeSerie(0);
+            if (this.lineas[j].visible) {
+                this.chartDetalle.removeSerie(0);
+                this.serie.push([]);
+            }
         }
         for (let j = 0; j < this.lineas.length; j++) {
             if (this.lineas[j].visible) {
-                this.chartDetalle.addSerie({
-                    type: 'pie',
-                    name: this.lineas[j].nombre,
-                    data: [this.dataVia[j]],
-                    zIndex: 1,
-                    marker: {
-                        // fillColor: 'grey',
-                        lineWidth: 2,
-                    }
-                });
+                this.serie[j].push(this.lineas[j].nombre, this.dataVia[j]);
             }
         }
+        this.chartDetalle.addSerie({
+            data: this.serie,
+        });
     }
     loadChartConsumo() {
         this.chartDetalle = new Chart;
@@ -125,14 +124,8 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
         for (let j = 0; j < this.lineas.length; j++) {
             if (this.lineas[j].visible) {
                 this.chartDetalle.addSerie({
-                    type: 'column',
                     name: this.lineas[j].nombre,
                     data: [this.dataCon[j]],
-                    zIndex: 1,
-                    marker: {
-                        // fillColor: 'grey',
-                        lineWidth: 2,
-                    }
                 });
             }
         }
@@ -148,12 +141,7 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
             if (this.lineas[j].visible) {
                 this.chartDetalle.addSerie({
                     name: this.lineas[j].nombre,
-                    data: this.dataCoc[j],
-                    zIndex: 1,
-                    marker: {
-                        // fillColor: 'grey',
-                        lineWidth: 2,
-                    }
+                    data: [this.dataCoc[j]],
                 });
             }
         }
@@ -214,7 +202,11 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
             this.tipoChart = (params['tipo']); });
         this.loadAllLineas();
         this.loadAll();
+        // this.registerChangeRoute();
     }
+    // registerChangeRoute() {
+    //     this.eventSubscriber = this.eventManager.subscribe('routeChanged', (response) => this.loadAll());
+    // }
 
     loadAll() {
         this.loadDatosFecha();

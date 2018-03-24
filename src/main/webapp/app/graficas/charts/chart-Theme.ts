@@ -17,6 +17,16 @@ export const ChartGeneralVel = {
     series: []
 };
 export const ChartGeneralCon = {
+    plotOptions: {
+        column: {
+            borderRadius: 8
+        }
+    },
+    chart: {
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'bar'
+    },
     title: {
         text: 'CONSUMO'
     },
@@ -24,39 +34,49 @@ export const ChartGeneralCon = {
         title: {
             text: ''
         },
-       // min: 0 // this sets minimum values of y to 0
+        min: 0 // this sets minimum values of y to 0
     },
     xAxis: {
-        categories: ['CONSUMO']
+        categories: ['']
     },
-    // xAxis: {
-    //     type: 'datetime',
-    //     dateTimeLabelFormats: {
-    //         hour: '%H h',
-    //     },
-    // },
     series: []
 };
 export const ChartGeneralVia = {
-
     title: {
         text: 'VIAJEROS'
     },
-    yAxis: {
-        title: {
-            text: ''
-        },
-        min: 0 // this sets minimum values of y to 0
+    chart: {
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
     },
-    // xAxis: {
-    //     type: 'datetime',
-    //     dateTimeLabelFormats: {
-    //         hour: '%H h',
-    //     },
-    // },
+    tooltip: {
+        pointFormat: '<b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true
+            },
+            showInLegend: true
+        }
+    },
     series: []
 };
 export const ChartGeneralCoc = {
+    plotOptions: {
+        column: {
+            borderRadius: 8
+        }
+    },
+
+    chart: {
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'column'
+    },
     title: {
         text: 'COCHES/KM'
     },
@@ -66,12 +86,9 @@ export const ChartGeneralCoc = {
         },
         min: 0 // this sets minimum values of y to 0
     },
-    // xAxis: {
-    //     type: 'datetime',
-    //     dateTimeLabelFormats: {
-    //         hour: '%H h',
-    //     },
-    // },
+    xAxis: {
+        categories: ['']
+    },
     series: []
 };
 export const ChartIntervalo = {

@@ -23,7 +23,7 @@ export const GRAFICAS_ROUTE: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-    path: 'graf/genera/:tipo',
+    path: 'graf/general/:tipo',
         component: GraficasGeneralComponent,
         data: {
             authorities: ['ROLE_USER'],

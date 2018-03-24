@@ -1,12 +1,40 @@
 /* ==========================================================================
 Main page styles
 ========================================================================== */
-
-body {
-    background: #e64646;
+.btn-general1{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    min-height: 100px;
+    text-align-all: center;
+    background-color: rgba(255, 232, 0, 0.83);
 }
 
+.btn-general2{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    min-height: 100px;
+    text-align-all: center;
+    background-color: rgba(0, 255, 33, 0.79);
+}
 
+.btn-general3{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    min-height: 100px;
+    text-align-all: center;
+    background-color: rgba(255, 34, 21, 0.81);
+}
+.btn-general4{
+    border-radius: 6px;
+    font-family: sans-serif;
+    min-width: 110px;
+    min-height: 100px;
+    text-align-all: center;
+    background-color: rgba(0, 20, 255, 0.64);
+}
 .container {
    /* height: 200px;*/
 }

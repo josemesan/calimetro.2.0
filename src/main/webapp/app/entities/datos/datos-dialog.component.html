@@ -16,62 +16,62 @@
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.fechaHora" for="field_fechaHora" >Fecha Hora</label>
             <div class="d-flex">
                 <input id="field_fechaHora" (change)="loadInter()" type="datetime-local" class="form-control" name="fechaHora" [(ngModel)]="datos.fechaHora"
-                />
+                       required/>
             </div>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.intervaloMedio" for="field_intervaloMedio">Intervalo Medio</label>
             <input type="number" class="form-control" name="intervaloMedio" id="field_intervaloMedio"
-                [(ngModel)]="datos.intervaloMedio" />
+                [(ngModel)]="datos.intervaloMedio" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.desviacionMedia" for="field_desviacionMedia">Desviacion Media</label>
             <input type="number" class="form-control" name="desviacionMedia" id="field_desviacionMedia"
-                [(ngModel)]="datos.desviacionMedia" />
+                [(ngModel)]="datos.desviacionMedia" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.tiempoVuelta" for="field_tiempoVuelta">Tiempo Vuelta</label>
             <input type="number" class="form-control" name="tiempoVuelta" id="field_tiempoVuelta"
-                [(ngModel)]="datos.tiempoVuelta" />
+                [(ngModel)]="datos.tiempoVuelta" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.numeroTrenes" for="field_numeroTrenes">Numero Trenes</label>
             <input type="number" class="form-control" name="numeroTrenes" id="field_numeroTrenes"
-                [(ngModel)]="datos.numeroTrenes" />
+                [(ngModel)]="datos.numeroTrenes" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.viajeros" for="field_viajeros">Viajeros</label>
             <input type="number" class="form-control" name="viajeros" id="field_viajeros"
-                [(ngModel)]="datos.viajeros" />
+                [(ngModel)]="datos.viajeros" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.toc" for="field_toc">Toc</label>
             <input type="number" class="form-control" name="toc" id="field_toc"
-                [(ngModel)]="datos.toc" />
+                [(ngModel)]="datos.toc" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.densidad" for="field_densidad">Densidad</label>
             <input type="number" class="form-control" name="densidad" id="field_densidad"
-                [(ngModel)]="datos.densidad" />
+                [(ngModel)]="datos.densidad" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.consumo" for="field_consumo">Consumo</label>
             <input type="number" class="form-control" name="consumo" id="field_consumo"
-                [(ngModel)]="datos.consumo" />
+                [(ngModel)]="datos.consumo" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.velocidad" for="field_velocidad">Velocidad</label>
             <input type="number" class="form-control" name="velocidad" id="field_velocidad"
-                [(ngModel)]="datos.velocidad" />
+                [(ngModel)]="datos.velocidad" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.cocheKm" for="field_cocheKm">Coche Km</label>
             <input type="number" class="form-control" name="cocheKm" id="field_cocheKm"
-                [(ngModel)]="datos.cocheKm" />
+                [(ngModel)]="datos.cocheKm" required/>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.datos.linea" for="field_linea">Linea</label>
-            <select class="form-control" id="field_linea" name="linea" [(ngModel)]="datos.linea" >
+            <select required class="form-control" id="field_linea" name="linea" [(ngModel)]="datos.linea">
                 <option [ngValue]="null"></option>
                 <option [ngValue]="lineaOption.id === datos.linea?.id ? datos.linea : lineaOption" *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
             </select>
