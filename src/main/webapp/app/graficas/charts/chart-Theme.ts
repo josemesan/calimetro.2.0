@@ -24,17 +24,21 @@ export const ChartGeneralCon = {
         title: {
             text: ''
         },
-        min: 0 // this sets minimum values of y to 0
+       // min: 0 // this sets minimum values of y to 0
     },
     xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: {
-            hour: '%H h',
-        },
+        categories: ['CONSUMO']
     },
+    // xAxis: {
+    //     type: 'datetime',
+    //     dateTimeLabelFormats: {
+    //         hour: '%H h',
+    //     },
+    // },
     series: []
 };
 export const ChartGeneralVia = {
+
     title: {
         text: 'VIAJEROS'
     },
@@ -44,12 +48,12 @@ export const ChartGeneralVia = {
         },
         min: 0 // this sets minimum values of y to 0
     },
-    xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: {
-            hour: '%H h',
-        },
-    },
+    // xAxis: {
+    //     type: 'datetime',
+    //     dateTimeLabelFormats: {
+    //         hour: '%H h',
+    //     },
+    // },
     series: []
 };
 export const ChartGeneralCoc = {
@@ -62,12 +66,12 @@ export const ChartGeneralCoc = {
         },
         min: 0 // this sets minimum values of y to 0
     },
-    xAxis: {
-        type: 'datetime',
-        dateTimeLabelFormats: {
-            hour: '%H h',
-        },
-    },
+    // xAxis: {
+    //     type: 'datetime',
+    //     dateTimeLabelFormats: {
+    //         hour: '%H h',
+    //     },
+    // },
     series: []
 };
 export const ChartIntervalo = {
@@ -128,6 +132,11 @@ export const ChartTiempoVueltaVelocidad = {
     title: {
         text: 'Tiempo de vuelta y velocidad'
     },
+    plotOptions: {
+        column: {
+            borderRadius: 5
+        }
+    },
     yAxis: {
         title: {
             text: ''
@@ -161,6 +170,9 @@ export const ChartTOC = {
     series: []
 };
 export const ChartViajerosDensidad = {
+    chart: {
+        polar: true
+    },
     title: {
         text: 'Viajeros y Densidad'
     },

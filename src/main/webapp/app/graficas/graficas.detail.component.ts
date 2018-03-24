@@ -92,10 +92,12 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             type: 'arearange',
             lineWidth: 0,
             linkedTo: ':previous',
-            fillOpacity: 0.3,
+            fillOpacity: 0.5,
             zIndex: 0,
+            color: '#18ff24',
             marker: {
-                enabled: false
+                enabled: false,
+                fillColor: 'red',
             }
         });
         this.chartDetalle.addSerie({
@@ -103,7 +105,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             data: this.dataInt,
             zIndex: 1,
             marker: {
-                fillColor: 'grey',
+                fillColor: 'black',
                 lineWidth: 2,
             }
         });
@@ -112,14 +114,14 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.chartDetalle = new Chart;
         this.chartDetalle.options = ChartDesviacion;
         this.chartDetalle.removeSerie(0);
-        // this.chartIntervalo.removeSerie(0);
-
         this.chartDetalle.addSerie({
+            type: 'areaspline',
             name: 'Desidad',
             data: this.dataDes,
+            color: 'orange',
             zIndex: 1,
             marker: {
-                fillColor: 'grey',
+                fillColor: 'blue',
                 lineWidth: 2,
             }
         });
@@ -137,10 +139,11 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             type: 'arearange',
             lineWidth: 0,
             linkedTo: ':previous',
-            fillOpacity: 0.3,
+            fillOpacity: 0.5,
             zIndex: 0,
             marker: {
-                enabled: false
+                fillColor: 'red',
+                lineWidth: 2,
             }
         });
         this.chartDetalle.addSerie({
@@ -161,7 +164,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.chartDetalle.removeSerie(0);
 
         this.chartDetalle.addSerie({
+            type: 'column',
             name: 'Tiempo de Vuelta',
+            fillOpacity: 0.5,
+            color: 'red',
             data: this.dataVue,
             zIndex: 1,
             marker: {
@@ -170,6 +176,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             }
         });
         this.chartDetalle.addSerie({
+            type: 'spline',
             name: 'Velocidad',
             data: this.dataVel,
             zIndex: 1,
@@ -185,6 +192,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.chartDetalle.removeSerie(0);
 
         this.chartDetalle.addSerie({
+            type: 'bar',
             name: 'TOC',
             data: this.dataTOC,
             zIndex: 1,
@@ -202,7 +210,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.chartDetalle.removeSerie(0);
 
         this.chartDetalle.addSerie({
+            type: 'area',
             name: 'Numero de viajeros',
+            fillOpacity: 0.5,
+            color: 'red',
             data: this.dataVia,
             zIndex: 1,
             marker: {
@@ -211,8 +222,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             }
         });
         this.chartDetalle.addSerie({
+            type: 'line',
             name: 'Densidad',
             data: this.dataDen,
+            color: 'black',
             zIndex: 1,
             marker: {
                 fillColor: 'grey',

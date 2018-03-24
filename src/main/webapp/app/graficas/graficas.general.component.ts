@@ -104,8 +104,9 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
         for (let j = 0; j < this.lineas.length; j++) {
             if (this.lineas[j].visible) {
                 this.chartDetalle.addSerie({
+                    type: 'pie',
                     name: this.lineas[j].nombre,
-                    data: this.dataVia[j],
+                    data: [this.dataVia[j]],
                     zIndex: 1,
                     marker: {
                         // fillColor: 'grey',
@@ -124,8 +125,9 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
         for (let j = 0; j < this.lineas.length; j++) {
             if (this.lineas[j].visible) {
                 this.chartDetalle.addSerie({
+                    type: 'column',
                     name: this.lineas[j].nombre,
-                    data: this.dataCon[j],
+                    data: [this.dataCon[j]],
                     zIndex: 1,
                     marker: {
                         // fillColor: 'grey',
@@ -181,20 +183,21 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
         this.dataVel = [];
         this.dataVia = [];
         this.dataCoc = [];
+
         for (let j = 0; j < this.lineas.length; j++) {
-            this.dataCon.push([]);
             this.dataVel.push([]);
-            this.dataVia.push([]);
-            this.dataCoc.push([]);
+            this.dataVia.push(0);
+            this.dataCoc.push(0);
+            this.dataCon.push(0);
         }
 
             for (let i = 0; i < this.datos.length; i++) {
                 for (let j = 0; j < this.lineas.length; j++) {
                     if ((this.lineas[j].id === this.datos[i].linea.id) && (this.lineas[j].visible) ) {
-                        this.dataCon[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].consumo]);
+                        this.dataCon[j] = this.dataCon[j] + this.datos[i].consumo;
                         this.dataVel[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
-                        this.dataVia[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].viajeros]);
-                        this.dataCoc[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
+                        this.dataVia[j] = this.dataVia[j] + this.datos[i].viajeros;
+                        this.dataCoc[j] = this.dataCoc[j] + this.datos[i].cocheKm;
                     }
                 }
             }

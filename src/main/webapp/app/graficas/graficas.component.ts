@@ -96,18 +96,21 @@ export class GraficasComponent implements OnInit, OnDestroy {
             type: 'arearange',
             lineWidth: 0,
             linkedTo: ':previous',
-            fillOpacity: 0.3,
+            fillOpacity: 0.5,
             zIndex: 0,
+            color: '#18ff24',
             marker: {
-                enabled: false
+                enabled: false,
+                fillColor: 'red',
             }
         });
         this.chartIntervalo.addSerie({
+            type: 'spline',
             name: 'Intervalo medio',
             data: this.dataInt,
             zIndex: 1,
             marker: {
-                fillColor: 'grey',
+                fillColor: 'black',
                 lineWidth: 2,
             }
         });
@@ -116,14 +119,14 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartDesviacion = new Chart;
         this.chartDesviacion.options = ChartDesviacion;
         this.chartDesviacion.removeSerie(0);
-        // this.chartIntervalo.removeSerie(0);
-
         this.chartDesviacion.addSerie({
+            type: 'areaspline',
             name: 'Desidad',
             data: this.dataDes,
+            color: 'orange',
             zIndex: 1,
             marker: {
-                fillColor: 'grey',
+                fillColor: 'blue',
                 lineWidth: 2,
             }
         });
@@ -141,10 +144,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
             type: 'arearange',
             lineWidth: 0,
             linkedTo: ':previous',
-            fillOpacity: 0.3,
+            fillOpacity: 0.5,
             zIndex: 0,
             marker: {
-                enabled: false
+                fillColor: 'red',
+                lineWidth: 2,
             }
         });
         this.chartNumeroTrenes.addSerie({
@@ -165,7 +169,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartTiempoVueltaVelocidad.removeSerie(0);
 
         this.chartTiempoVueltaVelocidad.addSerie({
+            type: 'column',
             name: 'Tiempo de Vuelta',
+            fillOpacity: 0.5,
+            color: 'red',
             data: this.dataVue,
             zIndex: 1,
             marker: {
@@ -174,6 +181,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
             }
         });
         this.chartTiempoVueltaVelocidad.addSerie({
+            type: 'spline',
             name: 'Velocidad',
             data: this.dataVel,
             zIndex: 1,
@@ -189,7 +197,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartTOC.removeSerie(0);
 
         this.chartTOC.addSerie({
+            type: 'bar',
             name: 'TOC',
+            color: 'purple',
             data: this.dataTOC,
             zIndex: 1,
             marker: {
@@ -206,7 +216,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartViajerosDensidad.removeSerie(0);
 
         this.chartViajerosDensidad.addSerie({
+            type: 'area',
             name: 'Numero de viajeros',
+            fillOpacity: 0.5,
+            color: 'red',
             data: this.dataVia,
             zIndex: 1,
             marker: {
@@ -215,8 +228,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
             }
         });
         this.chartViajerosDensidad.addSerie({
+            type: 'line',
             name: 'Densidad',
             data: this.dataDen,
+            color: 'black',
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
@@ -233,8 +248,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.loadChartDesviacion();
         this.loadChartViajerosDensidad();
     }
-
-    // -------------------------
 
     loadSeriesDatos() {
 
@@ -330,11 +343,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
     loadTipodia() {
         this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
             (resT: HttpResponse<TipoDia>) => {
-                if (this.tipo !== resT.body) {
                     this.tipo = resT.body;
                     this.updatedataInO(this.tipo);
                     this.updatedataTaT(this.tipo);
-                }
             },
             (res: HttpErrorResponse) => {this.onError(res.message);
             }
