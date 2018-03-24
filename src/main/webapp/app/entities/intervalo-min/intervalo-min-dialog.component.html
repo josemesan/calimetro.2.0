@@ -28,14 +28,14 @@
             <label class="form-control-label" jhiTranslate="calimetroApp.tablaTrenes.linea" for="field_linea">Linea</label>
             <select required class="form-control" id="field_linea" name="linea" [(ngModel)]="linea" (change)="loadEstacionesLinea()">
                 <option [ngValue]="null"></option>
-                <option *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
+                <option *ngFor="let lineaOption of lineas">{{lineaOption.nombre}}</option>
             </select>
         </div>
         <div class="form-group">
             <label class="form-control-label" jhiTranslate="calimetroApp.intervaloMin.estacionMin" for="field_estacionMin">Estacion Min</label>
             <select required class="form-control" name="estacionMin" id="field_estacionMin" [(ngModel)]="intervaloMin.estacionMin">
                 <option [ngValue]="null"></option>
-                <option *ngFor="let estacionOption of estacions; trackBy: trackLineaById">{{estacionOption.nemo}}</option>
+                <option *ngFor="let estacionOption of estacions">{{estacionOption.nemo}}</option>
             </select>
         </div>
         <div class="form-group">

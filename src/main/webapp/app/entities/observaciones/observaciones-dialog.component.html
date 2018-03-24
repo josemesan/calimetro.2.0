@@ -22,7 +22,7 @@
             <div class="input-group"  >
                 <select required class="form-control" id="field_linea" name="linea" [(ngModel)]="linea" (change)="loadDatosFechaLinea()" >
                     <option [ngValue]="null"></option>
-                    <option *ngFor="let lineaOption of lineas; trackBy: trackLineaById">{{lineaOption.nombre}}</option>
+                    <option *ngFor="let lineaOption of lineas">{{lineaOption.nombre}}</option>
                 </select>
             </div>
         </div>
