@@ -39,9 +39,17 @@
 
 <div [chart]="chartDetalle" *ngIf="datos.length"></div>
 
+<button *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn btn-primary float-right jh-create-entity create-observaciones" [routerLink]="['/', { outlets: { popup: ['observaciones-new'] } }]">
+    <span class="fa fa-plus"></span>
+    <span  jhiTranslate="calimetroApp.observaciones.home.createLabel">
+            Create new Observaciones
+            </span>
+</button><br>
 
 <div class="table-responsive" *ngIf="observacionesFinal.length > 0">
+
     <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
+
     <table class="table table-striped">
         <thead>
             <tr>

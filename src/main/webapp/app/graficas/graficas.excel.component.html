@@ -22,7 +22,8 @@
             </thead>
             <tbody >
             <tr *ngFor="let dato of datosEnvio">
-                <td><i aria-hidden="true"> </i> {{ dato.id}} </td>
+
+                <td><i aria-hidden="true"> </i>  </td>
                 <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'dd-mm-yyyy'}} </td>
                 <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'HH:mm'}} </td>
                 <td><i aria-hidden="true"> </i> {{ lineaEnvio }} </td>
@@ -42,6 +43,7 @@
         <hr>
         <button (click)="exportToExcelDatos()" class="btn btn-primary">Export to Excel</button>
     </div>
+    <br>
 
 
 
