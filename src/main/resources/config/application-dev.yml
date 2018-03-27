@@ -53,7 +53,7 @@ spring:
     mail:
         host: smtp.gmail.com
         port: 587
-        username: mellado.tfg2017@gmail.com
+        username: mvmellado.tfg2017@gmail.com
         password: mellado2017tfg
         protocol: smtp
         tls: true

@@ -45,13 +45,28 @@ spring:
             hibernate.cache.use_second_level_cache: false
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: false
+#    mail:
+#        host: localhost
+#        port: 25
+#        username:
+#        password:
+#    thymeleaf:
+#        cache: true
     mail:
-        host: localhost
-        port: 25
-        username:
-        password:
+        host: smtp.gmail.com
+        port: 587
+        username: mvmellado.tfg2017@gmail.com
+        password: mellado2017tfg
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
+    messages:
+        cache-seconds: 1
     thymeleaf:
-        cache: true
+        cache: false
 
 liquibase:
     contexts: prod
