@@ -1,6 +1,4 @@
-import { BaseEntity } from '../shared';
-
-export class DatosExcel implements BaseEntity {
+export class DatosExcelModel {
     constructor(
         public id?: number,
         public fechaHora?: any,
@@ -15,6 +13,7 @@ export class DatosExcel implements BaseEntity {
         public consumo?: number,
         public velocidad?: number,
         public cocheKm?: number,
+
     ) {
     }
 }

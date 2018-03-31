@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { ChartModule } from 'angular-highcharts';
 
 import {ExcelService} from '../excel/excelservice.service';
-import {ExcelComponent} from '../excel/excel.component';
 
 import { CalimetroSharedModule } from '../shared';
 
@@ -26,7 +25,6 @@ import { GraficasDetailComponent } from './graficas.detail.component';
         GraficasDetailComponent,
         GraficasExcelComponent,
         GraficasGeneralComponent,
-        ExcelComponent,
     ],
     entryComponents: [
     ],

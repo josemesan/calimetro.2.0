@@ -17,7 +17,6 @@ import { CalimetroEntityModule } from './entities/entity.module';
 import { CalimetroGraficasModule } from './graficas';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import {ExcelService} from './excel/excelservice.service';
-// jhipster-needle-angular-add-module-import JHipster will add new module here
 
 import {
     JhiMainComponent,
@@ -29,12 +28,8 @@ import {
     ErrorComponent
 } from './layouts';
 
-// import { ChartsModule } from 'ng2-charts';
-import {ExcelComponent} from './excel/excel.component';
-
 @NgModule({
     imports: [
-        // ChartsModule,
         BrowserModule,
         CalimetroAppRoutingModule,
         Ng2Webstorage.forRoot({ prefix: 'jhi', separator: '-'}),
@@ -48,7 +43,7 @@ import {ExcelComponent} from './excel/excel.component';
 
     ],
     declarations: [
-        // ExcelComponent,
+
         JhiMainComponent,
         NavbarComponent,
         ErrorComponent,

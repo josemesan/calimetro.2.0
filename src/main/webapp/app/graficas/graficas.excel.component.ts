@@ -3,9 +3,9 @@ import { ExcelService} from '../excel/excelservice.service';
 import { Datos, DatosService } from '../entities/datos';
 import { DatePipe } from '@angular/common';
 
-import { DatosExcel } from '../excel/datos.excel.model';
 import {Subscription} from 'rxjs/Subscription';
 import {JhiEventManager} from 'ng-jhipster';
+import {DatosExcelModel} from './datos.excel.model';
 
 @Component({
     selector: 'jhi-graficas-excel',
@@ -18,8 +18,8 @@ export class GraficasExcelComponent {
     @Input()
     lineaEnvio: string;
 
-    datoExcel: DatosExcel;
-    datosExcel: DatosExcel[] = [];
+    datoExcel: DatosExcelModel;
+    datosExcel: any[] = [];
     eventSubscriber: Subscription;
 
     constructor(
@@ -30,7 +30,7 @@ export class GraficasExcelComponent {
     }
     exportToExcelDatos() {
         for (let i = 0; i < this.datosEnvio.length; i++) {
-            this.datoExcel = new DatosExcel(
+            this.datoExcel = new DatosExcelModel(
                 this.datosEnvio[i].id,
                 this.datosEnvio[i].fechaHora,
                 this.lineaEnvio,
@@ -44,7 +44,7 @@ export class GraficasExcelComponent {
                 this.datosEnvio[i].consumo,
                 this.datosEnvio[i].velocidad,
                 this.datosEnvio[i].cocheKm,
-            );
+        );
             this.datosExcel.push(this.datoExcel);
     }
         this.excelService.exportAsExcelFile(this.datosExcel, 'datos');
