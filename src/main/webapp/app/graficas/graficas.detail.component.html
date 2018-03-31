@@ -1,3 +1,4 @@
+<body [class]="['body'+linea.replace(' ','')]">
 <div class="row">
     <div class="col-md-3">
         <h2>
@@ -39,7 +40,7 @@
 
 <div [chart]="chartDetalle" *ngIf="datos.length"></div>
 
-<button *jhiHasAnyAuthority="'ROLE_ADMIN'" class="btn btn-primary float-right jh-create-entity create-observaciones" [routerLink]="['/', { outlets: { popup: ['observaciones-new'] } }]">
+<button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" class="btn btn-primary float-right jh-create-entity create-observaciones" [routerLink]="['/', { outlets: { popup: ['observaciones-new'] } }]">
     <span class="fa fa-plus"></span>
     <span  jhiTranslate="calimetroApp.observaciones.home.createLabel">
             Create new Observaciones
@@ -67,3 +68,4 @@
 <hr>
 
 <jhi-graficas-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-graficas-excel>
+</body>

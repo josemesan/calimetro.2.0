@@ -98,6 +98,7 @@ export class NavbarComponent implements OnInit {
 
     toggleNavbar() {
         this.isNavbarCollapsed = !this.isNavbarCollapsed;
+        this.loadLineas();
     }
 
     getImageUrl() {
@@ -106,5 +107,4 @@ export class NavbarComponent implements OnInit {
     private onError(error) {
         this.jhiAlertService.error(error.message, null, null);
     }
-
 }
