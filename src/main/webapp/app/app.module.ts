@@ -17,6 +17,7 @@ import { CalimetroEntityModule } from './entities/entity.module';
 import { CalimetroGraficasModule } from './graficas';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import {ExcelService} from './excel/excelservice.service';
+import {ExcelComponent} from './excel/excel.component';
 
 import {
     JhiMainComponent,
@@ -49,7 +50,8 @@ import {
         ErrorComponent,
         PageRibbonComponent,
         ActiveMenuDirective,
-        FooterComponent
+        FooterComponent,
+        ExcelComponent,
     ],
     providers: [
         // ExcelService,

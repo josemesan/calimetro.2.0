@@ -23,7 +23,7 @@ import { GraficasDetailComponent } from './graficas.detail.component';
     declarations: [
         GraficasComponent,
         GraficasDetailComponent,
-        ExcelComponent,
+        // ExcelComponent,
         GraficasGeneralComponent,
     ],
     entryComponents: [

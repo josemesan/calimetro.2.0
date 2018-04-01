@@ -2,6 +2,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {DatosDesdehastaComponent} from './datos.desdehasta.component';
 import { CalimetroSharedModule } from '../../shared';
+import {ExcelComponent} from '../../excel/excel.component';
 import {
     DatosService,
     DatosPopupService,
