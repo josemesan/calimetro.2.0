@@ -136,6 +136,30 @@ public class DatosResource {
         });
         return lista;
     }
+//---------------------------------------------------------------------------------------------------
+    @GetMapping("/datos/fechaDesdeHasta/{ini}/{fin}")
+    @Timed
+    public List<Datos> getBetweenDesdeHastaDatos(@PathVariable String ini, @PathVariable String fin) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+
+        LocalDateTime ldt2 = LocalDateTime.parse(fin, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ldt2 = ldt2.plusDays(1);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
+
+        log.debug("REST request to get Datos segun Fecha inicio y fin : {}", ini,fin);
+
+        List<Datos> lista = datosRepository.findByFechaHoraBetween(zone1,zone2);
+        lista.sort(new Comparator<Datos>() {
+            @Override
+            public int compare(Datos o1, Datos o2) {
+                return o1.getFechaHora().compareTo(o2.getFechaHora());
+            }
+        });
+        return lista;
+    }
+
 
 //--------------------------------- viajeros
     @GetMapping("/datos/viajeros/{ini}/{lin}")

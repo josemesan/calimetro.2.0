@@ -1,7 +1,8 @@
 export class DatosExcelModel {
     constructor(
         public id?: number,
-        public fechaHora?: any,
+        public fecha?: any,
+        public hora?: any,
         public linea?: string,
         public intervaloMedio?: number,
         public desviacionMedia?: number,

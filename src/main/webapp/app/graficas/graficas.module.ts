@@ -11,7 +11,7 @@ import { GRAFICAS_ROUTE } from './';
 import { GraficasComponent } from './graficas.component';
 import { GraficasGeneralComponent } from './graficas.general.component';
 
-import { GraficasExcelComponent } from './graficas.excel.component';
+import { ExcelComponent } from '../excel/excel.component';
 import { GraficasDetailComponent } from './graficas.detail.component';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { GraficasDetailComponent } from './graficas.detail.component';
     declarations: [
         GraficasComponent,
         GraficasDetailComponent,
-        GraficasExcelComponent,
+        ExcelComponent,
         GraficasGeneralComponent,
     ],
     entryComponents: [

@@ -1,0 +1,117 @@
+<div>
+    <h2>
+        <span jhiTranslate="calimetroApp.datos.home.title">Datos</span>
+        <button class="btn btn-primary float-right jh-create-entity create-datos" [routerLink]="['/', { outlets: { popup: ['datos-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="calimetroApp.datos.home.createLabel">
+            Create new Datos
+            </span>
+        </button>
+    </h2>
+    <hr>    <jhi-excel [datosEnvio] ="datos"></jhi-excel>
+    <div class="row"><br>
+        <div class="col-md-4">
+            <h4 jhiTranslate="global.fecha">Fecha:</h4>
+            <input class="form-control" type="date" max="hasta" [(ngModel)]="desde" (change)="loadFechaDesdehasta()">
+        </div>
+        <div class="col-md-4">
+            <h4 jhiTranslate="global.fecha">Fecha:</h4>
+            <input class="form-control" type="date" min="desde" [(ngModel)]="hasta" (change)="loadFechaDesdehasta()">
+        </div>
+
+    </div>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.fechaHora">Fecha Hora</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.tiempoVuelta">Tiempo Vuelta</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Numero Trenes</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.viajeros">Viajeros</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.toc">Toc</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.densidad">Densidad</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.consumo">Consumo</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.cocheKm">Coche Km</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.linea">Linea</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.intervaloMin">Intervalo Min</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.intervaloMax">Intervalo Max</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.observaciones">Observaciones</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let datos of datos ;trackBy: trackId">
+                <td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>
+                <td>{{datos.fechaHora | date:'medium'}}</td>
+                <td>{{datos.intervaloMedio}}</td>
+                <td>{{datos.desviacionMedia}}</td>
+                <td>{{datos.tiempoVuelta}}</td>
+                <td>{{datos.numeroTrenes}}</td>
+                <td>{{datos.viajeros}}</td>
+                <td>{{datos.toc}}</td>
+                <td>{{datos.densidad}}</td>
+                <td>{{datos.consumo}}</td>
+                <td>{{datos.velocidad}}</td>
+                <td>{{datos.cocheKm}}</td>
+                <td>
+                    <div *ngIf="datos.linea">
+                        <a [routerLink]="['../linea', datos.linea?.id ]" >{{datos.linea?.nombre}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="datos.intervaloMin">
+                        <a [routerLink]="['../intervalo-min', datos.intervaloMin?.id ]" >{{datos.intervaloMin?.interMin}} min
+                            {{datos.intervaloMin?.estacionMin}} V.{{datos.intervaloMin?.viaMin}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="datos.intervaloMax">
+                        <a [routerLink]="['../intervalo-max', datos.intervaloMax?.id ]" >{{datos.intervaloMax?.interMax}} min
+                            {{datos.intervaloMax?.estacionMax}} V.{{datos.intervaloMax?.viamax}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <a [routerLink]="['/observaciones/dato/', datos.id ]" > Observaciones-{{datos.id}} </a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../datos', datos.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'datos/'+ datos.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

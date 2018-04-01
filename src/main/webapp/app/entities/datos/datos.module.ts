@@ -1,6 +1,6 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
+import {DatosDesdehastaComponent} from './datos.desdehasta.component';
 import { CalimetroSharedModule } from '../../shared';
 import {
     DatosService,
@@ -34,6 +34,7 @@ const ENTITY_STATES = [
         DatosDeleteDialogComponent,
         DatosPopupComponent,
         DatosDeletePopupComponent,
+        DatosDesdehastaComponent,
     ],
     entryComponents: [
         DatosComponent,
