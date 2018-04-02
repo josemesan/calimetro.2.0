@@ -15,6 +15,8 @@ import {
     Principal,
     HasAnyAuthorityDirective,
 } from './';
+import {ExcelService} from '../excel/excelservice.service';
+import {ExcelComponent} from '../excel/excel.component';
 
 @NgModule({
     imports: [
@@ -23,7 +25,8 @@ import {
     ],
     declarations: [
         JhiLoginModalComponent,
-        HasAnyAuthorityDirective
+        HasAnyAuthorityDirective,
+        // ExcelComponent
     ],
     providers: [
         LoginService,
@@ -34,7 +37,8 @@ import {
         CSRFService,
         AuthServerProvider,
         UserService,
-        DatePipe
+        DatePipe,
+        // ExcelService
     ],
     entryComponents: [JhiLoginModalComponent],
     exports: [

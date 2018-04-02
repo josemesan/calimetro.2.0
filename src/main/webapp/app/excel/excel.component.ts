@@ -45,7 +45,7 @@ export class ExcelComponent implements OnInit {
             (res: HttpErrorResponse) => this.onError(res.message)
         );
     }
-    exportToExcelDatos() {
+    convertExcelDatos() {
         for (let i = 0; i < this.datosEnvio.length; i++) {
             for (let j = 0; j < this.lineas.length; j++) {
                 if (this.datosEnvio[i].linea.id === this.lineas[j].id) {

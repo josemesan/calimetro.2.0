@@ -22,10 +22,10 @@
             <tbody >
             <tr *ngFor="let dato of datosEnvio">
 
-                <td><i aria-hidden="true"> </i>  </td>
-                <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'dd-mm-yyyy'}} </td>
-                <td><i aria-hidden="true"> </i> {{ dato.fechaHora | date: 'HH:mm'}} </td>
-                <td><i aria-hidden="true"> </i> {{ lineaEnvio }} </td>
+                <td><i aria-hidden="true"> </i>  {{ dato.id}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.fecha }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.hora }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.linea }} </td>
                 <td><i aria-hidden="true"> </i> {{ dato.intervaloMedio}} </td>
                 <td><i aria-hidden="true"> </i> {{ dato.desviacionMedia}} </td>
                 <td><i aria-hidden="true"> </i> {{ dato.tiempoVuelta}} </td>

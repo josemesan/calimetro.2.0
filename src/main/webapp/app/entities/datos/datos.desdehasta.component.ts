@@ -7,7 +7,8 @@ import { Datos } from './datos.model';
 import { DatosService } from './datos.service';
 import { Principal } from '../../shared';
 import { DatePipe } from '@angular/common';
-import {Linea, LineaService} from '../linea';
+import { ExcelService } from '../../excel/excelservice.service';
+import {DatosExcelModel} from '../../excel/datos.excel.model';
 
 @Component({
     selector: 'jhi-datosdesdehasta',
@@ -15,12 +16,11 @@ import {Linea, LineaService} from '../linea';
 })
 export class DatosDesdehastaComponent implements OnInit, OnDestroy {
     datos: Datos[];
+    datosExcel: DatosExcelModel [];
     currentAccount: any;
     eventSubscriber: Subscription;
     desde: any;
     hasta: any;
-    // linea: string;
-    // lineas: Linea[];
 
     constructor(
         private datosService: DatosService,
@@ -28,7 +28,7 @@ export class DatosDesdehastaComponent implements OnInit, OnDestroy {
         private eventManager: JhiEventManager,
         private principal: Principal,
         public datepipe: DatePipe,
-        // private lineaService: LineaService,
+        public excelService: ExcelService,
     ) {
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
@@ -36,20 +36,11 @@ export class DatosDesdehastaComponent implements OnInit, OnDestroy {
         this.hasta = this.datepipe.transform(this.hasta, 'yyyy-MM-dd');
     }
 
-    // loadAllLineas() {
-    //     this.lineaService.query().subscribe(
-    //         (res: HttpResponse<Linea[]>) => {
-    //             this.lineas = res.body;
-    //         },
-    //         (res: HttpErrorResponse) => this.onError(res.message)
-    //     );
-    // }
-
     ngOnInit() {
-        // this.loadAllLineas();
         this.principal.identity().then((account) => {
             this.currentAccount = account;
         });
+        this.loadFechaDesdehasta();
         this.registerChangeInDatos();
     }
 
@@ -58,10 +49,15 @@ export class DatosDesdehastaComponent implements OnInit, OnDestroy {
             this.datosService.queryDesdeHasta(this.desde + ' 06:00', this.hasta + ' 02:00' ).subscribe(
                 (res: HttpResponse<Datos[]>) => {
                     this.datos = res.body;
+                    this.datosExcel = this.excelService.convertExcelDatos(this.datos);
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+    }
+
+    exportExcel() {
+        this.excelService.exportAsExcelFile(this.datosExcel, 'Datos');
     }
 
     ngOnDestroy() {

@@ -1,24 +1,17 @@
 <div>
     <h2>
-        <span jhiTranslate="calimetroApp.datos.home.title">Datos</span>
-        <button class="btn btn-primary float-right jh-create-entity create-datos" [routerLink]="['/', { outlets: { popup: ['datos-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span  jhiTranslate="calimetroApp.datos.home.createLabel">
-            Create new Datos
-            </span>
-        </button>
+        <span>Datos Excel</span>
     </h2>
     <hr>
     <div class="row"><br>
         <div class="col-md-4">
-            <h4 jhiTranslate="global.fecha">Fecha:</h4>
-            <input class="form-control" type="date" max="hasta" [(ngModel)]="desde" (change)="loadFechaDesdehasta()">
+            <h4 jhiTranslate="global.fechaD">Desde:</h4>
+            <input class="form-control" type="date" [max]="hasta" [(ngModel)]="desde" (change)="loadFechaDesdehasta()">
         </div>
         <div class="col-md-4">
-            <h4 jhiTranslate="global.fecha">Fecha:</h4>
-            <input class="form-control" type="date" min="desde" [(ngModel)]="hasta" (change)="loadFechaDesdehasta()">
+            <h4 jhiTranslate="global.fechaH">Hasta:</h4>
+            <input class="form-control" type="date" [min]="desde" [(ngModel)]="hasta" (change)="loadFechaDesdehasta()">
         </div>
-
     </div>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -113,6 +106,8 @@
             </tbody>
         </table>
     </div>
+<hr>
+    <button (click)="exportExcel()" class="btn btn-primary">Export to Excel</button>
 
 </div>
-<jhi-excel [datosEnvio] ="datos"></jhi-excel>
+

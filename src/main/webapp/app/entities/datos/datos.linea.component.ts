@@ -14,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
     templateUrl: './datos.linea.component.html'
 })
 export class DatosLineaComponent implements OnInit, OnDestroy {
-    datos: Datos[];
+    datos: Datos[] = [];
     currentAccount: any;
     eventSubscriber: Subscription;
     desde: any;

@@ -51,10 +51,8 @@ import {
         PageRibbonComponent,
         ActiveMenuDirective,
         FooterComponent,
-        ExcelComponent,
     ],
     providers: [
-        // ExcelService,
         ProfileService,
         PaginationConfig,
         UserRouteAccessService,

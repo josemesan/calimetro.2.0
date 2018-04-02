@@ -3,16 +3,15 @@ import { RouterModule } from '@angular/router';
 
 import { ChartModule } from 'angular-highcharts';
 
-import {ExcelService} from '../excel/excelservice.service';
-
 import { CalimetroSharedModule } from '../shared';
 
 import { GRAFICAS_ROUTE } from './';
 import { GraficasComponent } from './graficas.component';
 import { GraficasGeneralComponent } from './graficas.general.component';
 
-import { ExcelComponent } from '../excel/excel.component';
 import { GraficasDetailComponent } from './graficas.detail.component';
+import {ExcelService} from '../excel/excelservice.service';
+import {ExcelComponent} from '../excel/excel.component';
 
 @NgModule({
     imports: [
@@ -23,13 +22,13 @@ import { GraficasDetailComponent } from './graficas.detail.component';
     declarations: [
         GraficasComponent,
         GraficasDetailComponent,
-        // ExcelComponent,
         GraficasGeneralComponent,
+        ExcelComponent
     ],
     entryComponents: [
     ],
     providers: [
-        ExcelService,
+        ExcelService
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
