@@ -11,7 +11,6 @@ import { GraficasGeneralComponent } from './graficas.general.component';
 
 import { GraficasDetailComponent } from './graficas.detail.component';
 import {ExcelService} from '../excel/excelservice.service';
-import {ExcelComponent} from '../excel/excel.component';
 
 @NgModule({
     imports: [
@@ -23,7 +22,6 @@ import {ExcelComponent} from '../excel/excel.component';
         GraficasComponent,
         GraficasDetailComponent,
         GraficasGeneralComponent,
-        ExcelComponent
     ],
     entryComponents: [
     ],

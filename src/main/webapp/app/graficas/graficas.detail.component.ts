@@ -14,6 +14,8 @@ import * as Highcharts from 'highcharts';
 import {RelacionFechaTipodiaService, TipoDia} from '../entities/relacion-fecha-tipodia';
 import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo-ofertado';
 import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
+import {DatosExcelModel} from '../excel/datos.excel.model';
+import {ExcelService} from '../excel/excelservice.service';
 
 import { ChartDesviacion,
         ChartIntervalo,
@@ -44,6 +46,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
     tipoChart: any;
     observaciones: Observaciones[] = [];
     observacionesFinal: any[] = [];
+    datosExcel: DatosExcelModel[] = [];
 
     date: any;
     desde: any;
@@ -80,6 +83,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         private intervaloOfertadoService: IntervaloOfertadoService,
         private tablaTrenesService: TablaTrenesService,
         private observacionesService: ObservacionesService,
+        private excelService: ExcelService,
     ) {
     }
 
@@ -397,6 +401,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
                 this.datos = res.body;
                 this.loadObservaciones();
                 this.loadSeriesDatos();
+                this.datosExcel = this.excelService.convertExcelDatos(this.datos);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -404,6 +409,8 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
 
     loadObservaciones() {
         this.observaciones = [];
+        this.observacionesFinal = [];
+
         for (let i = 0; i < this.datos.length; i++) {
             this.observacionesService.queryByDatoId(this.datos[i].id).subscribe(
                 (res: HttpResponse<Observaciones[]>) => {
@@ -416,7 +423,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
                         );
                     }
                 },
-                (res: HttpErrorResponse) => this.onError(res.message)
+                (res: HttpErrorResponse) => {
+                    this.onError(res.message);
+                    this.observacionesFinal = [];
+                }
             );
         }
     }
@@ -428,6 +438,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    exportExcel() {
+        this.excelService.exportAsExcelFile(this.datosExcel, 'Datos');
     }
 
     ngOnDestroy() {

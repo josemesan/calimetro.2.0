@@ -3,7 +3,7 @@ import { DatePipe } from '@angular/common';
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { JhiEventManager, JhiAlertService } from 'ng-jhipster';
-import {HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Principal } from '../shared';
 import { Datos } from '../entities/datos';
 import { DatosService } from '../entities/datos';

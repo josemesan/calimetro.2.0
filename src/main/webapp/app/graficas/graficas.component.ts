@@ -14,6 +14,8 @@ import * as Highcharts from 'highcharts';
 import {RelacionFechaTipodiaService, TipoDia} from '../entities/relacion-fecha-tipodia';
 import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo-ofertado';
 import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
+import {DatosExcelModel} from '../excel/datos.excel.model';
+import {ExcelService} from '../excel/excelservice.service';
 
 import {ChartDesviacion,
         ChartIntervalo,
@@ -39,6 +41,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
     linea: String;
     datos: Datos[] = [];
+    datosExcel: DatosExcelModel[] = [];
     tipo: TipoDia = null;
 
     date: any;
@@ -80,6 +83,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         private relacionFechaTipodiaService: RelacionFechaTipodiaService,
         private intervaloOfertadoService: IntervaloOfertadoService,
         private tablaTrenesService: TablaTrenesService,
+        private excelService: ExcelService,
     ) {
     }
 
@@ -377,6 +381,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
             (res: HttpResponse<Datos[]>) => {
                 this.datos = res.body;
                 this.loadSeriesDatos();
+                this.datosExcel = this.excelService.convertExcelDatos(this.datos);
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -394,6 +399,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
     ngOnDestroy() {
             this.eventSubscriber.unsubscribe();
             this.eventManager.destroy(this.eventSubscriber);
+    }
+
+    exportExcel() {
+        this.excelService.exportAsExcelFile(this.datosExcel, 'Datos');
     }
 
     private onError(error) {

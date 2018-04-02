@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     private lineas: Linea [];
     eventSubscriber: Subscription;
     private date: any;
+    usuario: string;
 
     constructor(
         private lineaService: LineaService,
@@ -45,6 +46,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.principal.identity().then((account) => {
             this.account = account;
+            this.usuario = this.account.login;
         });
         this.registerAuthenticationSuccess();
         this.registerChangeInLineas();

@@ -39,15 +39,15 @@
 </div>
 
 <div [chart]="chartDetalle" *ngIf="datos.length"></div>
-
+<div *ngIf="datos.length">
 <button *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_USER']" class="btn btn-primary float-right jh-create-entity create-observaciones" [routerLink]="['/', { outlets: { popup: ['observaciones-new'] } }]">
     <span class="fa fa-plus"></span>
     <span  jhiTranslate="calimetroApp.observaciones.home.createLabel">
             Create new Observaciones
             </span>
 </button><br>
-
-<div class="table-responsive" *ngIf="observacionesFinal.length > 0">
+</div>
+<div *ngIf="observacionesFinal.length" class="table-responsive">
 
     <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
 
@@ -66,5 +66,49 @@
     </table>
 </div>
 <hr>
-<jhi-excel [datosEnvio] ="datos" [lineaEnvio]="linea"></jhi-excel>
+
+    <div class="table-responsive" *ngIf="datosExcel.length > 0">
+        <h4 jhiTranslate="global.tablaDatos">TABLA DE DATOS</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Linea</th>
+                <th>Intervalo</th>
+                <th>Desviacion</th>
+                <th>T.Vuelta</th>
+                <th>NºTrenes</th>
+                <th>Viajeros</th>
+                <th>TOC</th>
+                <th>Densidad</th>
+                <th>Consumo</th>
+                <th>Velocidad</th>
+                <th>Cch/Km</th>
+            </tr>
+            </thead>
+            <tbody >
+            <tr *ngFor="let dato of datosExcel">
+                <td><i aria-hidden="true"> </i>  {{ dato.id}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.fecha }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.hora }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.linea }} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.intervaloMedio}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.desviacionMedia}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.tiempoVuelta}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.numeroTrenes}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.viajeros}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.toc}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.densidad}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.consumo}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.velocidad}} </td>
+                <td><i aria-hidden="true"> </i> {{ dato.cocheKm}} </td>
+            </tr>
+            </tbody>
+        </table>
+        <hr>
+    </div>
+    <br>
+    <button *ngIf="datosExcel.length > 0" (click)="exportExcel()" class="btn btn-primary">Export to Excel</button>
 </body>
