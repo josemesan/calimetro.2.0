@@ -103,10 +103,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             fillOpacity: 0.5,
             zIndex: 0,
             color: '#18ff24',
-            marker: {
-                enabled: false,
-                fillColor: 'red',
-            }
+            // marker: {
+            //     enabled: false,
+            //     // fillColor: 'red',
+            // }
         });
         this.chartDetalle.addSerie({
             name: 'Intervalo medio',
@@ -149,10 +149,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             linkedTo: ':previous',
             fillOpacity: 0.5,
             zIndex: 0,
-            marker: {
-                fillColor: 'red',
-                lineWidth: 2,
-            }
+            // marker: {
+            //     // fillColor: 'red',
+            //     lineWidth: 2,
+            // }
         });
         this.chartDetalle.addSerie({
             name: 'Tabla trenes',
@@ -284,13 +284,13 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         if (this.datos.length > 0) {
             for (let i = 0; i < this.datos.length; i++) {
                 if (this.datos[i].intervaloMedio) {
-                    this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio]);
+                    this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio / 100]);
                 }
                 if (this.datos[i].desviacionMedia) {
-                    this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia]);
+                    this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia / 100]);
                 }
                 if (this.datos[i].tiempoVuelta) {
-                    this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta]);
+                    this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta / 100]);
                 }
                 if (this.datos[i].numeroTrenes) {
                     this.dataNuT.push([this.datos[i].fechaHora.valueOf(), this.datos[i].numeroTrenes]);
@@ -302,13 +302,13 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
                     this.dataTOC.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
                 }
                 if (this.datos[i].densidad) {
-                    this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad]);
+                    this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad / 100]);
                 }
                 if (this.datos[i].consumo) {
                     this.dataCon.push([this.datos[i].fechaHora.valueOf(), this.datos[i].consumo]);
                 }
                 if (this.datos[i].velocidad) {
-                    this.dataVel.push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad]);
+                    this.dataVel.push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad / 100]);
                 }
                 if (this.datos[i].cocheKm) {
                     this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
