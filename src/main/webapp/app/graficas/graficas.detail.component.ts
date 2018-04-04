@@ -16,6 +16,7 @@ import {IntervaloOfertadoService, IntervaloOfertado} from '../entities/intervalo
 import {TablaTrenes, TablaTrenesService} from '../entities/tabla-trenes';
 import {DatosExcelModel} from '../excel/datos.excel.model';
 import {ExcelService} from '../excel/excelservice.service';
+import { Observaciones, ObservacionesService } from '../entities/observaciones';
 
 import { ChartDesviacion,
         ChartIntervalo,
@@ -23,7 +24,6 @@ import { ChartDesviacion,
         ChartTiempoVueltaVelocidad,
         ChartTOC,
         ChartViajerosDensidad } from './charts/chart-Theme';
-import { Observaciones, ObservacionesService } from '../entities/observaciones';
 
 declare var require: any;
 require('highcharts/highcharts-more')(Highcharts);
@@ -70,6 +70,7 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
     dataInO2: any[] = [];
     dataTaT: any[] = [];
     dataTaT2: any[] = [];
+    verTabla = false;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -92,9 +93,10 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.chartDetalle.options = ChartIntervalo;
         this.chartDetalle.removeSerie(1);
         this.chartDetalle.removeSerie(0);
+        this.chartDetalle.removeSerie(0);
 
         this.chartDetalle.addSerie({
-            step: 'left',
+            step: 'right',
             name: 'Intervalo Ofertado',
             data: this.dataInO2,
             type: 'arearange',
@@ -105,15 +107,28 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             color: '#18ff24',
             // marker: {
             //     enabled: false,
-            //     // fillColor: 'red',
+            //     fillColor: 'red',
             // }
         });
         this.chartDetalle.addSerie({
+            type: 'spline',
             name: 'Intervalo medio',
             data: this.dataInt,
             zIndex: 1,
             marker: {
                 fillColor: 'black',
+                lineWidth: 2,
+            }
+        });
+
+        this.chartDetalle.addSerie({
+            type: 'line',
+            name: 'Densidad',
+            data: this.dataDen,
+            color: 'black',
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
                 lineWidth: 2,
             }
         });
@@ -214,8 +229,8 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
 
         this.chartDetalle = new Chart;
         this.chartDetalle.options = ChartViajerosDensidad;
-        this.chartDetalle.removeSerie(1);
         this.chartDetalle.removeSerie(0);
+        // this.chartDetalle.removeSerie(0);
 
         this.chartDetalle.addSerie({
             type: 'area',
@@ -223,17 +238,6 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             fillOpacity: 0.5,
             color: 'red',
             data: this.dataVia,
-            zIndex: 1,
-            marker: {
-                fillColor: 'grey',
-                lineWidth: 2,
-            }
-        });
-        this.chartDetalle.addSerie({
-            type: 'line',
-            name: 'Densidad',
-            data: this.dataDen,
-            color: 'black',
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
@@ -383,12 +387,9 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
         this.relacionFechaTipodiaService.queryFechaTipoDia(this.desde).subscribe(
             (resT: HttpResponse<TipoDia>) => {
                 this.tipo = resT.body;
-                // if (this.tipo !== this.dataTipodia[0]) {
                     this.tipo = resT.body;
                     this.updatedataInO(this.tipo);
                     this.updatedataTaT(this.tipo);
-                    // this.loadCharts();
-                // }
             },
             (res: HttpErrorResponse) => {this.onError(res.message);
             }
@@ -438,6 +439,14 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
+    }
+
+    ocultarTabla() {
+        if (this.verTabla) {
+            this.verTabla = false;
+        } else {
+            this.verTabla = true;
+        }
     }
 
     exportExcel() {

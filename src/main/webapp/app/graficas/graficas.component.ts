@@ -71,6 +71,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
     dataInO2: any[] = [];
     dataTaT: any[] = [];
     dataTaT2: any[] = [];
+    verTabla = false;
 
     constructor(
         private jhiAlertService: JhiAlertService,
@@ -92,9 +93,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartIntervalo.options = ChartIntervalo;
         this.chartIntervalo.removeSerie(1);
         this.chartIntervalo.removeSerie(0);
+        this.chartIntervalo.removeSerie(0);
 
         this.chartIntervalo.addSerie({
-            step: 'left',
+            step: 'right',
             name: 'Intervalo Ofertado',
             data: this.dataInO2,
             type: 'arearange',
@@ -118,6 +120,19 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 lineWidth: 2,
             }
         });
+
+        this.chartIntervalo.addSerie({
+            type: 'line',
+            name: 'Densidad',
+            data: this.dataDen,
+            color: 'black',
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+
     }
     loadChartDesviacion() {
         this.chartDesviacion = new Chart;
@@ -140,6 +155,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartNumeroTrenes.options = ChartNumeroTrenes;
         this.chartNumeroTrenes.removeSerie(1);
         this.chartNumeroTrenes.removeSerie(0);
+        // this.chartNumeroTrenes.removeSerie(0);
 
         this.chartNumeroTrenes.addSerie({
             step: 'left',
@@ -216,8 +232,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
         this.chartViajerosDensidad = new Chart;
         this.chartViajerosDensidad.options = ChartViajerosDensidad;
-        this.chartViajerosDensidad.removeSerie(1);
         this.chartViajerosDensidad.removeSerie(0);
+        // this.chartViajerosDensidad.removeSerie(0);
 
         this.chartViajerosDensidad.addSerie({
             type: 'area',
@@ -225,17 +241,6 @@ export class GraficasComponent implements OnInit, OnDestroy {
             fillOpacity: 0.5,
             color: 'red',
             data: this.dataVia,
-            zIndex: 1,
-            marker: {
-                fillColor: 'grey',
-                lineWidth: 2,
-            }
-        });
-        this.chartViajerosDensidad.addSerie({
-            type: 'line',
-            name: 'Densidad',
-            data: this.dataDen,
-            color: 'black',
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
@@ -403,6 +408,14 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
     exportExcel() {
         this.excelService.exportAsExcelFile(this.datosExcel, 'Datos');
+    }
+
+    ocultarTabla() {
+        if (this.verTabla) {
+            this.verTabla = false;
+        } else {
+            this.verTabla = true;
+        }
     }
 
     private onError(error) {

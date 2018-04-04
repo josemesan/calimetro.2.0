@@ -93,7 +93,7 @@ export const ChartGeneralCoc = {
 };
 export const ChartIntervalo = {
     title: {
-        text: 'Intervalo medio'
+        text: 'Intervalo medio y Densidad viajeros'
     },
     yAxis: {
         title: {
@@ -191,7 +191,7 @@ export const ChartViajerosDensidad = {
         polar: true
     },
     title: {
-        text: 'Viajeros y Densidad'
+        text: 'Viajeros'
     },
     yAxis: {
         title: {

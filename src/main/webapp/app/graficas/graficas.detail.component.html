@@ -46,6 +46,7 @@
             Create new Observaciones
             </span>
 </button><br>
+
 </div>
 <div *ngIf="observacionesFinal.length" class="table-responsive">
 
@@ -66,10 +67,11 @@
     </table>
 </div>
 <hr>
-
+<button *ngIf="datosExcel.length > 0" (click)="ocultarTabla()" class="btn btn-primary">Ocultar/Mostrar Tabla Datos</button>
+<hr>
     <div class="table-responsive" *ngIf="datosExcel.length > 0">
         <h4 jhiTranslate="global.tablaDatos">TABLA DE DATOS</h4>
-        <table class="table table-striped">
+        <table class="table table-striped" *ngIf="verTabla">
             <thead>
             <tr>
                 <th>id</th>
