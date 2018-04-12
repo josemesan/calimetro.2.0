@@ -426,11 +426,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
     }
 
     ocultarTabla() {
-        if (this.verTabla) {
-            this.verTabla = false;
-        } else {
-            this.verTabla = true;
-        }
+
+        this.verTabla = !this.verTabla;
+
     }
 
     private onError(error) {

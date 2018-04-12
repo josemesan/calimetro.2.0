@@ -9,7 +9,7 @@ public final class AuthoritiesConstants {
 
     public static final String USER = "ROLE_USER";
 
-    public static final String OBSER = "ROLE_OBSER";
+    public static final String ADVANCED = "ROLE_ADVANCED";
 
     public static final String ANONYMOUS = "ROLE_ANONYMOUS";
 
