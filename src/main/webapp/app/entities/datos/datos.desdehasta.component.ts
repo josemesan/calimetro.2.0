@@ -21,6 +21,7 @@ export class DatosDesdehastaComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     desde: any;
     hasta: any;
+    listo = false;
 
     constructor(
         private datosService: DatosService,
@@ -46,10 +47,12 @@ export class DatosDesdehastaComponent implements OnInit, OnDestroy {
 
     loadFechaDesdehasta() {
         if (this.desde && this.hasta) {
+            this.listo = false;
             this.datosService.queryDesdeHasta(this.desde + ' 06:00', this.hasta + ' 02:00' ).subscribe(
                 (res: HttpResponse<Datos[]>) => {
                     this.datos = res.body;
                     this.datosExcel = this.excelService.convertExcelDatos(this.datos);
+                    this.listo = true;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );

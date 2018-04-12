@@ -1,5 +1,6 @@
 {
     "global": {
+        "esperar": "Recuperando datos, espere...",
         "sindatos": "Fecha sin datos, seleccione otro dia",
         "observaciones": "Tabla de Observaciones",
         "tablaDatos": "Tabla de datos",

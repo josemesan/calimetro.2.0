@@ -61,7 +61,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
     dataVue: any[] = [];
     dataNuT: any[] = [];
     dataVia: any[] = [];
-    dataTOC: any[] = [];
+    dataTOC1: any[] = [];
+    dataTOC2: any[] = [];
     dataDen: any[] = [];
     dataCon: any[] = [];
     dataVel: any[] = [];
@@ -215,12 +216,22 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartTOC = new Chart;
         this.chartTOC.options = ChartTOC;
         this.chartTOC.removeSerie(0);
+        this.chartTOC.removeSerie(0);
 
         this.chartTOC.addSerie({
             type: 'bar',
-            name: 'TOC',
-            color: 'purple',
-            data: this.dataTOC,
+            name: 'TOC V.I',
+            data: this.dataTOC1,
+            zIndex: 1,
+            marker: {
+                fillColor: 'grey',
+                lineWidth: 2,
+            }
+        });
+        this.chartTOC.addSerie({
+            type: 'bar',
+            name: 'TOC V.II',
+            data: this.dataTOC2,
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
@@ -265,7 +276,8 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.dataVue = [];
         this.dataNuT = [];
         this.dataVia = [];
-        this.dataTOC = [];
+        this.dataTOC1 = [];
+        this.dataTOC2 = [];
         this.dataDen = [];
         this.dataCon = [];
         this.dataVel = [];
@@ -288,8 +300,11 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 if (this.datos[i].viajeros) {
                     this.dataVia.push([this.datos[i].fechaHora.valueOf(), this.datos[i].viajeros]);
                 }
-                if (this.datos[i].toc) {
-                    this.dataTOC.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
+                if (this.datos[i].toc > 0) {
+                    this.dataTOC1.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
+                }
+                if (this.datos[i].toc < 0) {
+                    this.dataTOC2.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
                 }
                 if (this.datos[i].densidad) {
                     this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad / 100]);

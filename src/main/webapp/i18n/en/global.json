@@ -1,5 +1,6 @@
 {
     "global": {
+        "esperar": "Recovering data, wait...",
         "sindatos": "Date without data, select another day",
         "observaciones": "Observations table",
         "tablaDatos": "Data table",

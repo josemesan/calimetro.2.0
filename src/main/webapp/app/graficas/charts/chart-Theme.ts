@@ -176,7 +176,7 @@ export const ChartTOC = {
         title: {
             text: ''
         },
-        min: 0 // this sets minimum values of y to 0
+       // min: 0 // this sets minimum values of y to 0
     },
     xAxis: {
         type: 'datetime',
