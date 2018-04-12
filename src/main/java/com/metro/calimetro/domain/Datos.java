@@ -151,7 +151,13 @@ public class Datos implements Serializable {
     }
 
     public Integer getViajeros() {
-        return viajeros;
+
+        if (viajeros == null){
+            return 0;
+        }
+        else {
+            return viajeros;
+        }
     }
 
     public Datos viajeros(Integer viajeros) {
