@@ -15,6 +15,7 @@ import java.util.List;
 @Repository
 public interface ObservacionesRepository extends JpaRepository<Observaciones, Long> {
     public List<Observaciones> findByDatos_Id(long dato);
+    public List<Observaciones> findByDatosFechaHoraAndDatosLineaNombre(ZonedDateTime fecha, String id);
     public List<Observaciones> findByDatos_FechaHoraBetween (ZonedDateTime desde, ZonedDateTime hasta);
 
 }

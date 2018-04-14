@@ -45,6 +45,11 @@ export class ObservacionesService {
         return this.http.get<Observaciones[]>(`${this.resourceUrl}/fecha/${desde}`, {observe: 'response'})
             .map((res: HttpResponse<Observaciones[]>) => this.convertArrayResponse(res));
     }
+    queryFechaLinea(desde: any, linea: any): Observable<HttpResponse<Observaciones[]>> {
+        return this.http.get<Observaciones[]>(`${this.resourceUrl}/fechaLinea/${desde}/${linea}`, {observe: 'response'})
+            .map((res: HttpResponse<Observaciones[]>) => this.convertArrayResponse(res));
+    }
+
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response'});
     }

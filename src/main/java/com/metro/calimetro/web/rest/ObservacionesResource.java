@@ -113,6 +113,18 @@ public class ObservacionesResource {
         log.debug("REST request to get Datos segun Fecha : {}", ini);
         return observacionesRepository.findByDatos_FechaHoraBetween(zone1,zone2);
     }
+
+
+    //-------------------------------------------
+    @GetMapping("/observaciones/fechaLinea/{ini}/{linea}")
+    @Timed
+    public List<Observaciones> getFechaLinea(@PathVariable String ini,@PathVariable String linea ) {
+        //--- Convertir string en zonedatetime
+        LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        log.debug("REST request to get Datos segun Fecha Linea : {}", ini, linea);
+        return observacionesRepository.findByDatosFechaHoraAndDatosLineaNombre(zone1, linea);
+    }
     /**
      * GET  /observaciones/:id : get the "id" observaciones.
      *

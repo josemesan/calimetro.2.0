@@ -43,6 +43,7 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
 
     date: any;
     desde: any;
+    desde2: any;
 
     chartDetalle: any;
 
@@ -88,9 +89,11 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
                     data: this.dataVel[j],
                     zIndex: 1,
                     marker: {
-                        // fillColor: 'grey',
                         lineWidth: 2,
-                    }
+                    },
+                    tooltip: {
+                        valueSuffix: ' km/h'
+                    },
                 });
             }
         }
@@ -126,6 +129,9 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
                 this.chartDetalle.addSerie({
                     name: this.lineas[j].nombre,
                     data: [this.dataCon[j]],
+                    tooltip: {
+                        valueSuffix: ' kW'
+                    },
                 });
             }
         }
@@ -142,6 +148,9 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
                 this.chartDetalle.addSerie({
                     name: this.lineas[j].nombre,
                     data: [this.dataCoc[j]],
+                    tooltip: {
+                        valueSuffix: ' coches/km'
+                    },
                 });
             }
         }
@@ -181,10 +190,16 @@ export class GraficasGeneralComponent implements OnInit, OnDestroy {
 
             for (let i = 0; i < this.datos.length; i++) {
                 for (let j = 0; j < this.lineas.length; j++) {
+                    this.desde2 = Date.UTC(this.datos[i].fechaHora.getUTCFullYear(),
+                        this.datos[i].fechaHora.getUTCMonth(), this.datos[i].fechaHora.getUTCDate(),
+                        this.datos[i].fechaHora.getUTCHours() + 2, this.datos[i].fechaHora.getUTCMinutes(),
+                        this.datos[i].fechaHora.getUTCSeconds());
+
                     if ((this.lineas[j].id === this.datos[i].linea.id) && (this.lineas[j].visible) ) {
                         this.dataCon[j] = this.dataCon[j] + this.datos[i].consumo;
+
                         if (this.datos[i].velocidad) {
-                            this.dataVel[j].push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad / 100]);
+                            this.dataVel[j].push([this.desde2, this.datos[i].velocidad / 100]);
                         }
                         this.dataVia[j] = this.dataVia[j] + this.datos[i].viajeros;
                         this.dataCoc[j] = this.dataCoc[j] + this.datos[i].cocheKm;

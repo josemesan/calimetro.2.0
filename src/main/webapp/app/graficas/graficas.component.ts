@@ -97,24 +97,32 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartIntervalo.removeSerie(0);
 
         this.chartIntervalo.addSerie({
-            step: 'right',
+            legend: {
+                enabled: false
+            },
+            type: 'arearange',
+            step: 'left',
             name: 'Intervalo Ofertado',
             data: this.dataInO2,
-            type: 'arearange',
             lineWidth: 0,
             linkedTo: ':previous',
             fillOpacity: 0.5,
-            zIndex: 0,
+            zIndex: 1,
             color: '#18ff24',
-            // marker: {
-            //     enabled: false,
-            //     fillColor: 'red',
-            // }
+            tooltip: {
+                   valueSuffix: ' min'
+            },
+            marker: {
+                enabled: false
+            },
         });
         this.chartIntervalo.addSerie({
             type: 'spline',
             name: 'Intervalo medio',
             data: this.dataInt,
+            tooltip: {
+                valueSuffix: ' min'
+            },
             zIndex: 1,
             marker: {
                 fillColor: 'black',
@@ -126,6 +134,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
             type: 'line',
             name: 'Densidad',
             data: this.dataDen,
+            tooltip: {
+                valueSuffix: ' v/m2'
+            },
             color: 'black',
             zIndex: 1,
             marker: {
@@ -141,7 +152,7 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartDesviacion.removeSerie(0);
         this.chartDesviacion.addSerie({
             type: 'areaspline',
-            name: 'Desidad',
+            name: 'Desviacion media',
             data: this.dataDes,
             color: 'orange',
             zIndex: 1,
@@ -156,30 +167,35 @@ export class GraficasComponent implements OnInit, OnDestroy {
         this.chartNumeroTrenes.options = ChartNumeroTrenes;
         this.chartNumeroTrenes.removeSerie(1);
         this.chartNumeroTrenes.removeSerie(0);
-        // this.chartNumeroTrenes.removeSerie(0);
 
         this.chartNumeroTrenes.addSerie({
             step: 'left',
             name: 'Tabla trenes',
             data: this.dataTaT2,
-            type: 'arearange',
+            type: 'area',
             lineWidth: 0,
             linkedTo: ':previous',
             fillOpacity: 0.5,
             zIndex: 0,
-            // marker: {
-            //     fillColor: 'red',
-            //     lineWidth: 2,
-            // }
+            marker: {
+                enabled: false
+            },
+            tooltip: {
+                valueSuffix: ' trenes'
+            },
         });
         this.chartNumeroTrenes.addSerie({
-            name: 'Tabla trenes',
+            step: 'left',
+            name: 'Nº trenes',
             data: this.dataNuT,
             zIndex: 1,
             marker: {
                 fillColor: 'grey',
                 lineWidth: 2,
-            }
+            },
+            tooltip: {
+                valueSuffix: ' trenes'
+            },
         });
     }
     loadChartTiempoVueltaVelocidad() {
@@ -199,7 +215,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
             marker: {
                 fillColor: 'grey',
                 lineWidth: 2,
-            }
+            },
+            tooltip: {
+                valueSuffix: ' min'
+            },
         });
         this.chartTiempoVueltaVelocidad.addSerie({
             type: 'spline',
@@ -209,7 +228,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
             marker: {
                 fillColor: 'grey',
                 lineWidth: 2,
-            }
+            },
+            tooltip: {
+                valueSuffix: ' km/h'
+            },
         });
     }
     loadChartTOC() {
@@ -226,7 +248,10 @@ export class GraficasComponent implements OnInit, OnDestroy {
             marker: {
                 fillColor: 'grey',
                 lineWidth: 2,
-            }
+            },
+            tooltip: {
+                valueSuffix: ' seg'
+            },
         });
         this.chartTOC.addSerie({
             type: 'bar',
@@ -236,6 +261,9 @@ export class GraficasComponent implements OnInit, OnDestroy {
             marker: {
                 fillColor: 'grey',
                 lineWidth: 2,
+            },
+            tooltip: {
+                valueSuffix: ' seg'
             }
         });
     }
@@ -285,38 +313,44 @@ export class GraficasComponent implements OnInit, OnDestroy {
 
         if (this.datos.length > 0) {
             for (let i = 0; i < this.datos.length; i++) {
+
+                this.desde2 = Date.UTC(this.datos[i].fechaHora.getUTCFullYear(),
+                    this.datos[i].fechaHora.getUTCMonth(), this.datos[i].fechaHora.getUTCDate(),
+                    this.datos[i].fechaHora.getUTCHours() + 2, this.datos[i].fechaHora.getUTCMinutes(),
+                    this.datos[i].fechaHora.getUTCSeconds());
+
                 if (this.datos[i].intervaloMedio) {
-                    this.dataInt.push([this.datos[i].fechaHora.valueOf(), this.datos[i].intervaloMedio / 100]);
+                    this.dataInt.push([this.desde2, this.datos[i].intervaloMedio / 100]);
                 }
                 if (this.datos[i].desviacionMedia) {
-                    this.dataDes.push([this.datos[i].fechaHora.valueOf(), this.datos[i].desviacionMedia / 100]);
+                    this.dataDes.push([this.desde2, this.datos[i].desviacionMedia / 100]);
                 }
                 if (this.datos[i].tiempoVuelta) {
-                    this.dataVue.push([this.datos[i].fechaHora.valueOf(), this.datos[i].tiempoVuelta / 100]);
+                    this.dataVue.push([this.desde2, this.datos[i].tiempoVuelta / 100]);
                 }
                 if (this.datos[i].numeroTrenes) {
-                    this.dataNuT.push([this.datos[i].fechaHora.valueOf(), this.datos[i].numeroTrenes]);
+                    this.dataNuT.push([this.desde2, this.datos[i].numeroTrenes]);
                 }
                 if (this.datos[i].viajeros) {
-                    this.dataVia.push([this.datos[i].fechaHora.valueOf(), this.datos[i].viajeros]);
+                    this.dataVia.push([this.desde2, this.datos[i].viajeros]);
                 }
                 if (this.datos[i].toc > 0) {
-                    this.dataTOC1.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
+                    this.dataTOC1.push([this.desde2, this.datos[i].toc]);
                 }
                 if (this.datos[i].toc < 0) {
-                    this.dataTOC2.push([this.datos[i].fechaHora.valueOf(), this.datos[i].toc]);
+                    this.dataTOC2.push([this.desde2, this.datos[i].toc]);
                 }
                 if (this.datos[i].densidad) {
-                    this.dataDen.push([this.datos[i].fechaHora.valueOf(), this.datos[i].densidad / 100]);
+                    this.dataDen.push([this.desde2, this.datos[i].densidad / 100]);
                 }
                 if (this.datos[i].consumo) {
-                    this.dataCon.push([this.datos[i].fechaHora.valueOf(), this.datos[i].consumo]);
+                    this.dataCon.push([this.desde2, this.datos[i].consumo]);
                 }
                 if (this.datos[i].velocidad) {
-                    this.dataVel.push([this.datos[i].fechaHora.valueOf(), this.datos[i].velocidad / 100]);
+                    this.dataVel.push([this.desde2, this.datos[i].velocidad / 100]);
                 }
                 if (this.datos[i].cocheKm) {
-                    this.dataCoK.push([this.datos[i].fechaHora.valueOf(), this.datos[i].cocheKm]);
+                    this.dataCoK.push([this.desde2, this.datos[i].cocheKm]);
                 }
             }
         }
@@ -350,11 +384,21 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 for (let i = 0; i < this.dataTaT.length; i++) {
                     this.date = this.dataTaT[i].hora;
                     this.desde2 = new Date (this.desde);
-                    this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
-                        this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
-                        this.date.getUTCHours(), this.date.getUTCMinutes(),
-                        this.date.getUTCSeconds());
-                    this.dataTaT2.push([this.desde2, 0, this.dataTaT[i].numeroTrenes]);
+
+                    if (this.date.getUTCHours() < 5) {
+                        this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
+                            this.desde2.getUTCMonth(), this.desde2.getUTCDate() + 1,
+                            this.date.getUTCHours() + 1, this.date.getUTCMinutes(),
+                            this.date.getUTCSeconds());
+
+                    } else {
+                        this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
+                            this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
+                            this.date.getUTCHours() + 1, this.date.getUTCMinutes(),
+                            this.date.getUTCSeconds());
+                    }
+
+                    this.dataTaT2.push([this.desde2, this.dataTaT[i].numeroTrenes]);
                 }
                 this.dataTaT2.sort();
                 this.loadCharts();
@@ -371,10 +415,19 @@ export class GraficasComponent implements OnInit, OnDestroy {
                 for (let i = 0; i < this.dataInO.length; i++) {
                     this.date = this.dataInO[i].hora;
                     this.desde2 = new Date (this.desde);
-                    this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
-                        this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
-                        this.date.getUTCHours(), this.date.getUTCMinutes(),
+
+                    if (this.date.getUTCHours() < 5) {
+                        this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
+                        this.desde2.getUTCMonth(), this.desde2.getUTCDate() + 1,
+                        this.date.getUTCHours() + 1, this.date.getUTCMinutes(),
                         this.date.getUTCSeconds());
+
+                    } else {
+                        this.desde2 = Date.UTC(this.desde2.getUTCFullYear(),
+                        this.desde2.getUTCMonth(), this.desde2.getUTCDate(),
+                        this.date.getUTCHours() + 1, this.date.getUTCMinutes(),
+                        this.date.getUTCSeconds());
+                    }
                     this.dataInO2.push([this.desde2, this.dataInO[i].intervaloMin, this.dataInO[i].intervaloMax]);
                 }
                 this.dataInO2.sort();

@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-4">
             <h4 jhiTranslate="global.linea"> Seleccionar línea: </h4>
-            <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadFechaLinea()">>
+            <select  name= "selectlinea" class="form-control" [(ngModel)]="linea" (click)="loadFechaLinea()">
                 <option [ngValue]="null"></option>
                 <option *ngFor="let lin of lineas"><span>{{lin.nombre}}</span></option>
             </select>
@@ -24,10 +24,29 @@
 
     </div>
     <jhi-alert></jhi-alert>
-    <div class="row">
-    </div>
-    <br/>
+    <br>
+    <button *ngIf="datos.length" (click)="loadObservaciones()" class="btn btn-primary">Buscar obervaciones</button>
+    <br>
+    {{dato.fechaHora}}
+    <br>
     <div class="table-responsive">
+        <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th width="20%" scope="col">Hora/Fecha</th>
+                <th scope="col">Observaciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let observacion of observacionesFinal">
+                <td>{{dato.fechaHora}}</td>
+                <!---->
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <h4 jhiTranslate="global.tablaDatos">TABLA DE DATOS</h4>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -43,10 +62,10 @@
             <th><span jhiTranslate="calimetroApp.datos.consumo">Consumo</span></th>
             <th><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></th>
             <th><span jhiTranslate="calimetroApp.datos.cocheKm">Coche Km</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.linea">Linea</span></th>
+            <!--<th><span jhiTranslate="calimetroApp.datos.linea">Linea</span></th>-->
             <th><span jhiTranslate="calimetroApp.datos.intervaloMin">Intervalo Min</span></th>
             <th><span jhiTranslate="calimetroApp.datos.intervaloMax">Intervalo Max</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.observaciones">Observaciones</span></th>
+            <!--<th><span jhiTranslate="calimetroApp.datos.observaciones">Observaciones</span></th>-->
             <th></th>
             </tr>
             </thead>
@@ -54,21 +73,21 @@
             <tr *ngFor="let datos of datos ;trackBy: trackId">
                 <td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>
                 <td>{{datos.fechaHora | date:'medium'}}</td>
-                <td>{{datos.intervaloMedio}}</td>
-                <td>{{datos.desviacionMedia}}</td>
-                <td>{{datos.tiempoVuelta}}</td>
-                <td>{{datos.numeroTrenes}}</td>
-                <td>{{datos.viajeros}}</td>
-                <td>{{datos.toc}}</td>
-                <td>{{datos.densidad}}</td>
-                <td>{{datos.consumo}}</td>
-                <td>{{datos.velocidad}}</td>
-                <td>{{datos.cocheKm}}</td>
-                <td>
-                    <div *ngIf="datos.linea">
-                        <a [routerLink]="['../linea', datos.linea?.id ]" >{{datos.linea?.nombre}}</a>
-                    </div>
-                </td>
+                <td>{{datos.intervaloMedio/100}}</td>
+                <td>{{datos.desviacionMedia/100}}</td>
+                <td>{{datos.tiempoVuelta/100}}</td>
+                <td>{{datos.numeroTrenes/1}}</td>
+                <td>{{datos.viajeros/1}}</td>
+                <td>{{datos.toc/1}}</td>
+                <td>{{datos.densidad/100}}</td>
+                <td>{{datos.consumo/1}}</td>
+                <td>{{datos.velocidad/100}}</td>
+                <td>{{datos.cocheKm/1}}</td>
+                <!--<td>-->
+                    <!--<div *ngIf="datos.linea">-->
+                        <!--<a [routerLink]="['../linea', datos.linea?.id ]" >{{datos.linea?.nombre}}</a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td>
                     <div *ngIf="datos.intervaloMin">
                         <a [routerLink]="['../intervalo-min', datos.intervaloMin?.id ]" >{{datos.intervaloMin?.interMin}} min
@@ -81,11 +100,11 @@
                             {{datos.intervaloMax?.estacionMax}} V.{{datos.intervaloMax?.viamax}}</a>
                     </div>
                 </td>
-                <td>
-                    <div>
-                        <a [routerLink]="['/observaciones/dato/', datos.id ]" > Observaciones-{{datos.id}} </a>
-                    </div>
-                </td>
+                <!--<td>-->
+                    <!--<div>-->
+                        <!--<a [routerLink]="['/observaciones/dato/', datos.id ]" > Observaciones-{{datos.id}} </a>-->
+                    <!--</div>-->
+                <!--</td>-->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

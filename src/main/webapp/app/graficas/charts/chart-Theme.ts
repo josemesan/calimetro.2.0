@@ -51,7 +51,7 @@ export const ChartGeneralVia = {
         type: 'pie'
     },
     tooltip: {
-        pointFormat: '<b>{point.percentage:.1f}%</b>'
+        pointFormat: '<b>{point.percentage:.1f} %</b>'
     },
     plotOptions: {
         pie: {
@@ -88,6 +88,9 @@ export const ChartGeneralCoc = {
     },
     xAxis: {
         categories: ['']
+    },
+    tooltip: {
+        valueSuffix: ' coches/km'
     },
     series: []
 };

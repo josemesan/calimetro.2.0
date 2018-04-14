@@ -8,18 +8,22 @@ import { DatosService } from './datos.service';
 import { Principal } from '../../shared';
 import { DatePipe } from '@angular/common';
 import {Linea, LineaService} from '../linea';
+import {Observaciones, ObservacionesService} from '../observaciones';
 
 @Component({
     selector: 'jhi-datos',
     templateUrl: './datos.component.html'
 })
 export class DatosComponent implements OnInit, OnDestroy {
-    datos: Datos[];
+    datos: Datos[] = [];
+    dato: Datos;
     currentAccount: any;
     eventSubscriber: Subscription;
     desde: any;
     linea: string;
     lineas: Linea[];
+    observacionesFinal: any[] = [];
+    observaciones:  any[] = [];
 
     constructor(
         private datosService: DatosService,
@@ -28,6 +32,7 @@ export class DatosComponent implements OnInit, OnDestroy {
         private principal: Principal,
         public datepipe: DatePipe,
         private lineaService: LineaService,
+        private observacionesService: ObservacionesService,
     ) {
         this.desde = new Date();
         this.desde = this.datepipe.transform(this.desde, 'yyyy-MM-dd');
@@ -51,9 +56,10 @@ export class DatosComponent implements OnInit, OnDestroy {
     }
 
     loadFechaLinea() {
+        this.observaciones = [];
         if (this.desde && this.linea) {
             this.datosService.queryFechaLinea(this.desde + ' 06:00', this.linea).subscribe(
-                (res: HttpResponse<Datos[]>) => {
+                (res: HttpResponse<Observaciones[]>) => {
                     this.datos = res.body;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
@@ -65,9 +71,35 @@ export class DatosComponent implements OnInit, OnDestroy {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
+    loadObservaciones() {
+        this.observaciones = [];
+        this.observacionesFinal = [];
+
+        if (this.desde && this.linea) {
+            this.observaciones = [];
+            if (this.desde && this.linea) {
+                this.observacionesService.queryFechaLinea(this.desde + ' 06:00', this.linea).subscribe(
+                    (res: HttpResponse<Observaciones[]>) => {
+                        this.observaciones = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
+             for (let j = 0; j < this.observaciones.length; j++) {
+                 this.dato = this.observaciones[j].datos;
+                 this.observacionesFinal.push(
+                    [this.datepipe.transform(this.dato.fechaHora, 'HH:mm dd/MM/yyyy'),
+                        this.observaciones[j].texto, this.observaciones[j].id]
+                 );
+            }
+
+        }
+    }
+
     trackId(index: number, item: Datos) {
         return item.id;
     }
+
     registerChangeInDatos() {
         this.eventSubscriber = this.eventManager.subscribe('datosListModification', (response) => this.loadFechaLinea());
     }
