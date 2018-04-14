@@ -8,21 +8,19 @@
 <div>
     <jhi-alert></jhi-alert>
     <br>
-    <div *ngIf="observacionesFinal.length" class="table-responsive">
-
+    <div *ngIf="observaciones.length" class="table-responsive">
         <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
-
         <table class="table table-striped">
             <thead>
             <tr>
-                <th width="20%" scope="col">Hora/Fecha</th>
+                <th width="20%" scope="col">Fecha Hora</th>
                 <th scope="col">Observaciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let observacion of observacionesFinal">
-                <td>{{observacion[0]}}</td>
-                <td>{{observacion[1]}}</td>
+            <tr *ngFor="let observacion of observaciones">
+                <td>{{observacion.datos?.fechaHora | date:'medium'}}</td>
+                <td>{{observacion.texto}}</td>
             </tbody>
         </table>
     </div>
@@ -39,9 +37,9 @@
                 <th><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.tiempoVuelta">Tiempo Vuelta</span></th>
-                <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Numero Trenes</span></th>
+                <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Nº Trenes</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.viajeros">Viajeros</span></th>
-                <th><span jhiTranslate="calimetroApp.datos.toc">Toc</span></th>
+                <th><span jhiTranslate="calimetroApp.datos.toc">TOC</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.densidad">Densidad</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.consumo">Consumo</span></th>
                 <th><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></th>

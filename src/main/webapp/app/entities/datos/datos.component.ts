@@ -22,7 +22,6 @@ export class DatosComponent implements OnInit, OnDestroy {
     desde: any;
     linea: string;
     lineas: Linea[];
-    observacionesFinal: any[] = [];
     observaciones:  any[] = [];
 
     constructor(
@@ -56,7 +55,6 @@ export class DatosComponent implements OnInit, OnDestroy {
     }
 
     loadFechaLinea() {
-        this.observaciones = [];
         if (this.desde && this.linea) {
             this.datosService.queryFechaLinea(this.desde + ' 06:00', this.linea).subscribe(
                 (res: HttpResponse<Observaciones[]>) => {
@@ -65,6 +63,7 @@ export class DatosComponent implements OnInit, OnDestroy {
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
         }
+        this.loadObservaciones();
     }
 
     ngOnDestroy() {
@@ -73,8 +72,6 @@ export class DatosComponent implements OnInit, OnDestroy {
 
     loadObservaciones() {
         this.observaciones = [];
-        this.observacionesFinal = [];
-
         if (this.desde && this.linea) {
             this.observaciones = [];
             if (this.desde && this.linea) {
@@ -85,14 +82,6 @@ export class DatosComponent implements OnInit, OnDestroy {
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             }
-             for (let j = 0; j < this.observaciones.length; j++) {
-                 this.dato = this.observaciones[j].datos;
-                 this.observacionesFinal.push(
-                    [this.datepipe.transform(this.dato.fechaHora, 'HH:mm dd/MM/yyyy'),
-                        this.observaciones[j].texto, this.observaciones[j].id]
-                 );
-            }
-
         }
     }
 

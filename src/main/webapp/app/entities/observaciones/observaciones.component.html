@@ -27,6 +27,7 @@
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="calimetroApp.observaciones.texto">Texto</span></th>
+            <th><span>Linea</span></th>
             <th><span jhiTranslate="calimetroApp.observaciones.datos">Datos</span></th>
             <th></th>
             </tr>
@@ -35,6 +36,11 @@
             <tr *ngFor="let observaciones of observaciones ;trackBy: trackId">
                 <td><a [routerLink]="['/observaciones', observaciones.id ]">{{observaciones.id}}</a></td>
                 <td>{{observaciones.texto}}</td>
+                <td>
+                    <div *ngIf="observaciones.datos.linea">
+                        {{observaciones.datos?.linea?.nombre}}
+                    </div>
+                </td>
                 <td>
                     <div *ngIf="observaciones.datos">
                         <a [routerLink]="['/datos', observaciones.datos?.id ]" >{{observaciones.datos?.fechaHora | date:'medium'}}</a>

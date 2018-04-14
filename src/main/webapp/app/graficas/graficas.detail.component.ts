@@ -45,7 +45,6 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
     tipo: TipoDia;
     tipoChart: any;
     observaciones: Observaciones[] = [];
-    observacionesFinal: any[] = [];
     datosExcel: DatosExcelModel[] = [];
 
     date: any;
@@ -482,25 +481,16 @@ export class GraficasDetailComponent implements OnInit, OnDestroy {
 
     loadObservaciones() {
         this.observaciones = [];
-        this.observacionesFinal = [];
-
-        for (let i = 0; i < this.datos.length; i++) {
-            this.observacionesService.queryByDatoId(this.datos[i].id).subscribe(
-                (res: HttpResponse<Observaciones[]>) => {
-                    this.observaciones = res.body;
-
-                    for (let j = 0; j < this.observaciones.length; j++) {
-                        this.observacionesFinal.push(
-                            [this.datepipe.transform(this.datos[i].fechaHora, 'HH:mm dd/MM/yyyy'),
-                            this.observaciones[j].texto, this.observaciones[j].id]
-                        );
-                    }
-                },
-                (res: HttpErrorResponse) => {
-                    this.onError(res.message);
-                    this.observacionesFinal = [];
-                }
-            );
+        if (this.desde && this.linea) {
+            this.observaciones = [];
+            if (this.desde && this.linea) {
+                this.observacionesService.queryFechaLinea(this.desde + ' 06:00', this.linea).subscribe(
+                    (res: HttpResponse<Observaciones[]>) => {
+                        this.observaciones = res.body;
+                    },
+                    (res: HttpErrorResponse) => this.onError(res.message)
+                );
+            }
         }
     }
 

@@ -25,23 +25,45 @@
     </div>
     <jhi-alert></jhi-alert>
     <br>
-    <button *ngIf="datos.length" (click)="loadObservaciones()" class="btn btn-primary">Buscar obervaciones</button>
-    <br>
-    {{dato.fechaHora}}
-    <br>
-    <div class="table-responsive">
+    <div *ngIf="observaciones.length" class="table-responsive">
         <h4 jhiTranslate="global.observaciones">TABLA DE OBSERVACIONES</h4>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th width="20%" scope="col">Hora/Fecha</th>
+                <th width="20%" scope="col">Fecha Hora</th>
                 <th scope="col">Observaciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let observacion of observacionesFinal">
-                <td>{{dato.fechaHora}}</td>
-                <!---->
+            <tr *ngFor="let observacion of observaciones">
+                <td>{{observacion.datos?.fechaHora | date:'medium'}}</td>
+                <td>{{observacion.texto}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/observaciones', observacion.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['', { outlets: { popup: 'observaciones/'+ observacion.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['', { outlets: { popup: 'observaciones/'+ observacion.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
             </tbody>
         </table>
     </div>
@@ -50,14 +72,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <!--<th><span jhiTranslate="global.field.id">ID</span></th>-->
             <th><span jhiTranslate="calimetroApp.datos.fechaHora">Fecha Hora</span></th>
             <th><span jhiTranslate="calimetroApp.datos.intervaloMedio">Intervalo Medio</span></th>
             <th><span jhiTranslate="calimetroApp.datos.desviacionMedia">Desviacion Media</span></th>
             <th><span jhiTranslate="calimetroApp.datos.tiempoVuelta">Tiempo Vuelta</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Numero Trenes</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.numeroTrenes">Nº Trenes</span></th>
             <th><span jhiTranslate="calimetroApp.datos.viajeros">Viajeros</span></th>
-            <th><span jhiTranslate="calimetroApp.datos.toc">Toc</span></th>
+            <th><span jhiTranslate="calimetroApp.datos.toc">TOC</span></th>
             <th><span jhiTranslate="calimetroApp.datos.densidad">Densidad</span></th>
             <th><span jhiTranslate="calimetroApp.datos.consumo">Consumo</span></th>
             <th><span jhiTranslate="calimetroApp.datos.velocidad">Velocidad</span></th>
@@ -71,7 +93,7 @@
             </thead>
             <tbody>
             <tr *ngFor="let datos of datos ;trackBy: trackId">
-                <td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>
+                <!--<td><a [routerLink]="['../datos', datos.id ]">{{datos.id}}</a></td>-->
                 <td>{{datos.fechaHora | date:'medium'}}</td>
                 <td>{{datos.intervaloMedio/100}}</td>
                 <td>{{datos.desviacionMedia/100}}</td>
