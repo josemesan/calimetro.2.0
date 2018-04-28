@@ -54,7 +54,7 @@ spring:
         host: smtp.gmail.com
         port: 587
         username: mellado.tfg2017@gmail.com
-        password: patxitfgmellado
+        password: tfg2017calimetro
         protocol: smtp
         tls: true
         properties.mail.smtp:
