@@ -122,8 +122,10 @@ public class ObservacionesResource {
         //--- Convertir string en zonedatetime
         LocalDateTime ldt1 = LocalDateTime.parse(ini, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         ZonedDateTime zone1 = ldt1.atZone(ZoneId.of("Europe/Paris"));
+        LocalDateTime ldt2 = ldt1.plusHours(20);
+        ZonedDateTime zone2 = ldt2.atZone(ZoneId.of("Europe/Paris"));
         log.debug("REST request to get Datos segun Fecha Linea : {}", ini, linea);
-        return observacionesRepository.findByDatosFechaHoraAndDatosLineaNombre(zone1, linea);
+        return observacionesRepository.findByDatosFechaHoraBetweenAndDatosLineaNombre(zone1,zone2, linea);
     }
     /**
      * GET  /observaciones/:id : get the "id" observaciones.

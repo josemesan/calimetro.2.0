@@ -63,7 +63,7 @@ export class IntervaloMinComponent implements OnInit, OnDestroy {
         return item.id;
     }
     registerChangeInIntervaloMins() {
-        this.eventSubscriber = this.eventManager.subscribe('intervaloMinListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('intervaloMinListModification', (response) => this.loadFecha());
     }
 
     private onError(error) {

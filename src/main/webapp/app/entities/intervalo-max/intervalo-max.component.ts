@@ -63,7 +63,7 @@ export class IntervaloMaxComponent implements OnInit, OnDestroy {
         return item.id;
     }
     registerChangeInIntervaloMaxes() {
-        this.eventSubscriber = this.eventManager.subscribe('intervaloMaxListModification', (response) => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('intervaloMaxListModification', (response) => this.loadFecha());
     }
 
     private onError(error) {
